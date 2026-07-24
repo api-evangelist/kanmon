@@ -1,0 +1,245 @@
+openapi: 3.0.0
+info:
+  contact: {}
+  description: Kanmon's public api. Contains all of the endpoints for both capital providers and platforms
+  title: Kanmon Public V2 Bank Accounts Connect Tokens API
+  version: 2.0.0
+servers:
+- description: Production
+  url: https://api.kanmon.com
+- description: Sandbox
+  url: https://api.kanmon.dev
+- description: Local
+  url: http://localhost:3333
+- description: Staging
+  url: https://workflow.concar.dev
+tags:
+- name: Connect Tokens
+paths:
+  /api/platform/v2/connect-tokens:
+    post:
+      description: Create a one-time use Connect Token for authenticating the user. The Connect Token expires after 24 hours. Multiple Connect Tokens can be created at the same time for a single user.
+      operationId: createConnectToken
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConnectTokenRequestBody'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectToken'
+          description: Connect token created.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+          description: BadRequestException
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+          description: ForbiddenException
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserNotFoundException'
+          description: UserNotFoundException
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+          description: TooManyRequestsException
+          headers:
+            X-RateLimit-Limit:
+              description: Maximum number of requests allowed per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: Number of remaining requests available.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+          description: InternalServerErrorException
+      security:
+      - Authorization: []
+      summary: Create a Connect Token
+      tags:
+      - Connect Tokens
+      x-readme:
+        code-samples:
+        - language: node
+          install: npm install @kanmon/sdk
+          name: SDK
+          code: "\nkanmonApi.connectTokens.createConnectToken({\n  ...params...\n})\n    "
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+components:
+  schemas:
+    ConnectToken:
+      example:
+        connectToken: 24470124-e9d4-4a0b-9a1a-d575418ae050
+      properties:
+        connectToken:
+          description: The connect token. Pass this to the Kanmon Connect widget.
+          example: 24470124-e9d4-4a0b-9a1a-d575418ae050
+          type: string
+      required:
+      - connectToken
+      type: object
+    UserNotFoundException:
+      example:
+        errorCode: UserNotFoundException
+        message: An error occurred.
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - UserNotFoundException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: An error occurred.
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    InternalServerErrorException:
+      example:
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - InternalServerErrorException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    CreateConnectTokenRequestBody:
+      example:
+        platformUserId: '12345'
+        userId: 145dd895-3243-4741-8e38-6275b6a81d85
+      properties:
+        userId:
+          description: UUID representing the user in Kanmon. Either `userId` or `platformUserId` is required.
+          example: 145dd895-3243-4741-8e38-6275b6a81d85
+          type: string
+        platformUserId:
+          description: Your platform’s unique ID for the user. Either `userId` or `platformUserId` is required.
+          example: '12345'
+          type: string
+      type: object
+    TooManyRequestsException:
+      example:
+        errorCode: TooManyRequestsException
+        message: Too Many Requests
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - TooManyRequestsException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Too Many Requests
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    ForbiddenException:
+      example:
+        errorCode: ForbiddenException
+        message: Forbidden
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - ForbiddenException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Forbidden
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    BadRequestException:
+      example:
+        errorCode: BadRequestException
+        message: Bad Request
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BadRequestException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Bad Request
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+  securitySchemes:
+    Authorization:
+      in: header
+      name: Authorization
+      type: apiKey

@@ -1,0 +1,845 @@
+openapi: 3.0.0
+info:
+  contact: {}
+  description: Kanmon's public api. Contains all of the endpoints for both capital providers and platforms
+  title: Kanmon Public V2 Bank Accounts Embedded Sessions API
+  version: 2.0.0
+servers:
+- description: Production
+  url: https://api.kanmon.com
+- description: Sandbox
+  url: https://api.kanmon.dev
+- description: Local
+  url: http://localhost:3333
+- description: Staging
+  url: https://workflow.concar.dev
+tags:
+- name: Embedded Sessions
+paths:
+  /api/platform/v2/embedded-session:
+    post:
+      description: Embedded session tokens allow you to securely pass data to Kanmon. First, you will need to call this API to create a token. Then, you will use the token when launching the embedded application.
+      operationId: createEmbeddedSession
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateSessionTokenRequestBody'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmbeddedSession'
+          description: Embedded session created.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+          description: BadRequestException
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+          description: ForbiddenException
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessNotFoundException'
+          description: BusinessNotFoundException
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/createEmbeddedSession_409_response'
+          description: BusinessHasNoInvoiceFinancingProductException, PlatformInvoiceIdAlreadyExistsForAnotherIssuedProductException
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+          description: TooManyRequestsException
+          headers:
+            X-RateLimit-Limit:
+              description: Maximum number of requests allowed per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: Number of remaining requests available.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+          description: InternalServerErrorException
+      security:
+      - Authorization: []
+      summary: Create an embedded session
+      tags:
+      - Embedded Sessions
+      x-readme:
+        code-samples:
+        - language: node
+          install: npm install @kanmon/sdk
+          name: SDK
+          code: "\nkanmonApi.embeddedSessions.createEmbeddedSession({\n  ...params...\n})\n    "
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+components:
+  schemas:
+    AccountsPayableInvoiceFlowWithInvoiceFileSessionTokenData:
+      properties:
+        component:
+          description: Generates a session token for the accounts payable invoice confirmation flow. This option can be used if you do not have all the required invoice data for the SESSION_ACCOUNTS_PAYABLE_INVOICE_FLOW option. Optional data that is not provided may be collected from the user. An invoice PDF must be provided.
+          enum:
+          - SESSION_ACCOUNTS_PAYABLE_INVOICE_FLOW_WITH_INVOICE_FILE
+          type: string
+        invoices:
+          description: Details about the list of invoices which are to be created.
+          items:
+            $ref: '#/components/schemas/AccountsPayableSessionInvoiceWithInvoiceFile'
+          type: array
+      required:
+      - component
+      - invoices
+      type: object
+    EmbeddedSession:
+      example:
+        sessionToken: sessionToken
+      properties:
+        sessionToken:
+          description: The session token used to launch an embedded session.
+          type: string
+      required:
+      - sessionToken
+      type: object
+    InvoiceFlowSessionTokenData:
+      example:
+        component: SESSION_INVOICE_FLOW
+        invoices:
+        - payorEmail: user@gmail.com
+          payorType: BUSINESS
+          description: Invoice for equipment purchased.
+          payorMiddleName: payorMiddleName
+          payorBusinessName: My Business
+          payorLastName: Smith
+          platformInvoiceId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          invoiceDueDate: 2022-06-01
+          payorFirstName: John
+          invoiceAmountCents: 1000000
+          payorAddress:
+            city: San Mateo
+            state: CA
+            country: USA
+            zipcode: '94401'
+            addressLineOne: 123 Main Street
+          platformInvoiceNumber: '123'
+          invoiceIssuedDate: 2022-04-01
+        - payorEmail: user@gmail.com
+          payorType: BUSINESS
+          description: Invoice for equipment purchased.
+          payorMiddleName: payorMiddleName
+          payorBusinessName: My Business
+          payorLastName: Smith
+          platformInvoiceId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          invoiceDueDate: 2022-06-01
+          payorFirstName: John
+          invoiceAmountCents: 1000000
+          payorAddress:
+            city: San Mateo
+            state: CA
+            country: USA
+            zipcode: '94401'
+            addressLineOne: 123 Main Street
+          platformInvoiceNumber: '123'
+          invoiceIssuedDate: 2022-04-01
+      properties:
+        component:
+          description: Generates a session token for the invoice confirmation flow. This option can be used if you have all the required invoice data.
+          enum:
+          - SESSION_INVOICE_FLOW
+          type: string
+        invoices:
+          description: Details about the list of invoices which are to be created.
+          items:
+            $ref: '#/components/schemas/SessionInvoice'
+          type: array
+      required:
+      - component
+      - invoices
+      type: object
+    AccountsPayableSessionInvoiceWithInvoiceFile:
+      properties:
+        platformInvoiceId:
+          description: Your platform’s unique ID for the invoice.
+          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          type: string
+        documentId:
+          description: The UUID of the invoice document created in Kanmon.
+          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          type: string
+        platformInvoiceNumber:
+          description: Your user-facing identifier for the invoice. This is unique per issued product. This may or may not be the same as your `platformInvoiceId`.
+          example: '123'
+          type: string
+        invoiceAmountCents:
+          description: The invoice amount - in cents. This needs to be greater than or equal to 100.
+          example: 1000000
+          type: number
+        invoiceDueDate:
+          description: The date when the invoice will be paid by the payor. ISO 8601 date format. This date must be no more than 5 days in the past. If `invoiceIssuedDate` is provided, then it must be after `invoiceIssuedDate`.
+          example: 2022-06-01
+          type: string
+        invoiceIssuedDate:
+          description: The date when the payee issued the invoice. ISO 8601 date format.
+          example: 2022-04-01
+          type: string
+        payeeEmail:
+          description: The email of the payee.
+          example: user@gmail.com
+          type: string
+        payeeAddress:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: The address of the payee. The address is optional. If you provide the address, you need to provide all the required fields in the address. The address must be a street address, not a PO Box.
+          example:
+            city: San Mateo
+            state: CA
+            country: USA
+            zipcode: '94401'
+            addressLineOne: 123 Main Street
+        payeeType:
+          description: '`INDIVIDUAL` if the payee is a person and `BUSINESS` if the payee is a company.'
+          enum:
+          - BUSINESS
+          - INDIVIDUAL
+          example: BUSINESS
+          type: string
+        payeeBusinessName:
+          description: The registered name of the payee business when the payee is a business and not an individual.
+          example: My Business
+          type: string
+        payeeFirstName:
+          description: The first name of the payee when the payee is an individual and not a business.
+          example: John
+          type: string
+        payeeMiddleName:
+          description: The middle name of the payee when the payee is an individual and not a business.
+          type: string
+        payeeLastName:
+          description: The last name of the payee when the payee is an individual and not a business.
+          example: Smith
+          type: string
+        description:
+          description: The description of the goods or services in the invoice.
+          example: Invoice for equipment purchased.
+          type: string
+      required:
+      - documentId
+      - platformInvoiceId
+      type: object
+    BusinessHasNoInvoiceFinancingProductException:
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BusinessHasNoInvoiceFinancingProductException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: An error occurred.
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    BusinessNotFoundException:
+      example:
+        errorCode: BusinessNotFoundException
+        message: An error occurred.
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BusinessNotFoundException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: An error occurred.
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    InternalServerErrorException:
+      example:
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - InternalServerErrorException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    Address:
+      properties:
+        addressLineOne:
+          type: string
+        addressLineTwo:
+          example: Apt 123
+          nullable: true
+          type: string
+        city:
+          type: string
+        state:
+          description: The 2 character abbreviated state
+          enum:
+          - AL
+          - KY
+          - OH
+          - AK
+          - LA
+          - OK
+          - AZ
+          - ME
+          - OR
+          - AR
+          - MD
+          - PA
+          - AS
+          - MA
+          - PR
+          - CA
+          - MI
+          - RI
+          - CO
+          - MN
+          - SC
+          - CT
+          - MS
+          - SD
+          - DE
+          - MO
+          - TN
+          - DC
+          - MT
+          - TX
+          - FL
+          - NE
+          - TT
+          - GA
+          - NV
+          - UT
+          - GU
+          - NH
+          - VT
+          - HI
+          - NJ
+          - VA
+          - ID
+          - NM
+          - VI
+          - IL
+          - NY
+          - WA
+          - IN
+          - NC
+          - WV
+          - IA
+          - ND
+          - WI
+          - KS
+          - MP
+          - WY
+          example: CA
+          type: string
+        zipcode:
+          description: Zip code can be 5 digits, 9 digits, or 5+4 including a hyphen or plus sign, e.g. 90210, 902101234, 90210-1234 or 90210+1234
+          example: '94401'
+          type: string
+        country:
+          description: USA
+          example: USA
+          type: string
+      required:
+      - addressLineOne
+      - city
+      - country
+      - state
+      - zipcode
+      type: object
+    createEmbeddedSession_409_response:
+      oneOf:
+      - $ref: '#/components/schemas/PlatformInvoiceIdAlreadyExistsForAnotherIssuedProductException'
+      - $ref: '#/components/schemas/BusinessHasNoInvoiceFinancingProductException'
+    CreateSessionTokenRequestBody:
+      example:
+        platformBusinessId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+        data:
+          component: SESSION_INVOICE_FLOW
+          invoices:
+          - payorEmail: user@gmail.com
+            payorType: BUSINESS
+            description: Invoice for equipment purchased.
+            payorMiddleName: payorMiddleName
+            payorBusinessName: My Business
+            payorLastName: Smith
+            platformInvoiceId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+            invoiceDueDate: 2022-06-01
+            payorFirstName: John
+            invoiceAmountCents: 1000000
+            payorAddress:
+              city: San Mateo
+              state: CA
+              country: USA
+              zipcode: '94401'
+              addressLineOne: 123 Main Street
+            platformInvoiceNumber: '123'
+            invoiceIssuedDate: 2022-04-01
+          - payorEmail: user@gmail.com
+            payorType: BUSINESS
+            description: Invoice for equipment purchased.
+            payorMiddleName: payorMiddleName
+            payorBusinessName: My Business
+            payorLastName: Smith
+            platformInvoiceId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+            invoiceDueDate: 2022-06-01
+            payorFirstName: John
+            invoiceAmountCents: 1000000
+            payorAddress:
+              city: San Mateo
+              state: CA
+              country: USA
+              zipcode: '94401'
+              addressLineOne: 123 Main Street
+            platformInvoiceNumber: '123'
+            invoiceIssuedDate: 2022-04-01
+        businessId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+      properties:
+        businessId:
+          description: The unique identifier for business within Kanmon. Either of `businessId` or `platformBusinessId` is required.
+          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          type: string
+        platformBusinessId:
+          description: The unique identifier for business in your platform. Either of `businessId` or `platformBusinessId` is required.
+          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          type: string
+        data:
+          $ref: '#/components/schemas/CreateSessionTokenRequestBody_data'
+      required:
+      - data
+      type: object
+    ForbiddenException:
+      example:
+        errorCode: ForbiddenException
+        message: Forbidden
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - ForbiddenException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Forbidden
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    BadRequestException:
+      example:
+        errorCode: BadRequestException
+        message: Bad Request
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BadRequestException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Bad Request
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    SessionInvoiceWithInvoiceFile:
+      properties:
+        platformInvoiceId:
+          description: Your platform’s unique ID for the invoice.
+          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          type: string
+        documentId:
+          description: The UUID of the invoice document created in Kanmon.
+          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          type: string
+        platformInvoiceNumber:
+          description: Your user-facing identifier for the invoice. This is unique per issued product. This may or may not be the same as your `platformInvoiceId`.
+          example: '123'
+          type: string
+        invoiceAmountCents:
+          description: The invoice amount - in cents. This needs to be greater than or equal to 100.
+          example: 1000000
+          type: number
+        invoiceDueDate:
+          description: The date when the invoice will be paid by the payor. ISO 8601 date format. This date must be at least 7 days in the future and must be after the `invoiceIssuedDate`.
+          example: 2022-06-01
+          type: string
+        invoiceIssuedDate:
+          description: The date when the payee issued the invoice. ISO 8601 date format.
+          example: 2022-04-01
+          type: string
+        payorEmail:
+          description: The email of the payor.
+          example: user@gmail.com
+          type: string
+        payorAddress:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: The address of the payor. The address is optional. If you provide the address, you need to provide all the required fields in the address. The address must be a street address, not a PO Box.
+          example:
+            city: San Mateo
+            state: CA
+            country: USA
+            zipcode: '94401'
+            addressLineOne: 123 Main Street
+        payorType:
+          description: '`INDIVIDUAL` if the payor is a person and `BUSINESS` if the payor is a company.'
+          enum:
+          - BUSINESS
+          - INDIVIDUAL
+          example: BUSINESS
+          type: string
+        payorBusinessName:
+          description: The registered name of the payor business when the payor is a business and not an individual.
+          example: My Business
+          type: string
+        payorFirstName:
+          description: The first name of the payor when the payor is an individual and not a business.
+          example: John
+          type: string
+        payorMiddleName:
+          description: The middle name of the payor when the payor is an individual and not a business.
+          type: string
+        payorLastName:
+          description: The last name of the payor when the payor is an individual and not a business.
+          example: Smith
+          type: string
+        description:
+          description: The description of the goods or services in the invoice.
+          example: Invoice for equipment purchased.
+          type: string
+      required:
+      - documentId
+      - platformInvoiceId
+      type: object
+    AccountsPayableInvoiceFlowSessionTokenData:
+      properties:
+        component:
+          description: Generates a session token for the accounts payable invoice confirmation flow. This option can be used if you have all the required invoice data.
+          enum:
+          - SESSION_ACCOUNTS_PAYABLE_INVOICE_FLOW
+          type: string
+        invoices:
+          description: Details about the list of invoices which are to be created.
+          items:
+            $ref: '#/components/schemas/AccountsPayableSessionInvoice'
+          type: array
+      required:
+      - component
+      - invoices
+      type: object
+    CreateSessionTokenRequestBody_data:
+      description: This will differ depending on which `component` is used.
+      discriminator:
+        mapping:
+          SESSION_INVOICE_FLOW: '#/components/schemas/InvoiceFlowSessionTokenData'
+          SESSION_INVOICE_FLOW_WITH_INVOICE_FILE: '#/components/schemas/InvoiceFlowWithInvoiceFileSessionTokenData'
+          SESSION_ACCOUNTS_PAYABLE_INVOICE_FLOW: '#/components/schemas/AccountsPayableInvoiceFlowSessionTokenData'
+          SESSION_ACCOUNTS_PAYABLE_INVOICE_FLOW_WITH_INVOICE_FILE: '#/components/schemas/AccountsPayableInvoiceFlowWithInvoiceFileSessionTokenData'
+        propertyName: component
+      oneOf:
+      - $ref: '#/components/schemas/InvoiceFlowSessionTokenData'
+      - $ref: '#/components/schemas/InvoiceFlowWithInvoiceFileSessionTokenData'
+      - $ref: '#/components/schemas/AccountsPayableInvoiceFlowSessionTokenData'
+      - $ref: '#/components/schemas/AccountsPayableInvoiceFlowWithInvoiceFileSessionTokenData'
+    TooManyRequestsException:
+      example:
+        errorCode: TooManyRequestsException
+        message: Too Many Requests
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - TooManyRequestsException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Too Many Requests
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    AccountsPayableSessionInvoice:
+      properties:
+        platformInvoiceId:
+          description: Your platform’s unique ID for the invoice.
+          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          type: string
+        platformInvoiceNumber:
+          description: Your user-facing identifier for the invoice. This is unique per issued product. This may or may not be the same as your `platformInvoiceId`.
+          example: '123'
+          type: string
+        invoiceAmountCents:
+          description: The invoice amount - in cents. This needs to be greater than or equal to 100.
+          example: 1000000
+          type: number
+        invoiceDueDate:
+          description: The date when the invoice will be paid by the payor. ISO 8601 date format. This date must be no more than 5 days in the past. If `invoiceIssuedDate` is provided, then it must be after `invoiceIssuedDate`.
+          example: 2022-06-01
+          type: string
+        invoiceIssuedDate:
+          description: The date when the payee issued the invoice. ISO 8601 date format.
+          example: 2022-04-01
+          type: string
+        payeeEmail:
+          description: The email of the payee.
+          example: user@gmail.com
+          type: string
+        payeeAddress:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: The address of the payee. The address is optional. If you provide the address, you need to provide all the required fields in the address. The address must be a street address, not a PO Box.
+          example:
+            city: San Mateo
+            state: CA
+            country: USA
+            zipcode: '94401'
+            addressLineOne: 123 Main Street
+        payeeType:
+          description: '`INDIVIDUAL` if the payee is a person and `BUSINESS` if the payee is a company.'
+          enum:
+          - BUSINESS
+          - INDIVIDUAL
+          example: BUSINESS
+          type: string
+        payeeBusinessName:
+          description: The registered name of the payee business when the payee is a business and not an individual. Required and should only be defined if `payeeType` is `BUSINESS`.
+          example: My Business
+          type: string
+        payeeFirstName:
+          description: The first name of the payee when the payee is an individual and not a business. Required and should only be defined if `payeeType` is `INDIVIDUAL`.
+          example: John
+          type: string
+        payeeMiddleName:
+          description: The middle name of the payee when the payee is an individual and not a business. Optional and should only be defined if `payeeType` is `INDIVIDUAL`.
+          type: string
+        payeeLastName:
+          description: The last name of the payee when the payee is an individual and not a business. Required and should only be defined if `payeeType` is `INDIVIDUAL`.
+          example: Smith
+          type: string
+        description:
+          description: The description of the goods or services in the invoice.
+          example: Invoice for equipment purchased.
+          type: string
+      required:
+      - description
+      - invoiceAmountCents
+      - invoiceDueDate
+      - payeeType
+      - platformInvoiceId
+      - platformInvoiceNumber
+      type: object
+    SessionInvoice:
+      example:
+        payorEmail: user@gmail.com
+        payorType: BUSINESS
+        description: Invoice for equipment purchased.
+        payorMiddleName: payorMiddleName
+        payorBusinessName: My Business
+        payorLastName: Smith
+        platformInvoiceId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+        invoiceDueDate: 2022-06-01
+        payorFirstName: John
+        invoiceAmountCents: 1000000
+        payorAddress:
+          city: San Mateo
+          state: CA
+          country: USA
+          zipcode: '94401'
+          addressLineOne: 123 Main Street
+        platformInvoiceNumber: '123'
+        invoiceIssuedDate: 2022-04-01
+      properties:
+        platformInvoiceId:
+          description: Your platform’s unique ID for the invoice.
+          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          type: string
+        platformInvoiceNumber:
+          description: Your user-facing identifier for the invoice. This is unique per issued product. This may or may not be the same as your `platformInvoiceId`.
+          example: '123'
+          type: string
+        invoiceAmountCents:
+          description: The invoice amount - in cents. This needs to be greater than or equal to 100.
+          example: 1000000
+          type: number
+        invoiceDueDate:
+          description: The date when the invoice will be paid by the payor. ISO 8601 date format. This date must be at least 7 days in the future and must be after the `invoiceIssuedDate`.
+          example: 2022-06-01
+          type: string
+        invoiceIssuedDate:
+          description: The date when the payee issued the invoice. ISO 8601 date format.
+          example: 2022-04-01
+          type: string
+        payorEmail:
+          description: The email of the payor.
+          example: user@gmail.com
+          type: string
+        payorAddress:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: The address of the payor. The address is optional. If you provide the address, you need to provide all the required fields in the address. The address must be a street address, not a PO Box.
+          example:
+            city: San Mateo
+            state: CA
+            country: USA
+            zipcode: '94401'
+            addressLineOne: 123 Main Street
+        payorType:
+          description: '`INDIVIDUAL` if the payor is a person and `BUSINESS` if the payor is a company.'
+          enum:
+          - BUSINESS
+          - INDIVIDUAL
+          example: BUSINESS
+          type: string
+        payorBusinessName:
+          description: The registered name of the payor business when the payor is a business and not an individual. Required and should only be defined if `payorType` is `BUSINESS`.
+          example: My Business
+          type: string
+        payorFirstName:
+          description: The first name of the payor when the payor is an individual and not a business. Required and should only be defined if `payorType` is `INDIVIDUAL`.
+          example: John
+          type: string
+        payorMiddleName:
+          description: The middle name of the payor when the payor is an individual and not a business. Optional and should only be defined if `payorType` is `INDIVIDUAL`.
+          type: string
+        payorLastName:
+          description: The last name of the payor when the payor is an individual and not a business. Required and should only be defined if `payorType` is `INDIVIDUAL`.
+          example: Smith
+          type: string
+        description:
+          description: The description of the goods or services in the invoice.
+          example: Invoice for equipment purchased.
+          type: string
+      required:
+      - description
+      - invoiceAmountCents
+      - invoiceDueDate
+      - invoiceIssuedDate
+      - payorType
+      - platformInvoiceId
+      - platformInvoiceNumber
+      type: object
+    InvoiceFlowWithInvoiceFileSessionTokenData:
+      properties:
+        component:
+          description: Generates a session token for the invoice confirmation flow. This option can be used if you do not have all the required invoice data for the SESSION_INVOICE_FLOW option. Optional data that is not provided may be collected from the user. An invoice PDF must be provided.
+          enum:
+          - SESSION_INVOICE_FLOW_WITH_INVOICE_FILE
+          type: string
+        invoices:
+          description: Details about the list of invoices which are to be created.
+          items:
+            $ref: '#/components/schemas/SessionInvoiceWithInvoiceFile'
+          type: array
+      required:
+      - component
+      - invoices
+      type: object
+    PlatformInvoiceIdAlreadyExistsForAnotherIssuedProductException:
+      example:
+        errorCode: PlatformInvoiceIdAlreadyExistsForAnotherIssuedProductException
+        message: An error occurred.
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - PlatformInvoiceIdAlreadyExistsForAnotherIssuedProductException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: An error occurred.
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+  securitySchemes:
+    Authorization:
+      in: header
+      name: Authorization
+      type: apiKey

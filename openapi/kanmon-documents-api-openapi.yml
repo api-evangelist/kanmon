@@ -1,0 +1,285 @@
+openapi: 3.0.0
+info:
+  contact: {}
+  description: Kanmon's public api. Contains all of the endpoints for both capital providers and platforms
+  title: Kanmon Public V2 Bank Accounts Documents API
+  version: 2.0.0
+servers:
+- description: Production
+  url: https://api.kanmon.com
+- description: Sandbox
+  url: https://api.kanmon.dev
+- description: Local
+  url: http://localhost:3333
+- description: Staging
+  url: https://workflow.concar.dev
+tags:
+- name: Documents
+paths:
+  /api/platform/v2/documents:
+    post:
+      operationId: createBusinessDocument
+      parameters: []
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UploadBankDocumentsRequest'
+        required: true
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateBusinessDocumentsResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+          description: BadRequestException
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+          description: ForbiddenException
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+          description: TooManyRequestsException
+          headers:
+            X-RateLimit-Limit:
+              description: Maximum number of requests allowed per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: Number of remaining requests available.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+          description: InternalServerErrorException
+      security:
+      - Authorization: []
+      summary: Upload documents for a business
+      tags:
+      - Documents
+      x-readme:
+        code-samples:
+        - language: node
+          install: npm install @kanmon/sdk
+          name: SDK
+          code: "\nkanmonApi.documents.createBusinessDocument({\n  ...params...\n})\n    "
+      x-content-type: multipart/form-data
+      x-accepts:
+      - application/json
+components:
+  schemas:
+    InternalServerErrorException:
+      example:
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - InternalServerErrorException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    UploadBankDocumentsRequest:
+      properties:
+        invoices:
+          description: Invoices to be uploaded. The file format must be PDF. The limit is 10 files, 10 MB per file.
+          items:
+            format: binary
+            type: string
+          type: array
+        businessId:
+          description: The unique identifier for business within Kanmon. Either of `businessId` or `platformBusinessId` is required.
+          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          type: string
+        platformBusinessId:
+          description: The unique identifier for business in your platform. Either of `businessId` or `platformBusinessId` is required.
+          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          type: string
+      required:
+      - invoices
+      type: object
+    TooManyRequestsException:
+      example:
+        errorCode: TooManyRequestsException
+        message: Too Many Requests
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - TooManyRequestsException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Too Many Requests
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    BusinessDocumentType:
+      description: The type of document that is uploaded.
+      enum:
+      - INVOICE
+      type: string
+    CreateBusinessDocumentsResponse:
+      example:
+        documents:
+        - originalFileName: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          platformBusinessId: '12345'
+          documentType: INVOICE
+          businessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          id: 1193fdaf-630c-4771-a629-8da7a87947d2
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+        - originalFileName: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          platformBusinessId: '12345'
+          documentType: INVOICE
+          businessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          id: 1193fdaf-630c-4771-a629-8da7a87947d2
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        documents:
+          description: The documents that were uploaded.
+          items:
+            $ref: '#/components/schemas/BusinessDocument'
+          type: array
+      required:
+      - documents
+      type: object
+    BusinessDocument:
+      example:
+        originalFileName: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+        createdAt: 2022-06-01 03:57:26.115000+00:00
+        platformBusinessId: '12345'
+        documentType: INVOICE
+        businessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+        id: 1193fdaf-630c-4771-a629-8da7a87947d2
+        updatedAt: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        id:
+          description: The UUID representing the business document in Kanmon.
+          example: 1193fdaf-630c-4771-a629-8da7a87947d2
+          type: string
+        platformBusinessId:
+          description: Your platform’s unique ID for the business.
+          example: '12345'
+          nullable: true
+          type: string
+        businessId:
+          description: The UUID representing the business in Kanmon.
+          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          type: string
+        documentType:
+          $ref: '#/components/schemas/BusinessDocumentType'
+        originalFileName:
+          description: The file’s original file name.
+          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          type: string
+        createdAt:
+          description: Creation UTC ISO 8601 timestamp of the business document.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+        updatedAt:
+          description: Last updated UTC ISO 8601 timestamp of the business document.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - businessId
+      - createdAt
+      - documentType
+      - id
+      - originalFileName
+      - platformBusinessId
+      - updatedAt
+      type: object
+    ForbiddenException:
+      example:
+        errorCode: ForbiddenException
+        message: Forbidden
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - ForbiddenException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Forbidden
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    BadRequestException:
+      example:
+        errorCode: BadRequestException
+        message: Bad Request
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BadRequestException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Bad Request
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+  securitySchemes:
+    Authorization:
+      in: header
+      name: Authorization
+      type: apiKey

@@ -1,0 +1,527 @@
+openapi: 3.0.0
+info:
+  contact: {}
+  description: Kanmon's public api. Contains all of the endpoints for both capital providers and platforms
+  title: Kanmon Public V2 Bank Accounts Draw Requests API
+  version: 2.0.0
+servers:
+- description: Production
+  url: https://api.kanmon.com
+- description: Sandbox
+  url: https://api.kanmon.dev
+- description: Local
+  url: http://localhost:3333
+- description: Staging
+  url: https://workflow.concar.dev
+tags:
+- name: Draw Requests
+paths:
+  /api/platform/v2/draw-requests/{id}:
+    get:
+      operationId: getDrawRequest
+      parameters:
+      - description: The Kanmon draw request UUID.
+        example: 60eaa08c-f7a5-4f3a-860d-a16dde5771d6
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DrawRequest'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+          description: BadRequestException
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+          description: ForbiddenException
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DrawRequestNotFoundException'
+          description: ''
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+          description: TooManyRequestsException
+          headers:
+            X-RateLimit-Limit:
+              description: Maximum number of requests allowed per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: Number of remaining requests available.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+          description: InternalServerErrorException
+      security:
+      - Authorization: []
+      summary: Fetch a draw request
+      tags:
+      - Draw Requests
+      x-readme:
+        code-samples:
+        - language: node
+          install: npm install @kanmon/sdk
+          name: SDK
+          code: "\nkanmonApi.drawRequests.getDrawRequest({\n  ...params...\n})\n    "
+      x-accepts:
+      - application/json
+  /api/platform/v2/draw-requests:
+    get:
+      operationId: getAllDrawRequests
+      parameters:
+      - description: A comma delimited list of draw request statuses.
+        example: DRAW_REQUEST_FUNDED,DRAW_REQUEST_PAID_IN_FULL
+        explode: true
+        in: query
+        name: statuses
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: A comma delimited list of Kanmon’s unique IDs for invoices.
+        example: 60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34
+        explode: true
+        in: query
+        name: ids
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: A comma delimited list of your platform’s unique IDs for businesses.
+        example: 12345,67890
+        explode: true
+        in: query
+        name: platformBusinessIds
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: A comma delimited list of Kanmon’s unique IDs for businesses.
+        example: 60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34
+        explode: true
+        in: query
+        name: businessIds
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The number of records to skip when performing pagination. Defaults to `0`.
+        example: '0'
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+        style: form
+      - description: The number of records to limit when performing pagination. Defaults to `100`, which is the max.
+        example: '100'
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+        style: form
+      - description: Filter for records where `createdAt` is greater than or equal to this value. ISO 8601 format.
+        example: 2022-06-01 03:57:26.115000+00:00
+        explode: true
+        in: query
+        name: createdAtStart
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter for records where `createdAt` is less than or equal to this value. ISO 8601 format.
+        example: 2022-06-01 03:57:26.115000+00:00
+        explode: true
+        in: query
+        name: createdAtEnd
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetDrawRequestsResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+          description: BadRequestException
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+          description: ForbiddenException
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+          description: TooManyRequestsException
+          headers:
+            X-RateLimit-Limit:
+              description: Maximum number of requests allowed per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: Number of remaining requests available.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+          description: InternalServerErrorException
+      security:
+      - Authorization: []
+      summary: Fetch draw requests
+      tags:
+      - Draw Requests
+      x-readme:
+        code-samples:
+        - language: node
+          install: npm install @kanmon/sdk
+          name: SDK
+          code: "\nkanmonApi.drawRequests.getAllDrawRequests({\n  ...params...\n})\n    "
+      x-accepts:
+      - application/json
+components:
+  schemas:
+    InternalServerErrorException:
+      example:
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - InternalServerErrorException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    DrawRequestNotFoundException:
+      example:
+        errorCode: DrawRequestNotFoundException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - DrawRequestNotFoundException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    PaginationResult:
+      properties:
+        limit:
+          description: The number of records to limit when performing pagination.
+          example: 100
+          type: number
+        offset:
+          description: The number of records to skip when performing pagination.
+          example: 0
+          type: number
+        totalCount:
+          description: The total number of records that matched the query.
+          example: 100
+          type: number
+      required:
+      - limit
+      - offset
+      - totalCount
+      type: object
+    TooManyRequestsException:
+      example:
+        errorCode: TooManyRequestsException
+        message: Too Many Requests
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - TooManyRequestsException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Too Many Requests
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    DrawRequestState:
+      description: The state of the draw request.
+      enum:
+      - DRAW_REQUEST_CREATED
+      - DRAW_REQUEST_FUNDED
+      - DRAW_REQUEST_PAID_IN_FULL
+      - REJECTED
+      - DEFAULTED
+      type: string
+    RepaymentCadence:
+      enum:
+      - WEEKLY
+      - MONTHLY
+      type: string
+    ForbiddenException:
+      example:
+        errorCode: ForbiddenException
+        message: Forbidden
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - ForbiddenException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Forbidden
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    GetDrawRequestsResponse:
+      example:
+        drawRequests:
+        - gracePeriodDays: 30
+          remainingBalanceCents: 500000
+          feePercentage: 5
+          issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          disbursementAmountCents: 960000
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          amountCents: 1000000
+          repaymentCadence: WEEKLY
+          id: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          feeAmountCents: 40000
+          interestRatePercentage: 10
+          repaymentDurationMonths: 6
+          status: DRAW_REQUEST_CREATED
+          numPaymentPeriods: 3
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+        - gracePeriodDays: 30
+          remainingBalanceCents: 500000
+          feePercentage: 5
+          issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          disbursementAmountCents: 960000
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          amountCents: 1000000
+          repaymentCadence: WEEKLY
+          id: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          feeAmountCents: 40000
+          interestRatePercentage: 10
+          repaymentDurationMonths: 6
+          status: DRAW_REQUEST_CREATED
+          numPaymentPeriods: 3
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+        pagination: ''
+      properties:
+        drawRequests:
+          description: Array of draw requests.
+          items:
+            $ref: '#/components/schemas/DrawRequest'
+          type: array
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/PaginationResult'
+          description: Pagination metadata.
+      required:
+      - drawRequests
+      - pagination
+      type: object
+    DrawRequest:
+      example:
+        gracePeriodDays: 30
+        remainingBalanceCents: 500000
+        feePercentage: 5
+        issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+        disbursementAmountCents: 960000
+        createdAt: 2022-06-01 03:57:26.115000+00:00
+        amountCents: 1000000
+        repaymentCadence: WEEKLY
+        id: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+        feeAmountCents: 40000
+        interestRatePercentage: 10
+        repaymentDurationMonths: 6
+        status: DRAW_REQUEST_CREATED
+        numPaymentPeriods: 3
+        updatedAt: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        id:
+          description: Kanmon’s unique ID for the draw request.
+          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          type: string
+        issuedProductId:
+          description: The UUID representing the issued product in Kanmon.
+          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          type: string
+        amountCents:
+          description: The total draw request amount - in cents.
+          example: 1000000
+          type: number
+        disbursementAmountCents:
+          description: The total draw request amount, less the fees - in cents. This is the amount disbursed to the business if the draw request is approved.
+          example: 960000
+          type: number
+        feeAmountCents:
+          description: The fee amount - in cents.
+          example: 40000
+          type: number
+        status:
+          $ref: '#/components/schemas/DrawRequestState'
+        interestRatePercentage:
+          description: The interest rate for the draw request. E.g. a value of `10` means 10%.
+          example: 10
+          type: number
+        feePercentage:
+          description: The fee percentage charged as the borrowing cost of the draw request. E.g. a value of `2` means a 2% fee.
+          example: 5
+          type: number
+        repaymentDurationMonths:
+          deprecated: true
+          description: 'The duration of the repayment for the draw request - in months. Deprecated: use `numPaymentPeriods` and `repaymentCadence` instead.'
+          example: 6
+          type: number
+        repaymentCadence:
+          $ref: '#/components/schemas/RepaymentCadence'
+        gracePeriodDays:
+          description: The number of days after the draw during which no installment payments are due. Interest still accrues.
+          example: 30
+          type: number
+        numPaymentPeriods:
+          description: The number of installment payment periods for the draw request.
+          example: 3
+          type: number
+        remainingBalanceCents:
+          description: The outstanding principal balance on the draw request - in cents. Equal to the original draw amount minus confirmed principal repayments.
+          example: 500000
+          type: number
+        createdAt:
+          description: Creation UTC ISO 8601 timestamp of the draw request.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+        updatedAt:
+          description: Last updated UTC ISO 8601 timestamp of the draw request.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - amountCents
+      - createdAt
+      - disbursementAmountCents
+      - feeAmountCents
+      - feePercentage
+      - gracePeriodDays
+      - id
+      - interestRatePercentage
+      - issuedProductId
+      - numPaymentPeriods
+      - remainingBalanceCents
+      - repaymentCadence
+      - repaymentDurationMonths
+      - status
+      - updatedAt
+      type: object
+    BadRequestException:
+      example:
+        errorCode: BadRequestException
+        message: Bad Request
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BadRequestException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Bad Request
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+  securitySchemes:
+    Authorization:
+      in: header
+      name: Authorization
+      type: apiKey

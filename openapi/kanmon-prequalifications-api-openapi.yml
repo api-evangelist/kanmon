@@ -1,0 +1,341 @@
+openapi: 3.0.0
+info:
+  contact: {}
+  description: Kanmon's public api. Contains all of the endpoints for both capital providers and platforms
+  title: Kanmon Public V2 Bank Accounts Prequalifications API
+  version: 2.0.0
+servers:
+- description: Production
+  url: https://api.kanmon.com
+- description: Sandbox
+  url: https://api.kanmon.dev
+- description: Local
+  url: http://localhost:3333
+- description: Staging
+  url: https://workflow.concar.dev
+tags:
+- name: Prequalifications
+paths:
+  /api/platform/v2/prequalifications:
+    get:
+      operationId: getAllPrequalifiedBusinesses
+      parameters:
+      - description: A comma delimited list of your platform’s unique IDs for businesses.
+        example: 12345,67890
+        explode: true
+        in: query
+        name: platformBusinessIds
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The number of records to skip when performing pagination. Defaults to `0`.
+        example: '0'
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+        style: form
+      - description: The number of records to limit when performing pagination. Defaults to `100`, which is the max.
+        example: '100'
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+        style: form
+      - description: Filter for records where `createdAt` is greater than or equal to this value. ISO 8601 format.
+        example: 2022-06-01 03:57:26.115000+00:00
+        explode: true
+        in: query
+        name: createdAtStart
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter for records where `createdAt` is less than or equal to this value. ISO 8601 format.
+        example: 2022-06-01 03:57:26.115000+00:00
+        explode: true
+        in: query
+        name: createdAtEnd
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetPrequalificationsResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+          description: BadRequestException
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+          description: ForbiddenException
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+          description: TooManyRequestsException
+          headers:
+            X-RateLimit-Limit:
+              description: Maximum number of requests allowed per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: Number of remaining requests available.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+          description: InternalServerErrorException
+      security:
+      - Authorization: []
+      summary: Fetch business prequalifications
+      tags:
+      - Prequalifications
+      x-readme:
+        code-samples:
+        - language: node
+          install: npm install @kanmon/sdk
+          name: SDK
+          code: "\nkanmonApi.prequalifications.getAllPrequalifiedBusinesses({\n  ...params...\n})\n    "
+      x-accepts:
+      - application/json
+components:
+  schemas:
+    BusinessPrequalification:
+      example:
+        createdAt: 2022-06-01 03:57:26.115000+00:00
+        product: INVOICE_FINANCING
+        platformBusinessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+        isPrequalified: true
+        businessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+        platformId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+        prequalifiedAmountCents: 1000000
+        updatedAt: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        product:
+          $ref: '#/components/schemas/ProductType'
+        platformId:
+          description: The UUID representing your platform in Kanmon.
+          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          type: string
+        businessId:
+          description: The UUID representing the business in Kanmon.
+          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          nullable: true
+          type: string
+        platformBusinessId:
+          description: Your platform’s unique ID for the business.
+          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          type: string
+        isPrequalified:
+          description: Whether or not the business has been prequalified.
+          type: boolean
+        prequalifiedAmountCents:
+          description: Number describing the prequalification amount of the business in cents.
+          example: 1000000
+          nullable: true
+          type: number
+        createdAt:
+          description: Creation UTC ISO 8601 timestamp of the prequalification.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+        updatedAt:
+          description: Last updated UTC ISO 8601 timestamp of the prequalification.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - businessId
+      - createdAt
+      - isPrequalified
+      - platformBusinessId
+      - platformId
+      - prequalifiedAmountCents
+      - product
+      - updatedAt
+      type: object
+    InternalServerErrorException:
+      example:
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - InternalServerErrorException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    ProductType:
+      enum:
+      - INVOICE_FINANCING
+      - TERM_LOAN
+      - MCA
+      - LINE_OF_CREDIT
+      - INTEGRATED_MCA
+      - ACCOUNTS_PAYABLE_FINANCING
+      type: string
+    PaginationResult:
+      properties:
+        limit:
+          description: The number of records to limit when performing pagination.
+          example: 100
+          type: number
+        offset:
+          description: The number of records to skip when performing pagination.
+          example: 0
+          type: number
+        totalCount:
+          description: The total number of records that matched the query.
+          example: 100
+          type: number
+      required:
+      - limit
+      - offset
+      - totalCount
+      type: object
+    TooManyRequestsException:
+      example:
+        errorCode: TooManyRequestsException
+        message: Too Many Requests
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - TooManyRequestsException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Too Many Requests
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    GetPrequalificationsResponse:
+      example:
+        pagination: ''
+        prequalifications:
+        - createdAt: 2022-06-01 03:57:26.115000+00:00
+          product: INVOICE_FINANCING
+          platformBusinessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          isPrequalified: true
+          businessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          platformId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          prequalifiedAmountCents: 1000000
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+        - createdAt: 2022-06-01 03:57:26.115000+00:00
+          product: INVOICE_FINANCING
+          platformBusinessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          isPrequalified: true
+          businessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          platformId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          prequalifiedAmountCents: 1000000
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        prequalifications:
+          description: Array of prequalifications.
+          items:
+            $ref: '#/components/schemas/BusinessPrequalification'
+          type: array
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/PaginationResult'
+          description: Pagination metadata.
+      required:
+      - pagination
+      - prequalifications
+      type: object
+    ForbiddenException:
+      example:
+        errorCode: ForbiddenException
+        message: Forbidden
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - ForbiddenException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Forbidden
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    BadRequestException:
+      example:
+        errorCode: BadRequestException
+        message: Bad Request
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BadRequestException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Bad Request
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+  securitySchemes:
+    Authorization:
+      in: header
+      name: Authorization
+      type: apiKey

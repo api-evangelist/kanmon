@@ -1,0 +1,799 @@
+openapi: 3.0.0
+info:
+  contact: {}
+  description: Kanmon's public api. Contains all of the endpoints for both capital providers and platforms
+  title: Kanmon Public V2 Bank Accounts API
+  version: 2.0.0
+servers:
+- description: Production
+  url: https://api.kanmon.com
+- description: Sandbox
+  url: https://api.kanmon.dev
+- description: Local
+  url: http://localhost:3333
+- description: Staging
+  url: https://workflow.concar.dev
+tags:
+- name: Bank Accounts
+paths:
+  /api/platform/v2/bank-accounts:
+    get:
+      description: Please contact Kanmon to enable access to bank account APIs.
+      operationId: getAllBusinessBankAccounts
+      parameters:
+      - description: A comma delimited list of Kanmon’s unique IDs for bank accounts.
+        example: 60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34
+        explode: true
+        in: query
+        name: ids
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: A comma delimited list of your platform’s unique IDs for bank accounts.
+        example: 12345,67890
+        explode: true
+        in: query
+        name: platformBankAccountIds
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: A comma delimited list of your platform’s unique business IDs for bannk accounts.
+        example: 12345,67890
+        explode: true
+        in: query
+        name: platformBusinessIds
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: A comma delimited list of your Kanmon’s unique business IDs for bannk accounts.
+        example: e3765dce-bbc6-4038-ae73-4e63b6ce990b,e2b4d6a0-26d2-4c28-96f3-a40aea7187f7
+        explode: true
+        in: query
+        name: businessIds
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The number of records to skip when performing pagination. Defaults to `0`.
+        example: '0'
+        explode: true
+        in: query
+        name: offset
+        required: false
+        schema:
+          type: number
+        style: form
+      - description: The number of records to limit when performing pagination. Defaults to `100`, which is the max.
+        example: '100'
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: number
+        style: form
+      - description: Filter for records where `createdAt` is greater than or equal to this value. ISO 8601 format.
+        example: 2022-06-01 03:57:26.115000+00:00
+        explode: true
+        in: query
+        name: createdAtStart
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Filter for records where `createdAt` is less than or equal to this value. ISO 8601 format.
+        example: 2022-06-01 03:57:26.115000+00:00
+        explode: true
+        in: query
+        name: createdAtEnd
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GetBusinessBankAccountsResponse'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+          description: BadRequestException
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+          description: ForbiddenException
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+          description: TooManyRequestsException
+          headers:
+            X-RateLimit-Limit:
+              description: Maximum number of requests allowed per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: Number of remaining requests available.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+          description: InternalServerErrorException
+      security:
+      - Authorization: []
+      summary: Fetch business bank accounts
+      tags:
+      - Bank Accounts
+      x-readme:
+        code-samples:
+        - language: node
+          install: npm install @kanmon/sdk
+          name: SDK
+          code: "\nkanmonApi.bankAccounts.getAllBusinessBankAccounts({\n  ...params...\n})\n    "
+      x-accepts:
+      - application/json
+    post:
+      description: "We only support creating disbursement checking accounts at the moment. Each business can only have one disbursement checking account.\n      Please contact Kanmon to enable access to bank account APIs."
+      operationId: createBusinessBankAccount
+      parameters: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBusinessBankAccountRequestBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessBankAccount'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+          description: BadRequestException
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+          description: ForbiddenException
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessNotFoundException'
+          description: BusinessNotFoundException
+        '409':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankAccountAlreadyExistException'
+          description: BankAccountAlreadyExistException
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+          description: TooManyRequestsException
+          headers:
+            X-RateLimit-Limit:
+              description: Maximum number of requests allowed per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: Number of remaining requests available.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+          description: InternalServerErrorException
+      security:
+      - Authorization: []
+      summary: Create a business bank account
+      tags:
+      - Bank Accounts
+      x-readme:
+        code-samples:
+        - language: node
+          install: npm install @kanmon/sdk
+          name: SDK
+          code: "\nkanmonApi.bankAccounts.createBusinessBankAccount({\n  ...params...\n})\n    "
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+  /api/platform/v2/bank-accounts/{id}:
+    get:
+      description: Please contact Kanmon to enable access to bank account APIs.
+      operationId: getBusinessBankAccount
+      parameters:
+      - description: Either the Kanmon bank account UUID or your platform’s bank account ID, depending on `idType`.
+        example: 60eaa08c-f7a5-4f3a-860d-a16dde5771d6
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Which ID type to query the bank account by. Defaults to `KANMON`. Use `PLATFORM` if you want to query by your platform’s ID.
+        example: KANMON
+        explode: true
+        in: query
+        name: idType
+        required: false
+        schema:
+          enum:
+          - KANMON
+          - PLATFORM
+          type: string
+        style: form
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessBankAccount'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+          description: BadRequestException
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+          description: ForbiddenException
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankAccountNotFoundException'
+          description: BankAccountNotFoundException
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+          description: TooManyRequestsException
+          headers:
+            X-RateLimit-Limit:
+              description: Maximum number of requests allowed per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: Number of remaining requests available.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+          description: InternalServerErrorException
+      security:
+      - Authorization: []
+      summary: Fetch a business bank account
+      tags:
+      - Bank Accounts
+      x-readme:
+        code-samples:
+        - language: node
+          install: npm install @kanmon/sdk
+          name: SDK
+          code: "\nkanmonApi.bankAccounts.getBusinessBankAccount({\n  ...params...\n})\n    "
+      x-accepts:
+      - application/json
+    patch:
+      description: "We only support creating disbursement checking accounts at the moment. Each business can only have one disbursement checking account.\n        Please contact Kanmon to enable access to bank account APIs."
+      operationId: updateBusinessBankAccount
+      parameters:
+      - description: Either the Kanmon bank account UUID or your platform’s bank account ID, depending on `idType`.
+        example: 60eaa08c-f7a5-4f3a-860d-a16dde5771d6
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      - description: Which ID type to query the bank account by. Defaults to `KANMON`. Use `PLATFORM` if you want to query by your platform’s ID.
+        example: KANMON
+        explode: true
+        in: query
+        name: idType
+        required: false
+        schema:
+          enum:
+          - KANMON
+          - PLATFORM
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateBusinessAccountRequestBody'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusinessBankAccount'
+          description: ''
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequestException'
+          description: BadRequestException
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ForbiddenException'
+          description: ForbiddenException
+        '404':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BankAccountNotFoundException'
+          description: BankAccountNotFoundException
+        '429':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TooManyRequestsException'
+          description: TooManyRequestsException
+          headers:
+            X-RateLimit-Limit:
+              description: Maximum number of requests allowed per minute.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+            X-RateLimit-Remaining:
+              description: Number of remaining requests available.
+              explode: false
+              schema:
+                type: integer
+              style: simple
+        '500':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerErrorException'
+          description: InternalServerErrorException
+      security:
+      - Authorization: []
+      summary: Update a business bank account
+      tags:
+      - Bank Accounts
+      x-readme:
+        code-samples:
+        - language: node
+          install: npm install @kanmon/sdk
+          name: SDK
+          code: "\nkanmonApi.bankAccounts.updateBusinessBankAccount({\n  ...params...\n})\n    "
+      x-content-type: application/json
+      x-accepts:
+      - application/json
+components:
+  schemas:
+    CreateBusinessBankAccountRequestBody:
+      example:
+        routingNumber: '123456789'
+        platformBusinessId: '12345'
+        accountName: My bank account
+        accountType: CHECKING
+        roles:
+        - DISBURSEMENT
+        businessId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+        accountNumber: '123456789'
+        platformBankAccountId: '12345'
+      properties:
+        platformBusinessId:
+          description: Your platform’s unique business ID for the business. Either `platformBusinessId` or `businessId` is required.
+          example: '12345'
+          type: string
+        businessId:
+          description: The UUID representing the user’s business in Kanmon. Either `platformBusinessId` or `businessId` is required.
+          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          type: string
+        platformBankAccountId:
+          description: Your platform’s unique ID for the bank account.
+          example: '12345'
+          type: string
+        accountName:
+          description: The business defined bank account name.
+          example: My bank account
+          type: string
+        accountNumber:
+          description: The business’s bank account number. Only digits, no formatting.
+          example: '123456789'
+          type: string
+        routingNumber:
+          description: The business’s bank routing number. Should be a 9 digits number, no formatting.
+          example: '123456789'
+          type: string
+        accountType:
+          description: The bank account’s type. Currently, we only support checking accounts. We may support others in the future.
+          enum:
+          - CHECKING
+          example: CHECKING
+          type: string
+        roles:
+          description: The bank account’s roles. Currently, we only support creating disbursement bank account. We may support others in the future.
+          example:
+          - DISBURSEMENT
+          items:
+            enum:
+            - DISBURSEMENT
+            type: string
+          type: array
+      required:
+      - accountName
+      - accountNumber
+      - accountType
+      - platformBankAccountId
+      - roles
+      - routingNumber
+      type: object
+    InternalServerErrorException:
+      example:
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - InternalServerErrorException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    GetBusinessBankAccountsResponse:
+      example:
+        pagination: ''
+        bankAccounts:
+        - routingNumber: '123456789'
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          accountName: My bank account
+          accountType: CHECKING
+          roles:
+          - DISBURSEMENT
+          id: 1193fdaf-630c-4771-a629-8da7a87947d2
+          accountNumber: '123456789'
+          platformBankAccountId: '12345'
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+        - routingNumber: '123456789'
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          accountName: My bank account
+          accountType: CHECKING
+          roles:
+          - DISBURSEMENT
+          id: 1193fdaf-630c-4771-a629-8da7a87947d2
+          accountNumber: '123456789'
+          platformBankAccountId: '12345'
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        bankAccounts:
+          description: Array of business bank accounts.
+          items:
+            $ref: '#/components/schemas/BusinessBankAccount'
+          type: array
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/PaginationResult'
+          description: Pagination metadata.
+      required:
+      - bankAccounts
+      - pagination
+      type: object
+    PaginationResult:
+      properties:
+        limit:
+          description: The number of records to limit when performing pagination.
+          example: 100
+          type: number
+        offset:
+          description: The number of records to skip when performing pagination.
+          example: 0
+          type: number
+        totalCount:
+          description: The total number of records that matched the query.
+          example: 100
+          type: number
+      required:
+      - limit
+      - offset
+      - totalCount
+      type: object
+    BankAccountNotFoundException:
+      example:
+        errorCode: BankAccountNotFoundException
+        message: An error occurred.
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BankAccountNotFoundException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: An error occurred.
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    BadRequestException:
+      example:
+        errorCode: BadRequestException
+        message: Bad Request
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BadRequestException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Bad Request
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    BusinessNotFoundException:
+      example:
+        errorCode: BusinessNotFoundException
+        message: An error occurred.
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BusinessNotFoundException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: An error occurred.
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    TooManyRequestsException:
+      example:
+        errorCode: TooManyRequestsException
+        message: Too Many Requests
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - TooManyRequestsException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Too Many Requests
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    BusinessBankAccount:
+      example:
+        routingNumber: '123456789'
+        createdAt: 2022-06-01 03:57:26.115000+00:00
+        accountName: My bank account
+        accountType: CHECKING
+        roles:
+        - DISBURSEMENT
+        id: 1193fdaf-630c-4771-a629-8da7a87947d2
+        accountNumber: '123456789'
+        platformBankAccountId: '12345'
+        updatedAt: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        id:
+          description: The UUID representing the business bank account in Kanmon.
+          example: 1193fdaf-630c-4771-a629-8da7a87947d2
+          type: string
+        platformBankAccountId:
+          description: Your platform’s unique ID for the bank account.
+          example: '12345'
+          type: string
+        accountName:
+          description: The business bank account’s name.
+          example: My bank account
+          nullable: true
+          type: string
+        accountNumber:
+          description: The business’s bank account number. Only digits, no formatting.
+          example: '123456789'
+          type: string
+        routingNumber:
+          description: The business’s bank routing number. Only digits, no formatting.
+          example: '123456789'
+          type: string
+        accountType:
+          description: The bank account’s type. Currently, we only support checking accounts. We may support others in the future.
+          enum:
+          - CHECKING
+          example: CHECKING
+          type: string
+        roles:
+          description: The bank account’s roles. Currently, we only support disbursement bank role.
+          example:
+          - DISBURSEMENT
+          items:
+            enum:
+            - DISBURSEMENT
+            type: string
+          type: array
+        createdAt:
+          description: Creation UTC ISO 8601 timestamp of the business.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+        updatedAt:
+          description: Last updated UTC ISO 8601 timestamp of the business.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - accountName
+      - accountNumber
+      - accountType
+      - createdAt
+      - id
+      - platformBankAccountId
+      - roles
+      - routingNumber
+      - updatedAt
+      type: object
+    ForbiddenException:
+      example:
+        errorCode: ForbiddenException
+        message: Forbidden
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - ForbiddenException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Forbidden
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    UpdateBusinessAccountRequestBody:
+      example:
+        routingNumber: '123456789'
+        accountName: My account
+        accountNumber: '123456789'
+        platformBankAccountId: '12345'
+      properties:
+        platformBankAccountId:
+          description: Your platform’s unique ID for the bank account.
+          example: '12345'
+          type: string
+        accountName:
+          description: The business defined bank account name.
+          example: My account
+          type: string
+        accountNumber:
+          description: The business’s bank account number. Only digits, no formatting.
+          example: '123456789'
+          type: string
+        routingNumber:
+          description: The business’s bank routing number. Should be a 9 digits number, no formatting.
+          example: '123456789'
+          type: string
+      type: object
+    BankAccountAlreadyExistException:
+      example:
+        errorCode: BankAccountAlreadyExistException
+        message: An error occurred.
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BankAccountAlreadyExistException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: An error occurred.
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+  securitySchemes:
+    Authorization:
+      in: header
+      name: Authorization
+      type: apiKey

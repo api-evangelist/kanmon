@@ -1,0 +1,15 @@
+generated: '2026-07-19'
+method: searched
+source: openapi/kanmon-openapi-original.yml (event descriptions) + https://kanmon.dev/docs/webhook-events
+spec_type: Webhooks
+note: >-
+  Kanmon delivers outbound webhook events to notify the platform of borrower and
+  account lifecycle changes. No AsyncAPI document is published; the webhook-events
+  reference lives at kanmon.dev/docs/webhook-events (gated behind an account-manager
+  invite). The event names below are the ones referenced verbatim in the public
+  OpenAPI descriptions; the full catalog is documented on the gated page.
+delivery: HTTP POST to a platform-configured endpoint
+events:
+- {name: USER.CREATED, description: Sent when a user is created (including a secondary owner created via servicing flows).}
+- {name: BUSINESS.NEW_ACCOUNT, description: Sent for a new business account event.}
+docs: https://kanmon.dev/docs/webhook-events

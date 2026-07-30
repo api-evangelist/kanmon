@@ -1,0 +1,40 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/kanmon-openapi-original.yml
+entities:
+- {name: Business, description: A business borrower onboarded by the platform; carries a Kanmon id and your platformBusinessId.}
+- {name: User, description: A person associated with a business (primary/secondary owner or authorized user).}
+- {name: Prequalification, description: Prequalified-business record surfaced to the platform.}
+- {name: ConnectToken, description: Short-lived token that initializes an embedded Kanmon Connect session for a user.}
+- {name: EmbeddedSession, description: A server-created embedded session for driving borrower flows.}
+- {name: Offer, description: A financing offer extended to a business.}
+- {name: IssuedProduct, description: A funded/issued financing product (term loan, line of credit, invoice financing, AP financing, integrated MCA).}
+- {name: Invoice, description: An invoice submitted for financing.}
+- {name: InvoicePaymentPlan, description: The payment plan attached to a financed invoice.}
+- {name: BusinessBankAccount, description: A bank account linked to a business (often via Plaid).}
+- {name: PaymentOrder, description: A payment/repayment order against an issued product.}
+- {name: PaymentIntent, description: A payment intent record.}
+- {name: DrawRequest, description: A request to draw funds against a line of credit.}
+- {name: BusinessDocument, description: A document uploaded for a business.}
+- {name: IntegratedMcaReceivable, description: A receivable reported for an integrated merchant cash advance product.}
+- {name: ActivityLog, description: Activity-log entries for a business.}
+relationships:
+- {from: User, type: belongs_to, to: Business, via: businessId}
+- {from: Prequalification, type: belongs_to, to: Business, via: businessId}
+- {from: ConnectToken, type: belongs_to, to: User, via: userId}
+- {from: Offer, type: belongs_to, to: Business, via: businessId}
+- {from: IssuedProduct, type: belongs_to, to: Offer, via: offerId}
+- {from: IssuedProduct, type: belongs_to, to: Business, via: businessId}
+- {from: Invoice, type: belongs_to, to: IssuedProduct, via: issuedProductId}
+- {from: InvoicePaymentPlan, type: belongs_to, to: Invoice, via: invoiceId}
+- {from: BusinessBankAccount, type: belongs_to, to: Business, via: businessId}
+- {from: PaymentOrder, type: belongs_to, to: IssuedProduct, via: issuedProductId}
+- {from: DrawRequest, type: belongs_to, to: IssuedProduct, via: issuedProductId}
+- {from: BusinessDocument, type: belongs_to, to: Business, via: businessId}
+- {from: IntegratedMcaReceivable, type: belongs_to, to: Business, via: businessId}
+- {from: ActivityLog, type: belongs_to, to: Business, via: businessId}
+platform_id_fields:
+- platformBusinessId
+- platformUserId
+- platformInvoiceId
+- platformBankAccountId

@@ -1,0 +1,39 @@
+generated: '2026-07-19'
+method: searched
+source: https://github.com/Kanmon/sdk
+packages:
+- language: javascript
+  registry: npm
+  name: "@kanmon/sdk"
+  url: https://www.npmjs.com/package/@kanmon/sdk
+  version: 4.1.0
+  install: npm install @kanmon/sdk
+  description: Kanmon API client (Node / TypeScript) generated from the Kanmon Public V2 API.
+  repository: https://github.com/Kanmon/sdk
+  official: true
+- language: java
+  registry: maven-central
+  name: com.kanmon:kanmon-sdk
+  url: https://central.sonatype.com/artifact/com.kanmon/kanmon-sdk
+  version: 4.1.0
+  install: "implementation 'com.kanmon:kanmon-sdk:4.1.0'"
+  description: Kanmon API SDK for Java (Java 1.8+), generated from the Kanmon Public V2 API.
+  repository: https://github.com/Kanmon/sdk
+  official: true
+- language: javascript
+  registry: npm
+  name: "@kanmon/web-sdk"
+  url: https://www.npmjs.com/package/@kanmon/web-sdk
+  version: 2.2.13
+  install: npm install @kanmon/web-sdk
+  description: Kanmon Web SDK for embedding the Kanmon Connect UI (borrower flows) into a web application.
+  official: true
+- language: javascript
+  registry: npm
+  name: "@kanmon/react-native-sdk"
+  url: https://www.npmjs.com/package/@kanmon/react-native-sdk
+  version: 1.1.0
+  install: npm install @kanmon/react-native-sdk
+  description: Kanmon React Native SDK for embedding Kanmon Connect into mobile apps.
+  repository: https://github.com/Kanmon/react-native-sdk
+  official: true

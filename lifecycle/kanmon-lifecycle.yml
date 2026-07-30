@@ -1,0 +1,25 @@
+generated: '2026-07-19'
+method: searched
+source: https://github.com/Kanmon/sdk (README versioning policy) + openapi/kanmon-openapi-original.yml
+versioning:
+  scheme: uri-path
+  current: v2
+  spec_version: 2.0.0
+  semver_policy: >-
+    Kanmon uses a Semver variant: major = non-backwards-compatible API/SDK change;
+    minor = backwards-compatible API change (SDKs bump too); patch = SDK bug fix only.
+    API docs at kanmon.dev always track the latest minor version (e.g. v2.1); patches
+    are not reflected in the docs.
+  docs: https://kanmon.dev
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No public deprecation policy or RFC 8594 Sunset/Deprecation header support documented.
+sla:
+  url: null
+status_page: null
+support:
+  channels:
+  - https://github.com/Kanmon/sdk/issues
+  - account manager (direct support)
+deprecated_operations: []

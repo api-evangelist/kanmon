@@ -1,0 +1,27 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/kanmon-openapi-original.yml
+standards:
+- id: openapi-3.0
+  conforms: true
+  evidence: openapi 3.0.0 document published and used to generate the official SDKs
+- id: api-key-auth
+  conforms: true
+  evidence: securitySchemes type apiKey in header (Authorization)
+- id: oauth2
+  conforms: false
+  evidence: no oauth2 security scheme declared
+- id: oidc
+  conforms: false
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: errors use a typed { errorCode, message, timestamp } envelope, not application/problem+json
+- id: rate-limit-headers
+  conforms: true
+  evidence: X-RateLimit-Limit / X-RateLimit-Remaining returned on 429 responses
+- id: offset-limit-pagination
+  conforms: true
+  evidence: collection endpoints expose offset and limit query parameters
+- id: webhooks
+  conforms: true
+  evidence: API documents outbound webhook events (e.g. USER.CREATED, BUSINESS.NEW_ACCOUNT)

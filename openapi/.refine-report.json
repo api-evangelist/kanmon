@@ -1,0 +1,40 @@
+{
+  "provider": "kanmon",
+  "sources": [
+    "kanmon-bank-accounts-api-openapi.yml",
+    "kanmon-businesses-api-openapi.yml",
+    "kanmon-connect-tokens-api-openapi.yml",
+    "kanmon-documents-api-openapi.yml",
+    "kanmon-draw-requests-api-openapi.yml",
+    "kanmon-embedded-sessions-api-openapi.yml",
+    "kanmon-integrated-mca-api-openapi.yml",
+    "kanmon-invoices-api-openapi.yml",
+    "kanmon-issued-products-api-openapi.yml",
+    "kanmon-offers-api-openapi.yml",
+    "kanmon-payments-api-openapi.yml",
+    "kanmon-prequalifications-api-openapi.yml",
+    "kanmon-sandbox-utilities-api-openapi.yml",
+    "kanmon-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "kanmon-bank-accounts-api-openapi.yml",
+    "kanmon-businesses-api-openapi.yml",
+    "kanmon-connect-tokens-api-openapi.yml",
+    "kanmon-documents-api-openapi.yml",
+    "kanmon-draw-requests-api-openapi.yml",
+    "kanmon-embedded-sessions-api-openapi.yml",
+    "kanmon-integrated-mca-api-openapi.yml",
+    "kanmon-invoices-api-openapi.yml",
+    "kanmon-issued-products-api-openapi.yml",
+    "kanmon-offers-api-openapi.yml",
+    "kanmon-payments-api-openapi.yml",
+    "kanmon-prequalifications-api-openapi.yml",
+    "kanmon-sandbox-utilities-api-openapi.yml",
+    "kanmon-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

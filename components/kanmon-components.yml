@@ -1,0 +1,23 @@
+generated: '2026-07-19'
+method: searched
+source: https://www.npmjs.com/package/@kanmon/web-sdk + https://github.com/Kanmon/react-native-sdk
+note: >-
+  Kanmon Connect is Kanmon's embedded, prebuilt borrower UI. Platforms initialize it
+  with a Connect token (createConnectToken) and mount it via a client-side SDK, so the
+  entire application, offer-selection, and servicing flow renders inside the platform's
+  own app. Distinct from the server-side API SDKs in packages/.
+families:
+- name: Kanmon Connect (Web)
+  kind: embedded-ui
+  loader: "@kanmon/web-sdk"
+  registry: https://www.npmjs.com/package/@kanmon/web-sdk
+  description: Embeds the hosted Kanmon Connect borrower experience into a web application.
+- name: Kanmon Connect (React Native)
+  kind: embedded-ui
+  loader: "@kanmon/react-native-sdk"
+  registry: https://www.npmjs.com/package/@kanmon/react-native-sdk
+  repository: https://github.com/Kanmon/react-native-sdk
+  description: Embeds Kanmon Connect into iOS/Android apps built with React Native.
+initialization:
+  token_operation: createConnectToken
+  session_operation: createEmbeddedSession

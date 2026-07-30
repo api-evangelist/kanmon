@@ -1,0 +1,16 @@
+generated: '2026-07-19'
+method: generated
+source: openapi/kanmon-openapi-original.yml
+skills:
+- file: kanmon-onboard-business-and-offer.md
+  name: Onboard a business and start an embedded lending session
+  api: openapi/kanmon-openapi-original.yml
+  operations: [createBusiness, createUser, createConnectToken, createEmbeddedSession, getAllOffers]
+- file: kanmon-finance-invoice.md
+  name: Finance an invoice
+  api: openapi/kanmon-openapi-original.yml
+  operations: [getAllIssuedProducts, financeInvoice, getInvoice, getPaymentScheduleForAIssuedProduct]
+- file: kanmon-reconcile-payments.md
+  name: Reconcile issued products and payments
+  api: openapi/kanmon-openapi-original.yml
+  operations: [getAllIssuedProducts, getAllDrawRequests, getPaymentIntents, getPaymentById]

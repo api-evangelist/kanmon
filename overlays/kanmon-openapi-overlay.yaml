@@ -1,0 +1,26 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Kanmon Public V2 API
+  version: 1.0.0
+extends: openapi/kanmon-openapi-original.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: kanmon
+    x-apievangelist-category: embedded-lending
+    x-apievangelist-auth: api-key-header
+    x-apievangelist-pagination: offset-limit
+    x-apievangelist-rate-limit-headers: [X-RateLimit-Limit, X-RateLimit-Remaining]
+    x-apievangelist-events: webhooks
+    x-apievangelist-error-envelope: kanmon-exception
+- target: $.info
+  update:
+    x-apievangelist-artifacts:
+      authentication: authentication/kanmon-authentication.yml
+      conventions: conventions/kanmon-conventions.yml
+      errors: errors/kanmon-problem-types.yml
+      lifecycle: lifecycle/kanmon-lifecycle.yml
+      data-model: data-model/kanmon-data-model.yml
+      webhooks: asyncapi/kanmon-webhooks.yml
+      sandbox: sandbox/kanmon-sandbox.yml
+      packages: packages/kanmon-packages.yml

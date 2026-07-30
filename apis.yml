@@ -1,26 +1,248 @@
 aid: kanmon
 name: Kanmon
-description: 'Kanmon is a company surfaced as a portfolio company of homebrew and added to the API Evangelist
-  network as a stub for enrichment. Sector: fintech. This profile is a lead awaiting the enrichment pipeline.'
+description: >-
+  Kanmon is an embedded-lending platform that lets vertical SaaS and business-management
+  software offer working capital to their customers without becoming a lender themselves.
+  Through the Kanmon Public V2 REST API and the embeddable Kanmon Connect UI, platforms
+  can originate term loans, lines of credit, invoice financing, Accounts Payable financing,
+  and integrated merchant cash advances. Kanmon is the licensed lender and owns underwriting,
+  compliance, and credit risk, while partners integrate financing directly into their existing
+  product with API keys, official SDKs, prebuilt borrower UI components, and outbound webhooks.
 url: https://raw.githubusercontent.com/api-evangelist/kanmon/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - homebrew
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: active
+x-tier-reason: enriched-provider
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-19'
+image: https://files.readme.io/c09d869-small-kanmon_logoicon_bw_black.png
 tags:
 - Company
 - Fintech
-apis: []
+- Embedded Finance
+- Embedded Lending
+- Lending
+- Working Capital
+- Invoice Financing
+- API
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
+apis:
+- aid: kanmon:kanmon-bank-accounts-api
+  name: Kanmon Bank Accounts API
+  description: The Bank Accounts API from Kanmon — 2 operation(s) for bank accounts.
+  humanURL: https://kanmon.dev
+  baseURL: https://api.kanmon.com
+  tags:
+  - Bank Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/kanmon-bank-accounts-api-openapi.yml
+- aid: kanmon:kanmon-businesses-api
+  name: Kanmon Businesses API
+  description: The Businesses API from Kanmon — 3 operation(s) for businesses.
+  humanURL: https://kanmon.dev
+  baseURL: https://api.kanmon.com
+  tags:
+  - Businesses
+  properties:
+  - type: OpenAPI
+    url: openapi/kanmon-businesses-api-openapi.yml
+- aid: kanmon:kanmon-connect-tokens-api
+  name: Kanmon Connect Tokens API
+  description: The Connect Tokens API from Kanmon — 1 operation(s) for connect tokens.
+  humanURL: https://kanmon.dev
+  baseURL: https://api.kanmon.com
+  tags:
+  - Connect Tokens
+  properties:
+  - type: OpenAPI
+    url: openapi/kanmon-connect-tokens-api-openapi.yml
+- aid: kanmon:kanmon-documents-api
+  name: Kanmon Documents API
+  description: The Documents API from Kanmon — 1 operation(s) for documents.
+  humanURL: https://kanmon.dev
+  baseURL: https://api.kanmon.com
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/kanmon-documents-api-openapi.yml
+- aid: kanmon:kanmon-draw-requests-api
+  name: Kanmon Draw Requests API
+  description: The Draw Requests API from Kanmon — 2 operation(s) for draw requests.
+  humanURL: https://kanmon.dev
+  baseURL: https://api.kanmon.com
+  tags:
+  - Draw Requests
+  properties:
+  - type: OpenAPI
+    url: openapi/kanmon-draw-requests-api-openapi.yml
+- aid: kanmon:kanmon-embedded-sessions-api
+  name: Kanmon Embedded Sessions API
+  description: The Embedded Sessions API from Kanmon — 1 operation(s) for embedded sessions.
+  humanURL: https://kanmon.dev
+  baseURL: https://api.kanmon.com
+  tags:
+  - Embedded Sessions
+  properties:
+  - type: OpenAPI
+    url: openapi/kanmon-embedded-sessions-api-openapi.yml
+- aid: kanmon:kanmon-integrated-mca-api
+  name: Kanmon Integrated MCA API
+  description: The Integrated MCA API from Kanmon — 2 operation(s) for integrated mca.
+  humanURL: https://kanmon.dev
+  baseURL: https://api.kanmon.com
+  tags:
+  - Integrated MCA
+  properties:
+  - type: OpenAPI
+    url: openapi/kanmon-integrated-mca-api-openapi.yml
+- aid: kanmon:kanmon-invoices-api
+  name: Kanmon Invoices API
+  description: The Invoices API from Kanmon — 3 operation(s) for invoices.
+  humanURL: https://kanmon.dev
+  baseURL: https://api.kanmon.com
+  tags:
+  - Invoices
+  properties:
+  - type: OpenAPI
+    url: openapi/kanmon-invoices-api-openapi.yml
+- aid: kanmon:kanmon-issued-products-api
+  name: Kanmon Issued Products API
+  description: The Issued Products API from Kanmon — 2 operation(s) for issued products.
+  humanURL: https://kanmon.dev
+  baseURL: https://api.kanmon.com
+  tags:
+  - Issued Products
+  properties:
+  - type: OpenAPI
+    url: openapi/kanmon-issued-products-api-openapi.yml
+- aid: kanmon:kanmon-offers-api
+  name: Kanmon Offers API
+  description: The Offers API from Kanmon — 2 operation(s) for offers.
+  humanURL: https://kanmon.dev
+  baseURL: https://api.kanmon.com
+  tags:
+  - Offers
+  properties:
+  - type: OpenAPI
+    url: openapi/kanmon-offers-api-openapi.yml
+- aid: kanmon:kanmon-payments-api
+  name: Kanmon Payments API
+  description: The Payments API from Kanmon — 3 operation(s) for payments.
+  humanURL: https://kanmon.dev
+  baseURL: https://api.kanmon.com
+  tags:
+  - Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/kanmon-payments-api-openapi.yml
+- aid: kanmon:kanmon-prequalifications-api
+  name: Kanmon Prequalifications API
+  description: The Prequalifications API from Kanmon — 1 operation(s) for prequalifications.
+  humanURL: https://kanmon.dev
+  baseURL: https://api.kanmon.com
+  tags:
+  - Prequalifications
+  properties:
+  - type: OpenAPI
+    url: openapi/kanmon-prequalifications-api-openapi.yml
+- aid: kanmon:kanmon-sandbox-utilities-api
+  name: Kanmon Sandbox Utilities API
+  description: The Sandbox Utilities API from Kanmon — 2 operation(s) for sandbox utilities.
+  humanURL: https://kanmon.dev
+  baseURL: https://api.kanmon.com
+  tags:
+  - Sandbox Utilities
+  properties:
+  - type: OpenAPI
+    url: openapi/kanmon-sandbox-utilities-api-openapi.yml
+- aid: kanmon:kanmon-users-api
+  name: Kanmon Users API
+  description: The Users API from Kanmon — 3 operation(s) for users.
+  humanURL: https://kanmon.dev
+  baseURL: https://api.kanmon.com
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/kanmon-users-api-openapi.yml
 common:
+- type: OpenAPI
+  url: openapi/kanmon-openapi-original.yml
+- type: Overlay
+  url: overlays/kanmon-openapi-overlay.yaml
+- type: Authentication
+  url: authentication/kanmon-authentication.yml
+- type: AgenticAccess
+  url: agentic-access/kanmon-agentic-access.yml
+- type: DomainSecurity
+  url: security/kanmon-domain-security.yml
+- type: Packages
+  url: packages/kanmon-packages.yml
+- type: SDKs
+  url: packages/kanmon-packages.yml
+- type: MCPServer
+  url: mcp/kanmon-mcp.yml
+- type: LLMsTxt
+  url: llms/kanmon-llms.txt
+- type: Conformance
+  url: conformance/kanmon-conformance.yml
+- type: ErrorCatalog
+  url: errors/kanmon-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/kanmon-lifecycle.yml
+- type: Conventions
+  url: conventions/kanmon-conventions.yml
+- type: DataModel
+  url: data-model/kanmon-data-model.yml
+- type: Sandbox
+  url: sandbox/kanmon-sandbox.yml
+- type: Components
+  url: components/kanmon-components.yml
+- type: Webhooks
+  url: asyncapi/kanmon-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: DeveloperPortal
+  url: https://kanmon.dev
+- type: Documentation
+  url: https://kanmon.dev
+- type: APIReference
+  url: https://kanmon.dev
+- type: GitHubOrganization
+  url: https://github.com/Kanmon
+- type: Blog
+  url: https://www.kanmon.com/blog
+- type: Support
+  url: https://www.kanmon.com/contact-us
+- type: TermsOfService
+  url: https://www.kanmon.com/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.kanmon.com/privacy-policy
 - type: Website
-  url: https://www.kanmonhq.com
+  url: https://www.kanmon.com
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

@@ -1,0 +1,66 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/kanmon-openapi-original.yml
+format: kanmon-exception
+envelope:
+  fields:
+  - {name: errorCode, description: Stable machine-readable error code (safe for programmatic use).}
+  - {name: message, description: Human-readable description of the error.}
+  - {name: timestamp, description: When the error occurred, ISO 8601 format.}
+  example:
+    errorCode: BadRequestException
+    message: Bad Request
+    timestamp: '2022-06-01 03:57:26.115000+00:00'
+note: >-
+  Kanmon returns a typed exception envelope (errorCode/message/timestamp) rather than
+  RFC 9457 application/problem+json. HTTP-status-level classes plus the specific typed
+  business exceptions raised across the V2 API are enumerated below, derived from the
+  OpenAPI response schemas. Not application/problem+json.
+status_classes:
+- {status: 400, code: BadRequestException, title: Bad Request}
+- {status: 403, code: ForbiddenException, title: Forbidden}
+- {status: 404, code: NotFound, title: Resource not found}
+- {status: 409, code: Conflict, title: Conflict / resource already exists}
+- {status: 429, code: TooManyRequestsException, title: Rate limit exceeded, headers: [X-RateLimit-Limit, X-RateLimit-Remaining]}
+- {status: 500, code: InternalServerErrorException, title: Internal Server Error}
+problems:
+- {code: BusinessAlreadyExistsException, status: 409, domain: Businesses}
+- {code: BusinessNotFoundException, status: 404, domain: Businesses}
+- {code: BusinessHasNoPrimaryOwnerException, status: 409, domain: Businesses}
+- {code: BusinessHasNoIntegratedMcaProductException, status: 409, domain: Integrated MCA}
+- {code: BusinessHasNoInvoiceFinancingProductException, status: 409, domain: Invoices}
+- {code: BusinessHasNoAccountsPayableFinancingProductException, status: 409, domain: Invoices}
+- {code: UserNotFoundException, status: 404, domain: Users}
+- {code: UserAlreadyExistsWithEmailException, status: 409, domain: Users}
+- {code: UserAlreadyExistsWithPlatformUserIdException, status: 409, domain: Users}
+- {code: PrimaryBusinessOwnerAlreadyExistsForBusinessException, status: 409, domain: Users}
+- {code: PrimaryBusinessOwnerAlreadyExistsWithEmailException, status: 409, domain: Users}
+- {code: PrimaryBusinessOwnerNotFoundException, status: 404, domain: Users}
+- {code: UnmergeableBusinessException, status: 409, domain: Users}
+- {code: OfferNotFoundException, status: 404, domain: Offers}
+- {code: OfferAlreadySelectedException, status: 409, domain: Offers}
+- {code: OfferNotLockedException, status: 409, domain: Offers}
+- {code: SomeOffersHaveExpiredException, status: 409, domain: Offers}
+- {code: IssuedProductNotFoundException, status: 404, domain: Issued Products}
+- {code: IssuedProductStatusNotCurrentException, status: 409, domain: Issued Products}
+- {code: IncorrectProductTypeException, status: 409, domain: Issued Products}
+- {code: BankAccountAlreadyExistException, status: 409, domain: Bank Accounts}
+- {code: BankAccountNotFoundException, status: 404, domain: Bank Accounts}
+- {code: BusinessPlaidBankAccountNotFoundException, status: 404, domain: Bank Accounts}
+- {code: CheckingAccountRequiredException, status: 409, domain: Bank Accounts}
+- {code: PlaidAssetReportsInvalidException, status: 400, domain: Bank Accounts}
+- {code: BankStatementsInvalidException, status: 400, domain: Bank Accounts}
+- {code: PaymentOrderNotFoundException, status: 404, domain: Payments}
+- {code: IncorrectRepaymentAmountException, status: 409, domain: Payments}
+- {code: NoRemainingBalanceException, status: 409, domain: Payments}
+- {code: DrawRequestNotFoundException, status: 404, domain: Draw Requests}
+- {code: InvoiceNotFoundException, status: 404, domain: Invoices}
+- {code: InvalidInvoiceDueDateException, status: 400, domain: Invoices}
+- {code: InvoicePaymentPlanNotFoundException, status: 404, domain: Invoices}
+- {code: IncorrectFinancingAmountException, status: 409, domain: Invoices}
+- {code: InsufficientCreditLimitException, status: 409, domain: Invoices}
+- {code: PlatformInvoiceIdAlreadyExistsException, status: 409, domain: Invoices}
+- {code: PlatformInvoiceIdAlreadyExistsForAnotherIssuedProductException, status: 409, domain: Invoices}
+- {code: PlatformInvoiceNumberAlreadyExistsForIssuedProductException, status: 409, domain: Invoices}
+- {code: IntegratedMcaReceivableAlreadyExistsException, status: 409, domain: Integrated MCA}
+- {code: CustomInitializationNotFoundException, status: 404, domain: Embedded Sessions}

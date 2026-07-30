@@ -1,0 +1,24 @@
+generated: '2026-07-19'
+method: searched
+source: openapi/kanmon-openapi-original.yml (servers[] + Sandbox Utilities tag) + https://demo-platform.kanmon.dev/
+environments:
+- name: Sandbox
+  base_url: https://api.kanmon.dev
+- name: Production
+  base_url: https://api.kanmon.com
+separation:
+  mechanism: separate base host (api.kanmon.dev vs api.kanmon.com); each environment issues its own platform API key.
+demo_platform: https://demo-platform.kanmon.dev/
+sandbox_utilities:
+  note: The API exposes dedicated Sandbox Utilities operations to reset and tear down test businesses. These endpoints exist only in the sandbox environment.
+  operations:
+  - operationId: sandboxResetBusiness
+    method: POST
+    path: '/api/platform/v2/sandbox/businesses/{id}/reset'
+    description: Reset a sandbox business to a clean state for repeat testing.
+  - operationId: sandboxDeleteBusiness
+    method: DELETE
+    path: '/api/platform/v2/sandbox/businesses/{id}/delete'
+    description: Delete a sandbox business.
+test_values:
+  note: Kanmon does not publish a public catalog of magic test values (docs are gated behind an account-manager invite at kanmon.dev). No test values are recorded here to avoid fabrication.

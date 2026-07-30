@@ -1,0 +1,43 @@
+generated: '2026-07-19'
+method: derived
+source: openapi/kanmon-openapi-original.yml
+api: Kanmon Public V2 API
+authentication:
+  style: api-key
+  location: header
+  header: Authorization
+  detail: A platform API key is passed in the Authorization request header. See authentication/kanmon-authentication.yml.
+pagination:
+  style: offset-limit
+  params:
+    offset: The number of records to skip when performing pagination.
+    limit: The number of records to limit when performing pagination.
+  additional_filters:
+  - createdAtStart
+  - createdAtEnd
+  - ids
+  applies_to: collection GET endpoints (businesses, users, invoices, offers, issued-products, bank-accounts, draw-requests, prequalifications, payment-intents, integrated-mca-receivables)
+idempotency:
+  supported: false
+  note: The Kanmon V2 API does not document an Idempotency-Key header or parameter; write operations rely on typed *AlreadyExists* 409 conflict exceptions to guard against duplicate creation (e.g. platformBusinessId / platformInvoiceId uniqueness).
+rate_limiting:
+  signaled: true
+  headers:
+  - {name: X-RateLimit-Limit, description: Maximum number of requests allowed per minute.}
+  - {name: X-RateLimit-Remaining, description: Number of remaining requests available.}
+  exceeded_status: 429
+  exceeded_code: TooManyRequestsException
+identifiers:
+  platform_ids: Most resources carry both a Kanmon-generated id and your platform-side id (platformBusinessId, platformUserId, platformInvoiceId, platformBankAccountId) so records can be reconciled against your own system.
+error_envelope:
+  shape: '{ errorCode, message, timestamp }'
+  format: kanmon-exception (not RFC 9457)
+  cross_ref: errors/kanmon-problem-types.yml
+versioning:
+  scheme: uri-path
+  current: v2
+  spec_version: 2.0.0
+  cross_ref: lifecycle/kanmon-lifecycle.yml
+events:
+  mechanism: webhooks
+  cross_ref: asyncapi/kanmon-webhooks.yml

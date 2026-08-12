@@ -188,7 +188,7 @@ apis:
     url: openapi/kanmon-users-api-openapi.yml
 common:
 - type: OpenAPI
-  url: openapi/kanmon-openapi-original.yml
+  url: openapi/_original/kanmon-openapi-original.yml
 - type: Overlay
   url: overlays/kanmon-openapi-overlay.yaml
 - type: Authentication

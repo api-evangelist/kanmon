@@ -1,0 +1,199 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kanmon Public V2 Bank Accounts Users API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kanmon.com/api/platform/v2/users",
+            "params": [
+              {
+                "name": "ids",
+                "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34",
+                "type": "query",
+                "description": "A comma delimited list of Kanmon’s unique IDs for users."
+              },
+              {
+                "name": "platformUserIds",
+                "value": "12345,67890",
+                "type": "query",
+                "description": "A comma delimited list of your platform’s unique IDs for users."
+              },
+              {
+                "name": "platformBusinessIds",
+                "value": "12345,67890",
+                "type": "query",
+                "description": "A comma delimited list of your platform’s unique business IDs for users."
+              },
+              {
+                "name": "businessIds",
+                "value": "d4824e09-7857-49cb-8dc1-3410d14a1621,361530c5-9180-4ec8-9287-44c5dc9d3686",
+                "type": "query",
+                "description": "A comma delimited list of your Kanmon’s unique business IDs for users."
+              },
+              {
+                "name": "includeSecondaryOwners",
+                "value": "false",
+                "type": "query",
+                "description": "Whether to include secondary owners in results. Defaults to `false`."
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "The number of records to skip when performing pagination. Defaults to `0`."
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "The number of records to limit when performing pagination. Defaults to `100`, which is the max."
+              },
+              {
+                "name": "createdAtStart",
+                "value": "2022-06-01 03:57:26.115000+00:00",
+                "type": "query",
+                "description": "Filter for records where `createdAt` is greater than or equal to this value. ISO 8601 format."
+              },
+              {
+                "name": "createdAtEnd",
+                "value": "2022-06-01 03:57:26.115000+00:00",
+                "type": "query",
+                "description": "Filter for records where `createdAt` is less than or equal to this value. ISO 8601 format."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Fetch users"
+        },
+        {
+          "info": {
+            "name": "Create a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kanmon.com/api/platform/v2/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a user"
+        },
+        {
+          "info": {
+            "name": "Fetch a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kanmon.com/api/platform/v2/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6",
+                "type": "path",
+                "description": "Either the Kanmon user UUID or your platform’s user ID, depending on `idType`."
+              },
+              {
+                "name": "idType",
+                "value": "KANMON",
+                "type": "query",
+                "description": "Which ID type to query the user by. Defaults to `KANMON`. Use `PLATFORM` if you want to query by your platform’s ID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Fetch a user"
+        },
+        {
+          "info": {
+            "name": "Update a user",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.kanmon.com/api/platform/v2/users/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6",
+                "type": "path",
+                "description": "Either the Kanmon user UUID or your platform’s user ID, depending on `idType`."
+              },
+              {
+                "name": "idType",
+                "value": "KANMON",
+                "type": "query",
+                "description": "Which ID type to query the user by. Defaults to `KANMON`. Use `PLATFORM` if you want to query by your platform’s ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Update a user"
+        },
+        {
+          "info": {
+            "name": "Merge users from a source business into a target business",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kanmon.com/api/platform/v2/users/merge",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Users from the source business will be moved into the target business. This will only work if the source business has not started onboarding yet. After the merge, the source business will be deleted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

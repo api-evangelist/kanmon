@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kanmon Public V2 Bank Accounts Offers API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Offers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch an offer",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kanmon.com/api/platform/v2/offers/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6",
+                "type": "path",
+                "description": "The Kanmon offer UUID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Fetch an offer"
+        },
+        {
+          "info": {
+            "name": "Fetch offers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kanmon.com/api/platform/v2/offers",
+            "params": [
+              {
+                "name": "ids",
+                "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34",
+                "type": "query",
+                "description": "A comma delimited list of Kanmon’s unique IDs for offers."
+              },
+              {
+                "name": "platformBusinessIds",
+                "value": "12345,67890",
+                "type": "query",
+                "description": "A comma delimited list of your platform’s unique IDs for businesses."
+              },
+              {
+                "name": "businessIds",
+                "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34",
+                "type": "query",
+                "description": "A comma delimited list of Kanmon’s unique IDs for businesses."
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "The number of records to skip when performing pagination. Defaults to `0`."
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "The number of records to limit when performing pagination. Defaults to `100`, which is the max."
+              },
+              {
+                "name": "createdAtStart",
+                "value": "2022-06-01 03:57:26.115000+00:00",
+                "type": "query",
+                "description": "Filter for records where `createdAt` is greater than or equal to this value. ISO 8601 format."
+              },
+              {
+                "name": "createdAtEnd",
+                "value": "2022-06-01 03:57:26.115000+00:00",
+                "type": "query",
+                "description": "Filter for records where `createdAt` is less than or equal to this value. ISO 8601 format."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Fetch offers"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

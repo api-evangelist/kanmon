@@ -1,0 +1,506 @@
+{
+  "item": [
+    {
+      "id": "50c3b260-ca69-4790-aa0a-71312461c9c1",
+      "name": "Documents",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bde455d6-dbd8-4ad1-a568-bacf1f9d7262",
+          "name": "Upload documents for a business",
+          "request": {
+            "name": "Upload documents for a business",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "platform",
+                "v2",
+                "documents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "multipart/form-data"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "invoices",
+                  "value": "[\"<binary>\",\"<binary>\"]",
+                  "type": "text",
+                  "description": "(Required) Invoices to be uploaded. The file format must be PDF. The limit is 10 files, 10 MB per file."
+                },
+                {
+                  "key": "businessId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The unique identifier for business within Kanmon. Either of `businessId` or `platformBusinessId` is required."
+                },
+                {
+                  "key": "platformBusinessId",
+                  "value": "<string>",
+                  "type": "text",
+                  "description": "The unique identifier for business in your platform. Either of `businessId` or `platformBusinessId` is required."
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f810738b-248c-4e20-bd5e-12b0ee150c3a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Invoices to be uploaded. The file format must be PDF. The limit is 10 files, 10 MB per file.",
+                        "type": "text/plain"
+                      },
+                      "key": "invoices",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The unique identifier for business within Kanmon. Either of `businessId` or `platformBusinessId` is required.",
+                        "type": "text/plain"
+                      },
+                      "key": "businessId",
+                      "value": "adbcccf9-3a7f-4040-add3-55c9d6da2d37",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The unique identifier for business in your platform. Either of `businessId` or `platformBusinessId` is required.",
+                        "type": "text/plain"
+                      },
+                      "key": "platformBusinessId",
+                      "value": "adbcccf9-3a7f-4040-add3-55c9d6da2d37",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"documents\": [\n    {\n      \"businessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"createdAt\": \"2022-06-01 03:57:26.115000+00:00\",\n      \"documentType\": \"INVOICE\",\n      \"id\": \"1193fdaf-630c-4771-a629-8da7a87947d2\",\n      \"originalFileName\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"platformBusinessId\": \"12345\",\n      \"updatedAt\": \"2022-06-01 03:57:26.115000+00:00\"\n    },\n    {\n      \"businessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"createdAt\": \"2022-06-01 03:57:26.115000+00:00\",\n      \"documentType\": \"INVOICE\",\n      \"id\": \"1193fdaf-630c-4771-a629-8da7a87947d2\",\n      \"originalFileName\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"platformBusinessId\": \"12345\",\n      \"updatedAt\": \"2022-06-01 03:57:26.115000+00:00\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "adb57ddc-2d1b-415c-b506-da4887b1e63f",
+              "name": "BadRequestException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Invoices to be uploaded. The file format must be PDF. The limit is 10 files, 10 MB per file.",
+                        "type": "text/plain"
+                      },
+                      "key": "invoices",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The unique identifier for business within Kanmon. Either of `businessId` or `platformBusinessId` is required.",
+                        "type": "text/plain"
+                      },
+                      "key": "businessId",
+                      "value": "adbcccf9-3a7f-4040-add3-55c9d6da2d37",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The unique identifier for business in your platform. Either of `businessId` or `platformBusinessId` is required.",
+                        "type": "text/plain"
+                      },
+                      "key": "platformBusinessId",
+                      "value": "adbcccf9-3a7f-4040-add3-55c9d6da2d37",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"BadRequestException\",\n  \"message\": \"Bad Request\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e975984d-49e3-4721-8eed-b42f79a2344c",
+              "name": "ForbiddenException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Invoices to be uploaded. The file format must be PDF. The limit is 10 files, 10 MB per file.",
+                        "type": "text/plain"
+                      },
+                      "key": "invoices",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The unique identifier for business within Kanmon. Either of `businessId` or `platformBusinessId` is required.",
+                        "type": "text/plain"
+                      },
+                      "key": "businessId",
+                      "value": "adbcccf9-3a7f-4040-add3-55c9d6da2d37",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The unique identifier for business in your platform. Either of `businessId` or `platformBusinessId` is required.",
+                        "type": "text/plain"
+                      },
+                      "key": "platformBusinessId",
+                      "value": "adbcccf9-3a7f-4040-add3-55c9d6da2d37",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"ForbiddenException\",\n  \"message\": \"Forbidden\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "764bf096-7818-4eb5-98f2-5dc08f4a5b82",
+              "name": "TooManyRequestsException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Invoices to be uploaded. The file format must be PDF. The limit is 10 files, 10 MB per file.",
+                        "type": "text/plain"
+                      },
+                      "key": "invoices",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The unique identifier for business within Kanmon. Either of `businessId` or `platformBusinessId` is required.",
+                        "type": "text/plain"
+                      },
+                      "key": "businessId",
+                      "value": "adbcccf9-3a7f-4040-add3-55c9d6da2d37",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The unique identifier for business in your platform. Either of `businessId` or `platformBusinessId` is required.",
+                        "type": "text/plain"
+                      },
+                      "key": "platformBusinessId",
+                      "value": "adbcccf9-3a7f-4040-add3-55c9d6da2d37",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Maximum number of requests allowed per minute.",
+                  "key": "X-RateLimit-Limit",
+                  "value": "9849"
+                },
+                {
+                  "disabled": false,
+                  "description": "Number of remaining requests available.",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "9849"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"TooManyRequestsException\",\n  \"message\": \"Too Many Requests\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5aa829c-1565-4a9d-9fe2-a76982a8ee67",
+              "name": "InternalServerErrorException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "documents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "description": {
+                        "content": "(Required) Invoices to be uploaded. The file format must be PDF. The limit is 10 files, 10 MB per file.",
+                        "type": "text/plain"
+                      },
+                      "key": "invoices",
+                      "value": "[\"<binary>\",\"<binary>\"]",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The unique identifier for business within Kanmon. Either of `businessId` or `platformBusinessId` is required.",
+                        "type": "text/plain"
+                      },
+                      "key": "businessId",
+                      "value": "adbcccf9-3a7f-4040-add3-55c9d6da2d37",
+                      "type": "text"
+                    },
+                    {
+                      "description": {
+                        "content": "The unique identifier for business in your platform. Either of `businessId` or `platformBusinessId` is required.",
+                        "type": "text/plain"
+                      },
+                      "key": "platformBusinessId",
+                      "value": "adbcccf9-3a7f-4040-add3-55c9d6da2d37",
+                      "type": "text"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"InternalServerErrorException\",\n  \"message\": \"Internal Server Error\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.kanmon.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8de8264f-491a-459d-ab32-cd968c47cba0",
+    "name": "Kanmon Public V2 Bank Accounts Documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Kanmon's public api. Contains all of the endpoints for both capital providers and platforms",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kanmon Public V2 Bank Accounts Connect Tokens API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Connect Tokens",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Connect Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kanmon.com/api/platform/v2/connect-tokens",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Create a one-time use Connect Token for authenticating the user. The Connect Token expires after 24 hours. Multiple Connect Tokens can be created at the same time for a single user."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

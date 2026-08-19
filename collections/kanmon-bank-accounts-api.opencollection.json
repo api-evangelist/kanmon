@@ -1,0 +1,172 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kanmon Public V2 Bank Accounts API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Bank Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch business bank accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kanmon.com/api/platform/v2/bank-accounts",
+            "params": [
+              {
+                "name": "ids",
+                "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34",
+                "type": "query",
+                "description": "A comma delimited list of Kanmon’s unique IDs for bank accounts."
+              },
+              {
+                "name": "platformBankAccountIds",
+                "value": "12345,67890",
+                "type": "query",
+                "description": "A comma delimited list of your platform’s unique IDs for bank accounts."
+              },
+              {
+                "name": "platformBusinessIds",
+                "value": "12345,67890",
+                "type": "query",
+                "description": "A comma delimited list of your platform’s unique business IDs for bannk accounts."
+              },
+              {
+                "name": "businessIds",
+                "value": "e3765dce-bbc6-4038-ae73-4e63b6ce990b,e2b4d6a0-26d2-4c28-96f3-a40aea7187f7",
+                "type": "query",
+                "description": "A comma delimited list of your Kanmon’s unique business IDs for bannk accounts."
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "The number of records to skip when performing pagination. Defaults to `0`."
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "The number of records to limit when performing pagination. Defaults to `100`, which is the max."
+              },
+              {
+                "name": "createdAtStart",
+                "value": "2022-06-01 03:57:26.115000+00:00",
+                "type": "query",
+                "description": "Filter for records where `createdAt` is greater than or equal to this value. ISO 8601 format."
+              },
+              {
+                "name": "createdAtEnd",
+                "value": "2022-06-01 03:57:26.115000+00:00",
+                "type": "query",
+                "description": "Filter for records where `createdAt` is less than or equal to this value. ISO 8601 format."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Please contact Kanmon to enable access to bank account APIs."
+        },
+        {
+          "info": {
+            "name": "Create a business bank account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kanmon.com/api/platform/v2/bank-accounts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "We only support creating disbursement checking accounts at the moment. Each business can only have one disbursement checking account.\n      Please contact Kanmon to enable access to bank account APIs."
+        },
+        {
+          "info": {
+            "name": "Fetch a business bank account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kanmon.com/api/platform/v2/bank-accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6",
+                "type": "path",
+                "description": "Either the Kanmon bank account UUID or your platform’s bank account ID, depending on `idType`."
+              },
+              {
+                "name": "idType",
+                "value": "KANMON",
+                "type": "query",
+                "description": "Which ID type to query the bank account by. Defaults to `KANMON`. Use `PLATFORM` if you want to query by your platform’s ID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Please contact Kanmon to enable access to bank account APIs."
+        },
+        {
+          "info": {
+            "name": "Update a business bank account",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.kanmon.com/api/platform/v2/bank-accounts/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6",
+                "type": "path",
+                "description": "Either the Kanmon bank account UUID or your platform’s bank account ID, depending on `idType`."
+              },
+              {
+                "name": "idType",
+                "value": "KANMON",
+                "type": "query",
+                "description": "Which ID type to query the bank account by. Defaults to `KANMON`. Use `PLATFORM` if you want to query by your platform’s ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "We only support creating disbursement checking accounts at the moment. Each business can only have one disbursement checking account.\n        Please contact Kanmon to enable access to bank account APIs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

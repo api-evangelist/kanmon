@@ -1,0 +1,913 @@
+{
+  "item": [
+    {
+      "id": "2dfac227-03be-4879-ad3e-91050d82d4b8",
+      "name": "Offers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "183e559d-f653-40a2-83cb-84621cd7ef5b",
+          "name": "Fetch an offer",
+          "request": {
+            "name": "Fetch an offer",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "platform",
+                "v2",
+                "offers",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The Kanmon offer UUID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "dbacc20a-3a28-4f99-9288-c6d19f1afd5b",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "offers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kanmon offer UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"businessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n  \"createdAt\": \"2023-12-15 03:57:26.115000+00:00\",\n  \"expiredAt\": \"2023-12-29 03:57:26.115000+00:00\",\n  \"id\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n  \"platformBusinessId\": \"12345\",\n  \"selectedAt\": \"2023-12-15 03:57:26.115000+00:00\",\n  \"terms\": {\n    \"maxLoanAmountCents\": 1000000,\n    \"loanAmountCents\": 1000000,\n    \"durationMonths\": 6,\n    \"feePercentage\": 3,\n    \"interestRatePercentage\": 10,\n    \"productType\": \"INVOICE_FINANCING\"\n  },\n  \"updatedAt\": \"2023-12-15 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "001aaf3d-8d3f-4f6b-a516-f1a00cde89b2",
+              "name": "BadRequestException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "offers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kanmon offer UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"BadRequestException\",\n  \"message\": \"Bad Request\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09503807-e0fc-418a-99b1-ffcdf34d40f7",
+              "name": "ForbiddenException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "offers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kanmon offer UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"ForbiddenException\",\n  \"message\": \"Forbidden\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5a737cb7-e63c-46ac-8e13-7717808cad20",
+              "name": "OfferNotFoundException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "offers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kanmon offer UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"OfferNotFoundException\",\n  \"message\": \"Internal Server Error\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c17f4e8a-d4b2-43cd-9878-adea55295ccd",
+              "name": "TooManyRequestsException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "offers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kanmon offer UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Maximum number of requests allowed per minute.",
+                  "key": "X-RateLimit-Limit",
+                  "value": "6333"
+                },
+                {
+                  "disabled": false,
+                  "description": "Number of remaining requests available.",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "6333"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"TooManyRequestsException\",\n  \"message\": \"Too Many Requests\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d3eff4be-5a3f-4017-ab72-87f03241aa6f",
+              "name": "InternalServerErrorException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "offers",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kanmon offer UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"InternalServerErrorException\",\n  \"message\": \"Internal Server Error\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4f691db-da99-4edb-830e-36c54a093818",
+          "name": "Fetch offers",
+          "request": {
+            "name": "Fetch offers",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "platform",
+                "v2",
+                "offers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "A comma delimited list of Kanmon’s unique IDs for offers."
+                },
+                {
+                  "disabled": false,
+                  "key": "platformBusinessIds",
+                  "value": "<string>",
+                  "description": "A comma delimited list of your platform’s unique IDs for businesses."
+                },
+                {
+                  "disabled": false,
+                  "key": "businessIds",
+                  "value": "<string>",
+                  "description": "A comma delimited list of Kanmon’s unique IDs for businesses."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<number>",
+                  "description": "The number of records to skip when performing pagination. Defaults to `0`."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>",
+                  "description": "The number of records to limit when performing pagination. Defaults to `100`, which is the max."
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAtStart",
+                  "value": "<string>",
+                  "description": "Filter for records where `createdAt` is greater than or equal to this value. ISO 8601 format."
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAtEnd",
+                  "value": "<string>",
+                  "description": "Filter for records where `createdAt` is less than or equal to this value. ISO 8601 format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e2c60fde-36df-48d4-9d26-136b12d1d986",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34"
+                    },
+                    {
+                      "key": "platformBusinessIds",
+                      "value": "12345,67890"
+                    },
+                    {
+                      "key": "businessIds",
+                      "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "createdAtStart",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    },
+                    {
+                      "key": "createdAtEnd",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"offers\": [\n    {\n      \"businessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"createdAt\": \"2023-12-15 03:57:26.115000+00:00\",\n      \"expiredAt\": \"2023-12-29 03:57:26.115000+00:00\",\n      \"id\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"platformBusinessId\": \"12345\",\n      \"selectedAt\": \"2023-12-15 03:57:26.115000+00:00\",\n      \"terms\": {\n        \"maxLoanAmountCents\": 1000000,\n        \"loanAmountCents\": 1000000,\n        \"durationMonths\": 6,\n        \"feePercentage\": 3,\n        \"interestRatePercentage\": 10,\n        \"productType\": \"INVOICE_FINANCING\"\n      },\n      \"updatedAt\": \"2023-12-15 03:57:26.115000+00:00\"\n    },\n    {\n      \"businessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"createdAt\": \"2023-12-15 03:57:26.115000+00:00\",\n      \"expiredAt\": \"2023-12-29 03:57:26.115000+00:00\",\n      \"id\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"platformBusinessId\": \"12345\",\n      \"selectedAt\": \"2023-12-15 03:57:26.115000+00:00\",\n      \"terms\": {\n        \"maxLoanAmountCents\": 1000000,\n        \"loanAmountCents\": 1000000,\n        \"durationMonths\": 6,\n        \"feePercentage\": 3,\n        \"interestRatePercentage\": 10,\n        \"productType\": \"INVOICE_FINANCING\"\n      },\n      \"updatedAt\": \"2023-12-15 03:57:26.115000+00:00\"\n    }\n  ],\n  \"pagination\": {\n    \"limit\": 100,\n    \"offset\": 0,\n    \"totalCount\": 100\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a88a694d-bbc6-4791-95db-057164cff9c7",
+              "name": "BadRequestException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34"
+                    },
+                    {
+                      "key": "platformBusinessIds",
+                      "value": "12345,67890"
+                    },
+                    {
+                      "key": "businessIds",
+                      "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "createdAtStart",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    },
+                    {
+                      "key": "createdAtEnd",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"BadRequestException\",\n  \"message\": \"Bad Request\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e5fd6d4-f20c-4729-8112-26c56add9998",
+              "name": "ForbiddenException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34"
+                    },
+                    {
+                      "key": "platformBusinessIds",
+                      "value": "12345,67890"
+                    },
+                    {
+                      "key": "businessIds",
+                      "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "createdAtStart",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    },
+                    {
+                      "key": "createdAtEnd",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"ForbiddenException\",\n  \"message\": \"Forbidden\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd94bfce-7be1-4a78-80fb-cd08873998e9",
+              "name": "TooManyRequestsException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34"
+                    },
+                    {
+                      "key": "platformBusinessIds",
+                      "value": "12345,67890"
+                    },
+                    {
+                      "key": "businessIds",
+                      "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "createdAtStart",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    },
+                    {
+                      "key": "createdAtEnd",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Maximum number of requests allowed per minute.",
+                  "key": "X-RateLimit-Limit",
+                  "value": "6333"
+                },
+                {
+                  "disabled": false,
+                  "description": "Number of remaining requests available.",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "6333"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"TooManyRequestsException\",\n  \"message\": \"Too Many Requests\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b37328c-9950-4127-86af-1334faf21d04",
+              "name": "InternalServerErrorException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "offers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34"
+                    },
+                    {
+                      "key": "platformBusinessIds",
+                      "value": "12345,67890"
+                    },
+                    {
+                      "key": "businessIds",
+                      "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "createdAtStart",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    },
+                    {
+                      "key": "createdAtEnd",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"InternalServerErrorException\",\n  \"message\": \"Internal Server Error\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.kanmon.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "29b34209-28f6-4864-b4b0-3f173a6a6d67",
+    "name": "Kanmon Public V2 Bank Accounts Offers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Kanmon's public api. Contains all of the endpoints for both capital providers and platforms",
+      "type": "text/plain"
+    }
+  }
+}

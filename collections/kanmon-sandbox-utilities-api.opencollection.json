@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kanmon Public V2 Bank Accounts Sandbox Utilities API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sandbox Utilities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Reset a business in sandbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kanmon.com/api/platform/v2/sandbox/businesses/:id/reset",
+            "params": [
+              {
+                "name": "id",
+                "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6",
+                "type": "path",
+                "description": "Either the Kanmon business UUID or your platform’s business ID, depending on `idType`."
+              },
+              {
+                "name": "idType",
+                "value": "KANMON",
+                "type": "query",
+                "description": "Which ID type to query the business by. Defaults to `KANMON`. Use `PLATFORM` if you want to query by your platform’s ID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Reset a business in sandbox"
+        },
+        {
+          "info": {
+            "name": "Delete a business in sandbox",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.kanmon.com/api/platform/v2/sandbox/businesses/:id/delete",
+            "params": [
+              {
+                "name": "id",
+                "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6",
+                "type": "path",
+                "description": "Either the Kanmon business UUID or your platform’s business ID, depending on `idType`."
+              },
+              {
+                "name": "idType",
+                "value": "KANMON",
+                "type": "query",
+                "description": "Which ID type to query the business by. Defaults to `KANMON`. Use `PLATFORM` if you want to query by your platform’s ID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Delete a business in sandbox"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -2,47 +2,86 @@ generated: '2026-07-19'
 method: derived
 status: candidate
 source: openapi/kanmon-openapi-original.yml
-note: >-
-  No official hosted/remote Kanmon MCP server was found (no @kanmon MCP package, no
-  entry in public MCP registries). The tool list below is a DERIVED candidate mapping
-  one tool per OpenAPI operationId, as a starting point for an MCP server over the
-  Kanmon Public V2 API.
+note: No official hosted/remote Kanmon MCP server was found (no @kanmon MCP package, no entry in public
+  MCP registries). The tool list below is a DERIVED candidate mapping one tool per OpenAPI operationId,
+  as a starting point for an MCP server over the Kanmon Public V2 API.
 server:
   name: kanmon
   transport: http
 tools:
-- {name: list_prequalifications, source_operation: getAllPrequalifiedBusinesses}
-- {name: list_businesses, source_operation: getAllBusinesses}
-- {name: create_business, source_operation: createBusiness}
-- {name: get_business, source_operation: getBusiness}
-- {name: update_business, source_operation: updateBusiness}
-- {name: get_business_activity_log, source_operation: getBusinessActivityLog}
-- {name: list_users, source_operation: getAllUsers}
-- {name: create_user, source_operation: createUser}
-- {name: get_user, source_operation: getUser}
-- {name: update_user, source_operation: updateUser}
-- {name: merge_user_into_business, source_operation: mergeUserIntoBusiness}
-- {name: create_connect_token, source_operation: createConnectToken}
-- {name: get_invoice, source_operation: getInvoice}
-- {name: list_invoices, source_operation: getAllInvoices}
-- {name: finance_invoice, source_operation: financeInvoice}
-- {name: get_offer, source_operation: getOfferById}
-- {name: list_offers, source_operation: getAllOffers}
-- {name: get_issued_product, source_operation: getIssuedProductById}
-- {name: list_issued_products, source_operation: getAllIssuedProducts}
-- {name: list_bank_accounts, source_operation: getAllBusinessBankAccounts}
-- {name: create_bank_account, source_operation: createBusinessBankAccount}
-- {name: get_bank_account, source_operation: getBusinessBankAccount}
-- {name: update_bank_account, source_operation: updateBusinessBankAccount}
-- {name: get_payment, source_operation: getPaymentById}
-- {name: get_payment_schedule, source_operation: getPaymentScheduleForAIssuedProduct}
-- {name: list_payment_intents, source_operation: getPaymentIntents}
-- {name: get_draw_request, source_operation: getDrawRequest}
-- {name: list_draw_requests, source_operation: getAllDrawRequests}
-- {name: create_document, source_operation: createBusinessDocument}
-- {name: list_integrated_mca_receivables, source_operation: getReceivables}
-- {name: create_integrated_mca_receivable, source_operation: createIntegratedMcaReceivable}
-- {name: get_integrated_mca_payment_windows, source_operation: getIntegratedMcaPaymentWindows}
-- {name: reset_sandbox_business, source_operation: sandboxResetBusiness}
-- {name: delete_sandbox_business, source_operation: sandboxDeleteBusiness}
-- {name: create_embedded_session, source_operation: createEmbeddedSession}
+- name: list_prequalifications
+  source_operation: getAllPrequalifiedBusinesses
+- name: list_businesses
+  source_operation: getAllBusinesses
+- name: create_business
+  source_operation: createBusiness
+- name: get_business
+  source_operation: getBusiness
+- name: update_business
+  source_operation: updateBusiness
+- name: get_business_activity_log
+  source_operation: getBusinessActivityLog
+- name: list_users
+  source_operation: getAllUsers
+- name: create_user
+  source_operation: createUser
+- name: get_user
+  source_operation: getUser
+- name: update_user
+  source_operation: updateUser
+- name: merge_user_into_business
+  source_operation: mergeUserIntoBusiness
+- name: create_connect_token
+  source_operation: createConnectToken
+- name: get_invoice
+  source_operation: getInvoice
+- name: list_invoices
+  source_operation: getAllInvoices
+- name: finance_invoice
+  source_operation: financeInvoice
+- name: get_offer
+  source_operation: getOfferById
+- name: list_offers
+  source_operation: getAllOffers
+- name: get_issued_product
+  source_operation: getIssuedProductById
+- name: list_issued_products
+  source_operation: getAllIssuedProducts
+- name: list_bank_accounts
+  source_operation: getAllBusinessBankAccounts
+- name: create_bank_account
+  source_operation: createBusinessBankAccount
+- name: get_bank_account
+  source_operation: getBusinessBankAccount
+- name: update_bank_account
+  source_operation: updateBusinessBankAccount
+- name: get_payment
+  source_operation: getPaymentById
+- name: get_payment_schedule
+  source_operation: getPaymentScheduleForAIssuedProduct
+- name: list_payment_intents
+  source_operation: getPaymentIntents
+- name: get_draw_request
+  source_operation: getDrawRequest
+- name: list_draw_requests
+  source_operation: getAllDrawRequests
+- name: create_document
+  source_operation: createBusinessDocument
+- name: list_integrated_mca_receivables
+  source_operation: getReceivables
+- name: create_integrated_mca_receivable
+  source_operation: createIntegratedMcaReceivable
+- name: get_integrated_mca_payment_windows
+  source_operation: getIntegratedMcaPaymentWindows
+- name: reset_sandbox_business
+  source_operation: sandboxResetBusiness
+- name: delete_sandbox_business
+  source_operation: sandboxDeleteBusiness
+- name: create_embedded_session
+  source_operation: createEmbeddedSession
+deployment:
+  mode: none
+  verified: derived
+  tools: 35
+  checked: '2026-08-12'
+  source: catalog MCP census

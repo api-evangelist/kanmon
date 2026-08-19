@@ -1,0 +1,808 @@
+{
+  "item": [
+    {
+      "id": "60189cf8-273f-498b-8840-aec3e97968ab",
+      "name": "Sandbox Utilities",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "85aa8bb0-15cb-4d99-bc37-8489aed6bd27",
+          "name": "Reset a business in sandbox",
+          "request": {
+            "name": "Reset a business in sandbox",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "platform",
+                "v2",
+                "sandbox",
+                "businesses",
+                ":id",
+                "reset"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "idType",
+                  "value": "<string>",
+                  "description": "Which ID type to query the business by. Defaults to `KANMON`. Use `PLATFORM` if you want to query by your platform’s ID."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) Either the Kanmon business UUID or your platform’s business ID, depending on `idType`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "5a07d473-fbb0-4853-aea6-2fbca51d7990",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "sandbox",
+                    "businesses",
+                    ":id",
+                    "reset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon business UUID or your platform’s business ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdAt\": \"2022-06-01 03:57:26.115000+00:00\",\n  \"ein\": \"123456789\",\n  \"id\": \"1193fdaf-630c-4771-a629-8da7a87947d2\",\n  \"metadata\": {},\n  \"name\": \"My Business\",\n  \"phoneNumber\": \"+14155556789\",\n  \"updatedAt\": \"2022-06-01 03:57:26.115000+00:00\",\n  \"website\": \"https://www.my-business.com\",\n  \"platformBusinessId\": \"12345\",\n  \"address\": {\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"country\": \"USA\",\n    \"zipcode\": \"94401\",\n    \"addressLineOne\": \"123 Main Street\"\n  },\n  \"customInitializationName\": \"custom\",\n  \"isSoleProprietorship\": false\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94813b93-bde3-4f2b-8778-1c75560fa80b",
+              "name": "BadRequestException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "sandbox",
+                    "businesses",
+                    ":id",
+                    "reset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon business UUID or your platform’s business ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"BadRequestException\",\n  \"message\": \"Bad Request\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "59a6a78f-7758-4616-8d6f-c9205848f574",
+              "name": "ForbiddenException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "sandbox",
+                    "businesses",
+                    ":id",
+                    "reset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon business UUID or your platform’s business ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"ForbiddenException\",\n  \"message\": \"Forbidden\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2a08b9f-38c4-4382-af43-cf68af843293",
+              "name": "TooManyRequestsException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "sandbox",
+                    "businesses",
+                    ":id",
+                    "reset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon business UUID or your platform’s business ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Maximum number of requests allowed per minute.",
+                  "key": "X-RateLimit-Limit",
+                  "value": "8456"
+                },
+                {
+                  "disabled": false,
+                  "description": "Number of remaining requests available.",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "8456"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"TooManyRequestsException\",\n  \"message\": \"Too Many Requests\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "260d900d-a820-4b00-983c-ab95a46f327e",
+              "name": "InternalServerErrorException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "sandbox",
+                    "businesses",
+                    ":id",
+                    "reset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon business UUID or your platform’s business ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"InternalServerErrorException\",\n  \"message\": \"Internal Server Error\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f2c235c4-64af-4cc0-bcb3-0ef80d1d4f77",
+          "name": "Delete a business in sandbox",
+          "request": {
+            "name": "Delete a business in sandbox",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "platform",
+                "v2",
+                "sandbox",
+                "businesses",
+                ":id",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "idType",
+                  "value": "<string>",
+                  "description": "Which ID type to query the business by. Defaults to `KANMON`. Use `PLATFORM` if you want to query by your platform’s ID."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "id",
+                  "description": "(Required) Either the Kanmon business UUID or your platform’s business ID, depending on `idType`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "083b962a-e971-41b4-9839-182ba2276e5c",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "sandbox",
+                    "businesses",
+                    ":id",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon business UUID or your platform’s business ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "71c4efba-0ae3-46d4-9177-4c8f788cb0bf",
+              "name": "BadRequestException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "sandbox",
+                    "businesses",
+                    ":id",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon business UUID or your platform’s business ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"BadRequestException\",\n  \"message\": \"Bad Request\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a4a6986-68a9-4688-870b-5e40b1a40329",
+              "name": "ForbiddenException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "sandbox",
+                    "businesses",
+                    ":id",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon business UUID or your platform’s business ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"ForbiddenException\",\n  \"message\": \"Forbidden\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1b99c74c-750d-4e1e-b165-60c091bb3532",
+              "name": "TooManyRequestsException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "sandbox",
+                    "businesses",
+                    ":id",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon business UUID or your platform’s business ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Maximum number of requests allowed per minute.",
+                  "key": "X-RateLimit-Limit",
+                  "value": "8456"
+                },
+                {
+                  "disabled": false,
+                  "description": "Number of remaining requests available.",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "8456"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"TooManyRequestsException\",\n  \"message\": \"Too Many Requests\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "668061de-40ff-4a1d-9399-92c6d533d0f6",
+              "name": "InternalServerErrorException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "sandbox",
+                    "businesses",
+                    ":id",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon business UUID or your platform’s business ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"InternalServerErrorException\",\n  \"message\": \"Internal Server Error\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.kanmon.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0621cdc2-e91b-4d37-9e9e-244769d61e70",
+    "name": "Kanmon Public V2 Bank Accounts Sandbox Utilities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Kanmon's public api. Contains all of the endpoints for both capital providers and platforms",
+      "type": "text/plain"
+    }
+  }
+}

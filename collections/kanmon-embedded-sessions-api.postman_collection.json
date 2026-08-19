@@ -1,0 +1,489 @@
+{
+  "item": [
+    {
+      "id": "73856e49-55b4-464f-8815-8374378f23b1",
+      "name": "Embedded Sessions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5e5023da-552a-40ff-978d-ede99ab2174e",
+          "name": "Create an embedded session",
+          "request": {
+            "name": "Create an embedded session",
+            "description": {
+              "content": "Embedded session tokens allow you to securely pass data to Kanmon. First, you will need to call this API to create a token. Then, you will use the token when launching the embedded application.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "platform",
+                "v2",
+                "embedded-session"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"data\": {\n    \"component\": \"<string>\",\n    \"invoices\": [\n      {\n        \"description\": \"<string>\",\n        \"invoiceAmountCents\": \"<number>\",\n        \"invoiceDueDate\": \"<string>\",\n        \"invoiceIssuedDate\": \"<string>\",\n        \"payorType\": \"<string>\",\n        \"platformInvoiceId\": \"<string>\",\n        \"platformInvoiceNumber\": \"<string>\",\n        \"payorEmail\": \"<string>\",\n        \"payorAddress\": {\n          \"description\": \"The address of the payor. The address is optional. If you provide the address, you need to provide all the required fields in the address. The address must be a street address, not a PO Box.\",\n          \"example\": {\n            \"city\": \"San Mateo\",\n            \"state\": \"CA\",\n            \"country\": \"USA\",\n            \"zipcode\": \"94401\",\n            \"addressLineOne\": \"123 Main Street\"\n          },\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"payorBusinessName\": \"<string>\",\n        \"payorFirstName\": \"<string>\",\n        \"payorMiddleName\": \"<string>\",\n        \"payorLastName\": \"<string>\"\n      },\n      {\n        \"description\": \"<string>\",\n        \"invoiceAmountCents\": \"<number>\",\n        \"invoiceDueDate\": \"<string>\",\n        \"invoiceIssuedDate\": \"<string>\",\n        \"payorType\": \"<string>\",\n        \"platformInvoiceId\": \"<string>\",\n        \"platformInvoiceNumber\": \"<string>\",\n        \"payorEmail\": \"<string>\",\n        \"payorAddress\": {\n          \"description\": \"The address of the payor. The address is optional. If you provide the address, you need to provide all the required fields in the address. The address must be a street address, not a PO Box.\",\n          \"example\": {\n            \"city\": \"San Mateo\",\n            \"state\": \"CA\",\n            \"country\": \"USA\",\n            \"zipcode\": \"94401\",\n            \"addressLineOne\": \"123 Main Street\"\n          },\n          \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n        },\n        \"payorBusinessName\": \"<string>\",\n        \"payorFirstName\": \"<string>\",\n        \"payorMiddleName\": \"<string>\",\n        \"payorLastName\": \"<string>\"\n      }\n    ]\n  },\n  \"businessId\": \"<string>\",\n  \"platformBusinessId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dc2a16b4-c10b-4f9c-9958-d1c42c4c30aa",
+              "name": "Embedded session created.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "embedded-session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"platformBusinessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n  \"data\": {\n    \"component\": \"SESSION_INVOICE_FLOW\",\n    \"invoices\": [\n      {\n        \"payorEmail\": \"user@gmail.com\",\n        \"payorType\": \"BUSINESS\",\n        \"description\": \"Invoice for equipment purchased.\",\n        \"payorMiddleName\": \"payorMiddleName\",\n        \"payorBusinessName\": \"My Business\",\n        \"payorLastName\": \"Smith\",\n        \"platformInvoiceId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n        \"invoiceDueDate\": \"2022-06-01\",\n        \"payorFirstName\": \"John\",\n        \"invoiceAmountCents\": 1000000,\n        \"payorAddress\": {\n          \"city\": \"San Mateo\",\n          \"state\": \"CA\",\n          \"country\": \"USA\",\n          \"zipcode\": \"94401\",\n          \"addressLineOne\": \"123 Main Street\"\n        },\n        \"platformInvoiceNumber\": \"123\",\n        \"invoiceIssuedDate\": \"2022-04-01\"\n      },\n      {\n        \"payorEmail\": \"user@gmail.com\",\n        \"payorType\": \"BUSINESS\",\n        \"description\": \"Invoice for equipment purchased.\",\n        \"payorMiddleName\": \"payorMiddleName\",\n        \"payorBusinessName\": \"My Business\",\n        \"payorLastName\": \"Smith\",\n        \"platformInvoiceId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n        \"invoiceDueDate\": \"2022-06-01\",\n        \"payorFirstName\": \"John\",\n        \"invoiceAmountCents\": 1000000,\n        \"payorAddress\": {\n          \"city\": \"San Mateo\",\n          \"state\": \"CA\",\n          \"country\": \"USA\",\n          \"zipcode\": \"94401\",\n          \"addressLineOne\": \"123 Main Street\"\n        },\n        \"platformInvoiceNumber\": \"123\",\n        \"invoiceIssuedDate\": \"2022-04-01\"\n      }\n    ]\n  },\n  \"businessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"sessionToken\": \"sessionToken\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "37e667a8-0cb3-42e0-852c-2b02404bb8b2",
+              "name": "BadRequestException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "embedded-session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"platformBusinessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n  \"data\": {\n    \"component\": \"SESSION_INVOICE_FLOW\",\n    \"invoices\": [\n      {\n        \"payorEmail\": \"user@gmail.com\",\n        \"payorType\": \"BUSINESS\",\n        \"description\": \"Invoice for equipment purchased.\",\n        \"payorMiddleName\": \"payorMiddleName\",\n        \"payorBusinessName\": \"My Business\",\n        \"payorLastName\": \"Smith\",\n        \"platformInvoiceId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n        \"invoiceDueDate\": \"2022-06-01\",\n        \"payorFirstName\": \"John\",\n        \"invoiceAmountCents\": 1000000,\n        \"payorAddress\": {\n          \"city\": \"San Mateo\",\n          \"state\": \"CA\",\n          \"country\": \"USA\",\n          \"zipcode\": \"94401\",\n          \"addressLineOne\": \"123 Main Street\"\n        },\n        \"platformInvoiceNumber\": \"123\",\n        \"invoiceIssuedDate\": \"2022-04-01\"\n      },\n      {\n        \"payorEmail\": \"user@gmail.com\",\n        \"payorType\": \"BUSINESS\",\n        \"description\": \"Invoice for equipment purchased.\",\n        \"payorMiddleName\": \"payorMiddleName\",\n        \"payorBusinessName\": \"My Business\",\n        \"payorLastName\": \"Smith\",\n        \"platformInvoiceId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n        \"invoiceDueDate\": \"2022-06-01\",\n        \"payorFirstName\": \"John\",\n        \"invoiceAmountCents\": 1000000,\n        \"payorAddress\": {\n          \"city\": \"San Mateo\",\n          \"state\": \"CA\",\n          \"country\": \"USA\",\n          \"zipcode\": \"94401\",\n          \"addressLineOne\": \"123 Main Street\"\n        },\n        \"platformInvoiceNumber\": \"123\",\n        \"invoiceIssuedDate\": \"2022-04-01\"\n      }\n    ]\n  },\n  \"businessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"BadRequestException\",\n  \"message\": \"Bad Request\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21a1a014-33af-4748-a502-57bede9598a0",
+              "name": "ForbiddenException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "embedded-session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"platformBusinessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n  \"data\": {\n    \"component\": \"SESSION_INVOICE_FLOW\",\n    \"invoices\": [\n      {\n        \"payorEmail\": \"user@gmail.com\",\n        \"payorType\": \"BUSINESS\",\n        \"description\": \"Invoice for equipment purchased.\",\n        \"payorMiddleName\": \"payorMiddleName\",\n        \"payorBusinessName\": \"My Business\",\n        \"payorLastName\": \"Smith\",\n        \"platformInvoiceId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n        \"invoiceDueDate\": \"2022-06-01\",\n        \"payorFirstName\": \"John\",\n        \"invoiceAmountCents\": 1000000,\n        \"payorAddress\": {\n          \"city\": \"San Mateo\",\n          \"state\": \"CA\",\n          \"country\": \"USA\",\n          \"zipcode\": \"94401\",\n          \"addressLineOne\": \"123 Main Street\"\n        },\n        \"platformInvoiceNumber\": \"123\",\n        \"invoiceIssuedDate\": \"2022-04-01\"\n      },\n      {\n        \"payorEmail\": \"user@gmail.com\",\n        \"payorType\": \"BUSINESS\",\n        \"description\": \"Invoice for equipment purchased.\",\n        \"payorMiddleName\": \"payorMiddleName\",\n        \"payorBusinessName\": \"My Business\",\n        \"payorLastName\": \"Smith\",\n        \"platformInvoiceId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n        \"invoiceDueDate\": \"2022-06-01\",\n        \"payorFirstName\": \"John\",\n        \"invoiceAmountCents\": 1000000,\n        \"payorAddress\": {\n          \"city\": \"San Mateo\",\n          \"state\": \"CA\",\n          \"country\": \"USA\",\n          \"zipcode\": \"94401\",\n          \"addressLineOne\": \"123 Main Street\"\n        },\n        \"platformInvoiceNumber\": \"123\",\n        \"invoiceIssuedDate\": \"2022-04-01\"\n      }\n    ]\n  },\n  \"businessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"ForbiddenException\",\n  \"message\": \"Forbidden\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d736682f-c482-4168-a7dd-9d4f8db9ccc8",
+              "name": "BusinessNotFoundException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "embedded-session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"platformBusinessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n  \"data\": {\n    \"component\": \"SESSION_INVOICE_FLOW\",\n    \"invoices\": [\n      {\n        \"payorEmail\": \"user@gmail.com\",\n        \"payorType\": \"BUSINESS\",\n        \"description\": \"Invoice for equipment purchased.\",\n        \"payorMiddleName\": \"payorMiddleName\",\n        \"payorBusinessName\": \"My Business\",\n        \"payorLastName\": \"Smith\",\n        \"platformInvoiceId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n        \"invoiceDueDate\": \"2022-06-01\",\n        \"payorFirstName\": \"John\",\n        \"invoiceAmountCents\": 1000000,\n        \"payorAddress\": {\n          \"city\": \"San Mateo\",\n          \"state\": \"CA\",\n          \"country\": \"USA\",\n          \"zipcode\": \"94401\",\n          \"addressLineOne\": \"123 Main Street\"\n        },\n        \"platformInvoiceNumber\": \"123\",\n        \"invoiceIssuedDate\": \"2022-04-01\"\n      },\n      {\n        \"payorEmail\": \"user@gmail.com\",\n        \"payorType\": \"BUSINESS\",\n        \"description\": \"Invoice for equipment purchased.\",\n        \"payorMiddleName\": \"payorMiddleName\",\n        \"payorBusinessName\": \"My Business\",\n        \"payorLastName\": \"Smith\",\n        \"platformInvoiceId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n        \"invoiceDueDate\": \"2022-06-01\",\n        \"payorFirstName\": \"John\",\n        \"invoiceAmountCents\": 1000000,\n        \"payorAddress\": {\n          \"city\": \"San Mateo\",\n          \"state\": \"CA\",\n          \"country\": \"USA\",\n          \"zipcode\": \"94401\",\n          \"addressLineOne\": \"123 Main Street\"\n        },\n        \"platformInvoiceNumber\": \"123\",\n        \"invoiceIssuedDate\": \"2022-04-01\"\n      }\n    ]\n  },\n  \"businessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"BusinessNotFoundException\",\n  \"message\": \"An error occurred.\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb1c9e89-990e-4fdb-b4ef-75ea2075ce15",
+              "name": "BusinessHasNoInvoiceFinancingProductException, PlatformInvoiceIdAlreadyExistsForAnotherIssuedProductException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "embedded-session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"platformBusinessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n  \"data\": {\n    \"component\": \"SESSION_INVOICE_FLOW\",\n    \"invoices\": [\n      {\n        \"payorEmail\": \"user@gmail.com\",\n        \"payorType\": \"BUSINESS\",\n        \"description\": \"Invoice for equipment purchased.\",\n        \"payorMiddleName\": \"payorMiddleName\",\n        \"payorBusinessName\": \"My Business\",\n        \"payorLastName\": \"Smith\",\n        \"platformInvoiceId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n        \"invoiceDueDate\": \"2022-06-01\",\n        \"payorFirstName\": \"John\",\n        \"invoiceAmountCents\": 1000000,\n        \"payorAddress\": {\n          \"city\": \"San Mateo\",\n          \"state\": \"CA\",\n          \"country\": \"USA\",\n          \"zipcode\": \"94401\",\n          \"addressLineOne\": \"123 Main Street\"\n        },\n        \"platformInvoiceNumber\": \"123\",\n        \"invoiceIssuedDate\": \"2022-04-01\"\n      },\n      {\n        \"payorEmail\": \"user@gmail.com\",\n        \"payorType\": \"BUSINESS\",\n        \"description\": \"Invoice for equipment purchased.\",\n        \"payorMiddleName\": \"payorMiddleName\",\n        \"payorBusinessName\": \"My Business\",\n        \"payorLastName\": \"Smith\",\n        \"platformInvoiceId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n        \"invoiceDueDate\": \"2022-06-01\",\n        \"payorFirstName\": \"John\",\n        \"invoiceAmountCents\": 1000000,\n        \"payorAddress\": {\n          \"city\": \"San Mateo\",\n          \"state\": \"CA\",\n          \"country\": \"USA\",\n          \"zipcode\": \"94401\",\n          \"addressLineOne\": \"123 Main Street\"\n        },\n        \"platformInvoiceNumber\": \"123\",\n        \"invoiceIssuedDate\": \"2022-04-01\"\n      }\n    ]\n  },\n  \"businessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"PlatformInvoiceIdAlreadyExistsForAnotherIssuedProductException\",\n  \"message\": \"An error occurred.\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1bff4380-3d78-40a9-85ed-83e4c91b9a1a",
+              "name": "TooManyRequestsException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "embedded-session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"platformBusinessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n  \"data\": {\n    \"component\": \"SESSION_INVOICE_FLOW\",\n    \"invoices\": [\n      {\n        \"payorEmail\": \"user@gmail.com\",\n        \"payorType\": \"BUSINESS\",\n        \"description\": \"Invoice for equipment purchased.\",\n        \"payorMiddleName\": \"payorMiddleName\",\n        \"payorBusinessName\": \"My Business\",\n        \"payorLastName\": \"Smith\",\n        \"platformInvoiceId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n        \"invoiceDueDate\": \"2022-06-01\",\n        \"payorFirstName\": \"John\",\n        \"invoiceAmountCents\": 1000000,\n        \"payorAddress\": {\n          \"city\": \"San Mateo\",\n          \"state\": \"CA\",\n          \"country\": \"USA\",\n          \"zipcode\": \"94401\",\n          \"addressLineOne\": \"123 Main Street\"\n        },\n        \"platformInvoiceNumber\": \"123\",\n        \"invoiceIssuedDate\": \"2022-04-01\"\n      },\n      {\n        \"payorEmail\": \"user@gmail.com\",\n        \"payorType\": \"BUSINESS\",\n        \"description\": \"Invoice for equipment purchased.\",\n        \"payorMiddleName\": \"payorMiddleName\",\n        \"payorBusinessName\": \"My Business\",\n        \"payorLastName\": \"Smith\",\n        \"platformInvoiceId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n        \"invoiceDueDate\": \"2022-06-01\",\n        \"payorFirstName\": \"John\",\n        \"invoiceAmountCents\": 1000000,\n        \"payorAddress\": {\n          \"city\": \"San Mateo\",\n          \"state\": \"CA\",\n          \"country\": \"USA\",\n          \"zipcode\": \"94401\",\n          \"addressLineOne\": \"123 Main Street\"\n        },\n        \"platformInvoiceNumber\": \"123\",\n        \"invoiceIssuedDate\": \"2022-04-01\"\n      }\n    ]\n  },\n  \"businessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Maximum number of requests allowed per minute.",
+                  "key": "X-RateLimit-Limit",
+                  "value": "6896"
+                },
+                {
+                  "disabled": false,
+                  "description": "Number of remaining requests available.",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "6896"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"TooManyRequestsException\",\n  \"message\": \"Too Many Requests\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc64da90-c35d-49e5-90ce-6ed75399ed81",
+              "name": "InternalServerErrorException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "embedded-session"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"platformBusinessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n  \"data\": {\n    \"component\": \"SESSION_INVOICE_FLOW\",\n    \"invoices\": [\n      {\n        \"payorEmail\": \"user@gmail.com\",\n        \"payorType\": \"BUSINESS\",\n        \"description\": \"Invoice for equipment purchased.\",\n        \"payorMiddleName\": \"payorMiddleName\",\n        \"payorBusinessName\": \"My Business\",\n        \"payorLastName\": \"Smith\",\n        \"platformInvoiceId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n        \"invoiceDueDate\": \"2022-06-01\",\n        \"payorFirstName\": \"John\",\n        \"invoiceAmountCents\": 1000000,\n        \"payorAddress\": {\n          \"city\": \"San Mateo\",\n          \"state\": \"CA\",\n          \"country\": \"USA\",\n          \"zipcode\": \"94401\",\n          \"addressLineOne\": \"123 Main Street\"\n        },\n        \"platformInvoiceNumber\": \"123\",\n        \"invoiceIssuedDate\": \"2022-04-01\"\n      },\n      {\n        \"payorEmail\": \"user@gmail.com\",\n        \"payorType\": \"BUSINESS\",\n        \"description\": \"Invoice for equipment purchased.\",\n        \"payorMiddleName\": \"payorMiddleName\",\n        \"payorBusinessName\": \"My Business\",\n        \"payorLastName\": \"Smith\",\n        \"platformInvoiceId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n        \"invoiceDueDate\": \"2022-06-01\",\n        \"payorFirstName\": \"John\",\n        \"invoiceAmountCents\": 1000000,\n        \"payorAddress\": {\n          \"city\": \"San Mateo\",\n          \"state\": \"CA\",\n          \"country\": \"USA\",\n          \"zipcode\": \"94401\",\n          \"addressLineOne\": \"123 Main Street\"\n        },\n        \"platformInvoiceNumber\": \"123\",\n        \"invoiceIssuedDate\": \"2022-04-01\"\n      }\n    ]\n  },\n  \"businessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"InternalServerErrorException\",\n  \"message\": \"Internal Server Error\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.kanmon.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "35be9834-8635-437c-b605-db1510819bd3",
+    "name": "Kanmon Public V2 Bank Accounts Embedded Sessions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Kanmon's public api. Contains all of the endpoints for both capital providers and platforms",
+      "type": "text/plain"
+    }
+  }
+}

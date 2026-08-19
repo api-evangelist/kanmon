@@ -1,0 +1,460 @@
+{
+  "item": [
+    {
+      "id": "ead22b85-a6b6-4cce-b4aa-9df9f644df14",
+      "name": "Prequalifications",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b1f1ae77-08aa-4183-80c3-d57ef5dd443f",
+          "name": "Fetch business prequalifications",
+          "request": {
+            "name": "Fetch business prequalifications",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "platform",
+                "v2",
+                "prequalifications"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "platformBusinessIds",
+                  "value": "<string>",
+                  "description": "A comma delimited list of your platform’s unique IDs for businesses."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<number>",
+                  "description": "The number of records to skip when performing pagination. Defaults to `0`."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>",
+                  "description": "The number of records to limit when performing pagination. Defaults to `100`, which is the max."
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAtStart",
+                  "value": "<string>",
+                  "description": "Filter for records where `createdAt` is greater than or equal to this value. ISO 8601 format."
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAtEnd",
+                  "value": "<string>",
+                  "description": "Filter for records where `createdAt` is less than or equal to this value. ISO 8601 format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "272b114f-4ef3-4cea-9764-3409d66b3255",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "prequalifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "platformBusinessIds",
+                      "value": "12345,67890"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "createdAtStart",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    },
+                    {
+                      "key": "createdAtEnd",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"limit\": 100,\n    \"offset\": 0,\n    \"totalCount\": 100\n  },\n  \"prequalifications\": [\n    {\n      \"createdAt\": \"2022-06-01 03:57:26.115000+00:00\",\n      \"product\": \"INVOICE_FINANCING\",\n      \"platformBusinessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"isPrequalified\": true,\n      \"businessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"platformId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"prequalifiedAmountCents\": 1000000,\n      \"updatedAt\": \"2022-06-01 03:57:26.115000+00:00\"\n    },\n    {\n      \"createdAt\": \"2022-06-01 03:57:26.115000+00:00\",\n      \"product\": \"INVOICE_FINANCING\",\n      \"platformBusinessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"isPrequalified\": true,\n      \"businessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"platformId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"prequalifiedAmountCents\": 1000000,\n      \"updatedAt\": \"2022-06-01 03:57:26.115000+00:00\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7002ac64-31e6-4562-b94d-2c6483a1a310",
+              "name": "BadRequestException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "prequalifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "platformBusinessIds",
+                      "value": "12345,67890"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "createdAtStart",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    },
+                    {
+                      "key": "createdAtEnd",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"BadRequestException\",\n  \"message\": \"Bad Request\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e98378f2-db5a-404d-83b9-8e9cb0a1f179",
+              "name": "ForbiddenException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "prequalifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "platformBusinessIds",
+                      "value": "12345,67890"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "createdAtStart",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    },
+                    {
+                      "key": "createdAtEnd",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"ForbiddenException\",\n  \"message\": \"Forbidden\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c93bdc93-eda2-4494-8c7c-5fb75ad475a3",
+              "name": "TooManyRequestsException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "prequalifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "platformBusinessIds",
+                      "value": "12345,67890"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "createdAtStart",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    },
+                    {
+                      "key": "createdAtEnd",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Maximum number of requests allowed per minute.",
+                  "key": "X-RateLimit-Limit",
+                  "value": "8547"
+                },
+                {
+                  "disabled": false,
+                  "description": "Number of remaining requests available.",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "8547"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"TooManyRequestsException\",\n  \"message\": \"Too Many Requests\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec19ff5b-9a4f-4dc2-9b30-481636692e49",
+              "name": "InternalServerErrorException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "prequalifications"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "platformBusinessIds",
+                      "value": "12345,67890"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "createdAtStart",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    },
+                    {
+                      "key": "createdAtEnd",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"InternalServerErrorException\",\n  \"message\": \"Internal Server Error\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.kanmon.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "1ad53d72-03ec-42ac-a506-dab9ae44f9e8",
+    "name": "Kanmon Public V2 Bank Accounts Prequalifications API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Kanmon's public api. Contains all of the endpoints for both capital providers and platforms",
+      "type": "text/plain"
+    }
+  }
+}

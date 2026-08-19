@@ -1,0 +1,183 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kanmon Public V2 Bank Accounts Payments API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch a payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kanmon.com/api/platform/v2/payments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6",
+                "type": "path",
+                "description": "The Kanmon payment order UUID."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Fetch a payment"
+        },
+        {
+          "info": {
+            "name": "Fetch payment schedule for an issued product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kanmon.com/api/platform/v2/issued-products/:id/payment-schedule",
+            "params": [
+              {
+                "name": "drawRequestIds",
+                "value": "dd2ac3c3-249e-455c-a3bc-a0907cb82817,7f6126db-b592-4d17-bcdf-29663a54a80f",
+                "type": "query",
+                "description": "A comma delimited list of Kanmon’s unique draw request IDs."
+              },
+              {
+                "name": "invoiceIds",
+                "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34",
+                "type": "query",
+                "description": "A comma delimited list of Kanmon’s unique IDs for invoices."
+              },
+              {
+                "name": "platformInvoiceIds",
+                "value": "12322,12331",
+                "type": "query",
+                "description": "A comma delimited list of your platform’s unique IDs for invoices."
+              },
+              {
+                "name": "direction",
+                "value": "REPAYMENT",
+                "type": "query",
+                "description": "The direction of the payment."
+              },
+              {
+                "name": "status",
+                "value": "PAID",
+                "type": "query",
+                "description": "The status of the payment."
+              },
+              {
+                "name": "id",
+                "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6",
+                "type": "path",
+                "description": "The Kanmon issued product UUID."
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "The number of records to skip when performing pagination. Defaults to `0`."
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "The number of records to limit when performing pagination. Defaults to `100`, which is the max."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Deprecated. Prefer Fetch payment intents (`getPaymentIntents`) instead."
+        },
+        {
+          "info": {
+            "name": "Fetch payment intents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.kanmon.com/api/platform/v2/payment-intents",
+            "params": [
+              {
+                "name": "ids",
+                "value": "3789e162-b5ba-45a9-a8ea-27682ed7ea66,fa075e48-014f-46c6-a8cc-b2b9b74c5e4a",
+                "type": "query",
+                "description": "A comma delimited list of Kanmon’s unique payment intent IDs."
+              },
+              {
+                "name": "invoiceIds",
+                "value": "2a479896-c24c-4bd3-a8af-b3e15092974a,92eede22-dccc-4bb7-bae7-74b62a403c9d",
+                "type": "query",
+                "description": "A comma delimited list of Kanmon’s unique IDs for invoices."
+              },
+              {
+                "name": "drawRequestIds",
+                "value": "6ea29646-8f2a-456c-a58a-fe3caa640bc4,a01d5deb-f25a-4299-8fd7-34b1f2a2757d",
+                "type": "query",
+                "description": "A comma delimited list of Kanmon’s unique IDs for draw requests."
+              },
+              {
+                "name": "issuedProductIds",
+                "value": "b77f03df-f9bc-4faa-b4ee-8dd12a27848f,56692a55-9fb0-43e8-8af9-03a799f17268",
+                "type": "query",
+                "description": "A comma delimited list of Kanmon’s unique IDs for issued products."
+              },
+              {
+                "name": "businessIds",
+                "value": "8d0f3d97-3c2d-4811-871e-8b8fe9c93136,85fb1f58-2b85-42f8-903b-77973d941d39",
+                "type": "query",
+                "description": "A comma delimited list of Kanmon’s unique IDs for businesses."
+              },
+              {
+                "name": "triggers",
+                "value": "SCHEDULED_REPAYMENT,DISBURSEMENT",
+                "type": "query",
+                "description": "A comma delimited list of payment intent triggers to filter by.<table>\n\n<tr>\n<td>DISBURSEMENT</td>\n<td>Funds disbursed to the business.</td>\n</tr>\n<tr>\n<td>DISBURSEMENT_RETURN</td>\n<td>Return of previously disbursed funds. Only relevant for some AP financing setups.</td>\n</tr>\n<tr>\n<td>SCHEDULED_REPAYMENT</td>\n<td>A repayment scheduled on the payment schedule.</td>\n</tr>\n<tr>\n<td>EARLY_PAYOFF</td>\n<td>An early payoff of outstanding principal and interest. Early payoffs will cancel remaining scheduled repayments for installment products once they settle.</td>\n</tr>\n<tr>\n<td>REFINANCE_PAYOFF</td>\n<td>A bookkeeping record to pay off existing principal as part of refinancing into a new loan agreement.</td>\n</tr>\n<tr>\n<td>FEE</td>\n<td>A fee charged to the business, such as a maintenance or transaction fee.</td>\n</tr>\n<tr>\n<td>REFUND</td>\n<td>A refund or rebate issued to the business.</td>\n</tr>\n<tr>\n<td>MINIMUM_PAYMENT</td>\n<td>A minimum payment, relevant only for Integrated MCA products.</td>\n</tr>\n</table>"
+              },
+              {
+                "name": "cancelled",
+                "value": "false",
+                "type": "query",
+                "description": "When true, return only cancelled payment intents. When false, return only non-cancelled payment intents."
+              },
+              {
+                "name": "offset",
+                "value": "0",
+                "type": "query",
+                "description": "The number of records to skip when performing pagination. Defaults to `0`."
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "The number of records to limit when performing pagination. Defaults to `100`, which is the max."
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "A payment intent represents a planned payment on an issued product, such as a disbursement, scheduled repayment, fee, or refund. It tracks intended amounts, whether the payment is late, settlement progress via the confirmed and pending amount fields, and the payment orders that actually move funds. Payment intents may be cancelled when superseded — for example, by an early payoff."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

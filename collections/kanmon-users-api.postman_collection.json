@@ -1,0 +1,2487 @@
+{
+  "item": [
+    {
+      "id": "36bcba56-1246-4a8f-be04-6329ecd44f9f",
+      "name": "Users",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0bf7f4ad-6f9c-4730-87aa-3d788760b44d",
+          "name": "Fetch users",
+          "request": {
+            "name": "Fetch users",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "platform",
+                "v2",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "A comma delimited list of Kanmon’s unique IDs for users."
+                },
+                {
+                  "disabled": false,
+                  "key": "platformUserIds",
+                  "value": "<string>",
+                  "description": "A comma delimited list of your platform’s unique IDs for users."
+                },
+                {
+                  "disabled": false,
+                  "key": "platformBusinessIds",
+                  "value": "<string>",
+                  "description": "A comma delimited list of your platform’s unique business IDs for users."
+                },
+                {
+                  "disabled": false,
+                  "key": "businessIds",
+                  "value": "<string>",
+                  "description": "A comma delimited list of your Kanmon’s unique business IDs for users."
+                },
+                {
+                  "disabled": false,
+                  "key": "includeSecondaryOwners",
+                  "value": "<boolean>",
+                  "description": "Whether to include secondary owners in results. Defaults to `false`."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<number>",
+                  "description": "The number of records to skip when performing pagination. Defaults to `0`."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>",
+                  "description": "The number of records to limit when performing pagination. Defaults to `100`, which is the max."
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAtStart",
+                  "value": "<string>",
+                  "description": "Filter for records where `createdAt` is greater than or equal to this value. ISO 8601 format."
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAtEnd",
+                  "value": "<string>",
+                  "description": "Filter for records where `createdAt` is less than or equal to this value. ISO 8601 format."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8f3eb6db-5842-4683-a35b-cdfc3ba8cd5a",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34"
+                    },
+                    {
+                      "key": "platformUserIds",
+                      "value": "12345,67890"
+                    },
+                    {
+                      "key": "platformBusinessIds",
+                      "value": "12345,67890"
+                    },
+                    {
+                      "key": "businessIds",
+                      "value": "d4824e09-7857-49cb-8dc1-3410d14a1621,361530c5-9180-4ec8-9287-44c5dc9d3686"
+                    },
+                    {
+                      "key": "includeSecondaryOwners",
+                      "value": "false"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "createdAtStart",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    },
+                    {
+                      "key": "createdAtEnd",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"limit\": 100,\n    \"offset\": 0,\n    \"totalCount\": 100\n  },\n  \"users\": [\n    {\n      \"businessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n      \"createdAt\": \"2022-06-01 03:57:26.115000+00:00\",\n      \"email\": \"user@gmail.com\",\n      \"id\": \"1193fdaf-630c-4771-a629-8da7a87947d2\",\n      \"metadata\": {},\n      \"platformBusinessId\": \"12345\",\n      \"updatedAt\": \"2022-06-01 03:57:26.115000+00:00\",\n      \"platformUserId\": \"12345\",\n      \"phoneNumber\": \"+14155556789\",\n      \"address\": {\n        \"city\": \"San Mateo\",\n        \"state\": \"CA\",\n        \"country\": \"USA\",\n        \"zipcode\": \"94401\",\n        \"addressLineOne\": \"123 Main Street\"\n      },\n      \"firstName\": \"John\",\n      \"lastName\": \"Smith\",\n      \"roles\": [\n        \"PRIMARY_OWNER\"\n      ],\n      \"isUsCitizen\": {}\n    },\n    {\n      \"businessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n      \"createdAt\": \"2022-06-01 03:57:26.115000+00:00\",\n      \"email\": \"user@gmail.com\",\n      \"id\": \"1193fdaf-630c-4771-a629-8da7a87947d2\",\n      \"metadata\": {},\n      \"platformBusinessId\": \"12345\",\n      \"updatedAt\": \"2022-06-01 03:57:26.115000+00:00\",\n      \"platformUserId\": \"12345\",\n      \"phoneNumber\": \"+14155556789\",\n      \"address\": {\n        \"city\": \"San Mateo\",\n        \"state\": \"CA\",\n        \"country\": \"USA\",\n        \"zipcode\": \"94401\",\n        \"addressLineOne\": \"123 Main Street\"\n      },\n      \"firstName\": \"John\",\n      \"lastName\": \"Smith\",\n      \"roles\": [\n        \"PRIMARY_OWNER\"\n      ],\n      \"isUsCitizen\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ce159803-f8a7-4498-a99d-e403ca7f5fc4",
+              "name": "BadRequestException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34"
+                    },
+                    {
+                      "key": "platformUserIds",
+                      "value": "12345,67890"
+                    },
+                    {
+                      "key": "platformBusinessIds",
+                      "value": "12345,67890"
+                    },
+                    {
+                      "key": "businessIds",
+                      "value": "d4824e09-7857-49cb-8dc1-3410d14a1621,361530c5-9180-4ec8-9287-44c5dc9d3686"
+                    },
+                    {
+                      "key": "includeSecondaryOwners",
+                      "value": "false"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "createdAtStart",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    },
+                    {
+                      "key": "createdAtEnd",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"BadRequestException\",\n  \"message\": \"Bad Request\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "89bafbc7-67b0-4f67-b366-89a320f14d20",
+              "name": "ForbiddenException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34"
+                    },
+                    {
+                      "key": "platformUserIds",
+                      "value": "12345,67890"
+                    },
+                    {
+                      "key": "platformBusinessIds",
+                      "value": "12345,67890"
+                    },
+                    {
+                      "key": "businessIds",
+                      "value": "d4824e09-7857-49cb-8dc1-3410d14a1621,361530c5-9180-4ec8-9287-44c5dc9d3686"
+                    },
+                    {
+                      "key": "includeSecondaryOwners",
+                      "value": "false"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "createdAtStart",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    },
+                    {
+                      "key": "createdAtEnd",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"ForbiddenException\",\n  \"message\": \"Forbidden\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "40e120c1-2a48-4f78-96bc-e294dbf66034",
+              "name": "TooManyRequestsException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34"
+                    },
+                    {
+                      "key": "platformUserIds",
+                      "value": "12345,67890"
+                    },
+                    {
+                      "key": "platformBusinessIds",
+                      "value": "12345,67890"
+                    },
+                    {
+                      "key": "businessIds",
+                      "value": "d4824e09-7857-49cb-8dc1-3410d14a1621,361530c5-9180-4ec8-9287-44c5dc9d3686"
+                    },
+                    {
+                      "key": "includeSecondaryOwners",
+                      "value": "false"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "createdAtStart",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    },
+                    {
+                      "key": "createdAtEnd",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Maximum number of requests allowed per minute.",
+                  "key": "X-RateLimit-Limit",
+                  "value": "3810"
+                },
+                {
+                  "disabled": false,
+                  "description": "Number of remaining requests available.",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "3810"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"TooManyRequestsException\",\n  \"message\": \"Too Many Requests\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d054aa81-6408-4b01-9380-dd706b82bdd5",
+              "name": "InternalServerErrorException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34"
+                    },
+                    {
+                      "key": "platformUserIds",
+                      "value": "12345,67890"
+                    },
+                    {
+                      "key": "platformBusinessIds",
+                      "value": "12345,67890"
+                    },
+                    {
+                      "key": "businessIds",
+                      "value": "d4824e09-7857-49cb-8dc1-3410d14a1621,361530c5-9180-4ec8-9287-44c5dc9d3686"
+                    },
+                    {
+                      "key": "includeSecondaryOwners",
+                      "value": "false"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "createdAtStart",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    },
+                    {
+                      "key": "createdAtEnd",
+                      "value": "2022-06-01 03:57:26.115000+00:00"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"InternalServerErrorException\",\n  \"message\": \"Internal Server Error\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d1128a77-4960-4c97-9192-4f82c2d570a1",
+          "name": "Create a user",
+          "request": {
+            "name": "Create a user",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "platform",
+                "v2",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"platformUserId\": \"<string>\",\n  \"platformBusinessId\": \"<string>\",\n  \"businessId\": \"<string>\",\n  \"email\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"address\": {\n    \"addressLineOne\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zipcode\": \"<string>\",\n    \"addressLineTwo\": \"<string>\"\n  },\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"metadata\": \"<object>\",\n  \"isUsCitizen\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "dfb24140-457e-4007-8996-8a2a23efc180",
+              "name": "User created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"platformUserId\": \"12345\",\n  \"platformBusinessId\": \"12345\",\n  \"businessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n  \"email\": \"user@gmail.com\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"phoneNumber\": \"+14155556789\",\n  \"address\": {\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"country\": \"USA\",\n    \"zipcode\": \"94401\",\n    \"addressLineOne\": \"123 Main Street\"\n  },\n  \"roles\": [\n    \"PRIMARY_OWNER\"\n  ],\n  \"metadata\": \"<object>\",\n  \"isUsCitizen\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"businessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n  \"createdAt\": \"2022-06-01 03:57:26.115000+00:00\",\n  \"email\": \"user@gmail.com\",\n  \"id\": \"1193fdaf-630c-4771-a629-8da7a87947d2\",\n  \"metadata\": {},\n  \"platformBusinessId\": \"12345\",\n  \"updatedAt\": \"2022-06-01 03:57:26.115000+00:00\",\n  \"platformUserId\": \"12345\",\n  \"phoneNumber\": \"+14155556789\",\n  \"address\": {\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"country\": \"USA\",\n    \"zipcode\": \"94401\",\n    \"addressLineOne\": \"123 Main Street\"\n  },\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"roles\": [\n    \"PRIMARY_OWNER\"\n  ],\n  \"isUsCitizen\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19ebad4c-4d3b-4978-940c-2d7f742cd499",
+              "name": "BadRequestException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"platformUserId\": \"12345\",\n  \"platformBusinessId\": \"12345\",\n  \"businessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n  \"email\": \"user@gmail.com\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"phoneNumber\": \"+14155556789\",\n  \"address\": {\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"country\": \"USA\",\n    \"zipcode\": \"94401\",\n    \"addressLineOne\": \"123 Main Street\"\n  },\n  \"roles\": [\n    \"PRIMARY_OWNER\"\n  ],\n  \"metadata\": \"<object>\",\n  \"isUsCitizen\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"BadRequestException\",\n  \"message\": \"Bad Request\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c1e3b2a-2fe7-4dc9-8dbc-b19c97d28efb",
+              "name": "ForbiddenException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"platformUserId\": \"12345\",\n  \"platformBusinessId\": \"12345\",\n  \"businessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n  \"email\": \"user@gmail.com\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"phoneNumber\": \"+14155556789\",\n  \"address\": {\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"country\": \"USA\",\n    \"zipcode\": \"94401\",\n    \"addressLineOne\": \"123 Main Street\"\n  },\n  \"roles\": [\n    \"PRIMARY_OWNER\"\n  ],\n  \"metadata\": \"<object>\",\n  \"isUsCitizen\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"ForbiddenException\",\n  \"message\": \"Forbidden\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d493d22-733d-418e-8960-f3880fffa81f",
+              "name": "BusinessNotFoundException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"platformUserId\": \"12345\",\n  \"platformBusinessId\": \"12345\",\n  \"businessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n  \"email\": \"user@gmail.com\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"phoneNumber\": \"+14155556789\",\n  \"address\": {\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"country\": \"USA\",\n    \"zipcode\": \"94401\",\n    \"addressLineOne\": \"123 Main Street\"\n  },\n  \"roles\": [\n    \"PRIMARY_OWNER\"\n  ],\n  \"metadata\": \"<object>\",\n  \"isUsCitizen\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"BusinessNotFoundException\",\n  \"message\": \"An error occurred.\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "41cbfd69-189c-416d-8060-5ca5ed2a3a3c",
+              "name": "PrimaryBusinessOwnerAlreadyExistsForBusinessException, UserAlreadyExistsWithPlatformUserIdException, UserAlreadyExistsWithEmailException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"platformUserId\": \"12345\",\n  \"platformBusinessId\": \"12345\",\n  \"businessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n  \"email\": \"user@gmail.com\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"phoneNumber\": \"+14155556789\",\n  \"address\": {\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"country\": \"USA\",\n    \"zipcode\": \"94401\",\n    \"addressLineOne\": \"123 Main Street\"\n  },\n  \"roles\": [\n    \"PRIMARY_OWNER\"\n  ],\n  \"metadata\": \"<object>\",\n  \"isUsCitizen\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"PrimaryBusinessOwnerAlreadyExistsForBusinessException\",\n  \"message\": \"An error occurred.\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6bff5f63-933b-4202-a6af-9b33a0930d40",
+              "name": "TooManyRequestsException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"platformUserId\": \"12345\",\n  \"platformBusinessId\": \"12345\",\n  \"businessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n  \"email\": \"user@gmail.com\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"phoneNumber\": \"+14155556789\",\n  \"address\": {\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"country\": \"USA\",\n    \"zipcode\": \"94401\",\n    \"addressLineOne\": \"123 Main Street\"\n  },\n  \"roles\": [\n    \"PRIMARY_OWNER\"\n  ],\n  \"metadata\": \"<object>\",\n  \"isUsCitizen\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Maximum number of requests allowed per minute.",
+                  "key": "X-RateLimit-Limit",
+                  "value": "3810"
+                },
+                {
+                  "disabled": false,
+                  "description": "Number of remaining requests available.",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "3810"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"TooManyRequestsException\",\n  \"message\": \"Too Many Requests\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acd47e69-e3f9-4024-b53f-5bdaf21738c2",
+              "name": "InternalServerErrorException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"platformUserId\": \"12345\",\n  \"platformBusinessId\": \"12345\",\n  \"businessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n  \"email\": \"user@gmail.com\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"phoneNumber\": \"+14155556789\",\n  \"address\": {\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"country\": \"USA\",\n    \"zipcode\": \"94401\",\n    \"addressLineOne\": \"123 Main Street\"\n  },\n  \"roles\": [\n    \"PRIMARY_OWNER\"\n  ],\n  \"metadata\": \"<object>\",\n  \"isUsCitizen\": true\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"InternalServerErrorException\",\n  \"message\": \"Internal Server Error\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3264742c-22ac-43b6-8eb1-65fd2e21f073",
+          "name": "Fetch a user",
+          "request": {
+            "name": "Fetch a user",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "platform",
+                "v2",
+                "users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "idType",
+                  "value": "<string>",
+                  "description": "Which ID type to query the user by. Defaults to `KANMON`. Use `PLATFORM` if you want to query by your platform’s ID."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Either the Kanmon user UUID or your platform’s user ID, depending on `idType`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "26a6504c-c90b-4e7b-b893-9d66f4a6c8cb",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon user UUID or your platform’s user ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"businessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n  \"createdAt\": \"2022-06-01 03:57:26.115000+00:00\",\n  \"email\": \"user@gmail.com\",\n  \"id\": \"1193fdaf-630c-4771-a629-8da7a87947d2\",\n  \"metadata\": {},\n  \"platformBusinessId\": \"12345\",\n  \"updatedAt\": \"2022-06-01 03:57:26.115000+00:00\",\n  \"platformUserId\": \"12345\",\n  \"phoneNumber\": \"+14155556789\",\n  \"address\": {\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"country\": \"USA\",\n    \"zipcode\": \"94401\",\n    \"addressLineOne\": \"123 Main Street\"\n  },\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"roles\": [\n    \"PRIMARY_OWNER\"\n  ],\n  \"isUsCitizen\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a128d4fd-17fc-45c9-bfef-999875e6d260",
+              "name": "BadRequestException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon user UUID or your platform’s user ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"BadRequestException\",\n  \"message\": \"Bad Request\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d10e151-f9eb-4e7d-a85e-b6bb1627b8db",
+              "name": "ForbiddenException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon user UUID or your platform’s user ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"ForbiddenException\",\n  \"message\": \"Forbidden\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6677643-31d1-4579-a203-18e4247c6cef",
+              "name": "UserNotFoundException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon user UUID or your platform’s user ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"UserNotFoundException\",\n  \"message\": \"An error occurred.\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30f5a176-18ca-4334-a811-728aa12721ed",
+              "name": "TooManyRequestsException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon user UUID or your platform’s user ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Maximum number of requests allowed per minute.",
+                  "key": "X-RateLimit-Limit",
+                  "value": "3810"
+                },
+                {
+                  "disabled": false,
+                  "description": "Number of remaining requests available.",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "3810"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"TooManyRequestsException\",\n  \"message\": \"Too Many Requests\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aaa60a8f-ceb8-4f16-8490-5369bf3b8e57",
+              "name": "InternalServerErrorException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon user UUID or your platform’s user ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"InternalServerErrorException\",\n  \"message\": \"Internal Server Error\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba1eb670-fc6f-491e-9c47-f36b9e922004",
+          "name": "Update a user",
+          "request": {
+            "name": "Update a user",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "platform",
+                "v2",
+                "users",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "idType",
+                  "value": "<string>",
+                  "description": "Which ID type to query the user by. Defaults to `KANMON`. Use `PLATFORM` if you want to query by your platform’s ID."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Either the Kanmon user UUID or your platform’s user ID, depending on `idType`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"phoneNumber\": \"<string>\",\n  \"address\": {\n    \"addressLineOne\": \"<string>\",\n    \"city\": \"<string>\",\n    \"country\": \"<string>\",\n    \"state\": \"<string>\",\n    \"zipcode\": \"<string>\",\n    \"addressLineTwo\": \"<string>\"\n  },\n  \"email\": \"<string>\",\n  \"roles\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"metadata\": \"<object>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "da2e9d70-e957-4d79-970f-e5faa6d106db",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon user UUID or your platform’s user ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"phoneNumber\": \"+14155556789\",\n  \"address\": {\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"country\": \"USA\",\n    \"zipcode\": \"94401\",\n    \"addressLineOne\": \"123 Main Street\"\n  },\n  \"email\": \"user@gmail.com\",\n  \"roles\": [\n    \"PRIMARY_OWNER\"\n  ],\n  \"metadata\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"businessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n  \"createdAt\": \"2022-06-01 03:57:26.115000+00:00\",\n  \"email\": \"user@gmail.com\",\n  \"id\": \"1193fdaf-630c-4771-a629-8da7a87947d2\",\n  \"metadata\": {},\n  \"platformBusinessId\": \"12345\",\n  \"updatedAt\": \"2022-06-01 03:57:26.115000+00:00\",\n  \"platformUserId\": \"12345\",\n  \"phoneNumber\": \"+14155556789\",\n  \"address\": {\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"country\": \"USA\",\n    \"zipcode\": \"94401\",\n    \"addressLineOne\": \"123 Main Street\"\n  },\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"roles\": [\n    \"PRIMARY_OWNER\"\n  ],\n  \"isUsCitizen\": {}\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ab92c754-3e78-4855-88ba-52a35b8bc23d",
+              "name": "BadRequestException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon user UUID or your platform’s user ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"phoneNumber\": \"+14155556789\",\n  \"address\": {\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"country\": \"USA\",\n    \"zipcode\": \"94401\",\n    \"addressLineOne\": \"123 Main Street\"\n  },\n  \"email\": \"user@gmail.com\",\n  \"roles\": [\n    \"PRIMARY_OWNER\"\n  ],\n  \"metadata\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"BadRequestException\",\n  \"message\": \"Bad Request\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bd575afd-d972-4614-b184-ae589386010c",
+              "name": "ForbiddenException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon user UUID or your platform’s user ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"phoneNumber\": \"+14155556789\",\n  \"address\": {\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"country\": \"USA\",\n    \"zipcode\": \"94401\",\n    \"addressLineOne\": \"123 Main Street\"\n  },\n  \"email\": \"user@gmail.com\",\n  \"roles\": [\n    \"PRIMARY_OWNER\"\n  ],\n  \"metadata\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"ForbiddenException\",\n  \"message\": \"Forbidden\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "996b6c22-8c2a-4d49-9223-68c75b98e4ca",
+              "name": "UserNotFoundException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon user UUID or your platform’s user ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"phoneNumber\": \"+14155556789\",\n  \"address\": {\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"country\": \"USA\",\n    \"zipcode\": \"94401\",\n    \"addressLineOne\": \"123 Main Street\"\n  },\n  \"email\": \"user@gmail.com\",\n  \"roles\": [\n    \"PRIMARY_OWNER\"\n  ],\n  \"metadata\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"UserNotFoundException\",\n  \"message\": \"An error occurred.\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5e46615-1ce0-4aad-9c72-ada6d8bf4304",
+              "name": "UserAlreadyExistsWithEmailException, PrimaryBusinessOwnerAlreadyExistsForBusinessException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon user UUID or your platform’s user ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"phoneNumber\": \"+14155556789\",\n  \"address\": {\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"country\": \"USA\",\n    \"zipcode\": \"94401\",\n    \"addressLineOne\": \"123 Main Street\"\n  },\n  \"email\": \"user@gmail.com\",\n  \"roles\": [\n    \"PRIMARY_OWNER\"\n  ],\n  \"metadata\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"UserAlreadyExistsWithEmailException\",\n  \"message\": \"An error occurred.\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f636eda-9bb7-4e6f-8077-64c3c34df2f9",
+              "name": "TooManyRequestsException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon user UUID or your platform’s user ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"phoneNumber\": \"+14155556789\",\n  \"address\": {\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"country\": \"USA\",\n    \"zipcode\": \"94401\",\n    \"addressLineOne\": \"123 Main Street\"\n  },\n  \"email\": \"user@gmail.com\",\n  \"roles\": [\n    \"PRIMARY_OWNER\"\n  ],\n  \"metadata\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Maximum number of requests allowed per minute.",
+                  "key": "X-RateLimit-Limit",
+                  "value": "3810"
+                },
+                {
+                  "disabled": false,
+                  "description": "Number of remaining requests available.",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "3810"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"TooManyRequestsException\",\n  \"message\": \"Too Many Requests\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "08a704c3-3456-4ff3-830c-f9f34997019d",
+              "name": "InternalServerErrorException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "idType",
+                      "value": "KANMON"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Either the Kanmon user UUID or your platform’s user ID, depending on `idType`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"firstName\": \"John\",\n  \"lastName\": \"Smith\",\n  \"phoneNumber\": \"+14155556789\",\n  \"address\": {\n    \"city\": \"San Mateo\",\n    \"state\": \"CA\",\n    \"country\": \"USA\",\n    \"zipcode\": \"94401\",\n    \"addressLineOne\": \"123 Main Street\"\n  },\n  \"email\": \"user@gmail.com\",\n  \"roles\": [\n    \"PRIMARY_OWNER\"\n  ],\n  \"metadata\": \"<object>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"InternalServerErrorException\",\n  \"message\": \"Internal Server Error\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a968b0b-3ae8-4044-97f0-a99493260216",
+          "name": "Merge users from a source business into a target business",
+          "request": {
+            "name": "Merge users from a source business into a target business",
+            "description": {
+              "content": "Users from the source business will be moved into the target business. This will only work if the source business has not started onboarding yet. After the merge, the source business will be deleted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "platform",
+                "v2",
+                "users",
+                "merge"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sourcePlatformBusinessId\": \"<string>\",\n  \"sourceBusinessId\": \"<string>\",\n  \"targetPlatformBusinessId\": \"<string>\",\n  \"targetBusinessId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f2682878-2b73-461a-8e16-283efed08822",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users",
+                    "merge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sourceBusinessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n  \"sourcePlatformBusinessId\": \"12345\",\n  \"targetBusinessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n  \"targetPlatformBusinessId\": \"67890\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"mergedUsers\": [\n    {\n      \"businessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n      \"createdAt\": \"2022-06-01 03:57:26.115000+00:00\",\n      \"email\": \"user@gmail.com\",\n      \"id\": \"1193fdaf-630c-4771-a629-8da7a87947d2\",\n      \"metadata\": {},\n      \"platformBusinessId\": \"12345\",\n      \"updatedAt\": \"2022-06-01 03:57:26.115000+00:00\",\n      \"platformUserId\": \"12345\",\n      \"phoneNumber\": \"+14155556789\",\n      \"address\": {\n        \"city\": \"San Mateo\",\n        \"state\": \"CA\",\n        \"country\": \"USA\",\n        \"zipcode\": \"94401\",\n        \"addressLineOne\": \"123 Main Street\"\n      },\n      \"firstName\": \"John\",\n      \"lastName\": \"Smith\",\n      \"roles\": [\n        \"PRIMARY_OWNER\"\n      ],\n      \"isUsCitizen\": {}\n    },\n    {\n      \"businessId\": \"adbcccf9-3a7f-4040-add3-55c9d6da2d37\",\n      \"createdAt\": \"2022-06-01 03:57:26.115000+00:00\",\n      \"email\": \"user@gmail.com\",\n      \"id\": \"1193fdaf-630c-4771-a629-8da7a87947d2\",\n      \"metadata\": {},\n      \"platformBusinessId\": \"12345\",\n      \"updatedAt\": \"2022-06-01 03:57:26.115000+00:00\",\n      \"platformUserId\": \"12345\",\n      \"phoneNumber\": \"+14155556789\",\n      \"address\": {\n        \"city\": \"San Mateo\",\n        \"state\": \"CA\",\n        \"country\": \"USA\",\n        \"zipcode\": \"94401\",\n        \"addressLineOne\": \"123 Main Street\"\n      },\n      \"firstName\": \"John\",\n      \"lastName\": \"Smith\",\n      \"roles\": [\n        \"PRIMARY_OWNER\"\n      ],\n      \"isUsCitizen\": {}\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71719108-0078-436a-961c-115ae8e5c96a",
+              "name": "BadRequestException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users",
+                    "merge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sourceBusinessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n  \"sourcePlatformBusinessId\": \"12345\",\n  \"targetBusinessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n  \"targetPlatformBusinessId\": \"67890\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"BadRequestException\",\n  \"message\": \"Bad Request\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e82de64-ee03-4cb6-8943-48b67e73ca86",
+              "name": "ForbiddenException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users",
+                    "merge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sourceBusinessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n  \"sourcePlatformBusinessId\": \"12345\",\n  \"targetBusinessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n  \"targetPlatformBusinessId\": \"67890\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"ForbiddenException\",\n  \"message\": \"Forbidden\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3645d34f-c4b0-4923-9a81-633efc4619ca",
+              "name": "BusinessNotFoundException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users",
+                    "merge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sourceBusinessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n  \"sourcePlatformBusinessId\": \"12345\",\n  \"targetBusinessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n  \"targetPlatformBusinessId\": \"67890\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"BusinessNotFoundException\",\n  \"message\": \"An error occurred.\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c129e679-9de1-4062-bdd1-0235ee33d37f",
+              "name": "PrimaryBusinessOwnerAlreadyExistsForBusinessException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users",
+                    "merge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sourceBusinessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n  \"sourcePlatformBusinessId\": \"12345\",\n  \"targetBusinessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n  \"targetPlatformBusinessId\": \"67890\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"PrimaryBusinessOwnerAlreadyExistsForBusinessException\",\n  \"message\": \"An error occurred.\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51bc3a16-fa26-4ede-96a7-4d61a5f53717",
+              "name": "TooManyRequestsException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users",
+                    "merge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sourceBusinessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n  \"sourcePlatformBusinessId\": \"12345\",\n  \"targetBusinessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n  \"targetPlatformBusinessId\": \"67890\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Maximum number of requests allowed per minute.",
+                  "key": "X-RateLimit-Limit",
+                  "value": "3810"
+                },
+                {
+                  "disabled": false,
+                  "description": "Number of remaining requests available.",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "3810"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"TooManyRequestsException\",\n  \"message\": \"Too Many Requests\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2aba1772-eff3-45f8-89fb-64bf7af9fd1d",
+              "name": "InternalServerErrorException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "users",
+                    "merge"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sourceBusinessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n  \"sourcePlatformBusinessId\": \"12345\",\n  \"targetBusinessId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n  \"targetPlatformBusinessId\": \"67890\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"InternalServerErrorException\",\n  \"message\": \"Internal Server Error\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.kanmon.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "37650d0f-c8e7-4d6c-a0b1-da29e2e09cad",
+    "name": "Kanmon Public V2 Bank Accounts Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Kanmon's public api. Contains all of the endpoints for both capital providers and platforms",
+      "type": "text/plain"
+    }
+  }
+}

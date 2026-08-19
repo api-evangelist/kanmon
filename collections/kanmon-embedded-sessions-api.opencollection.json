@@ -1,0 +1,39 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Kanmon Public V2 Bank Accounts Embedded Sessions API",
+    "version": "2.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Embedded Sessions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create an embedded session",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.kanmon.com/api/platform/v2/embedded-session",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "Authorization",
+              "value": "{{Authorization}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Embedded session tokens allow you to securely pass data to Kanmon. First, you will need to call this API to create a token. Then, you will use the token when launching the embedded application."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

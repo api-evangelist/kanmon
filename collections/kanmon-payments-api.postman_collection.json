@@ -1,0 +1,1596 @@
+{
+  "item": [
+    {
+      "id": "a2129485-70ec-4322-afb3-dff5402f58a4",
+      "name": "Payments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2103770c-5fb4-409f-97b9-ea1bd3ce1918",
+          "name": "Fetch a payment",
+          "request": {
+            "name": "Fetch a payment",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "platform",
+                "v2",
+                "payments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The Kanmon payment order UUID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "392f515c-7969-4293-ace8-5c5e9f144dce",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kanmon payment order UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"createdAt\": \"2022-06-01 03:57:26.115000+00:00\",\n  \"direction\": \"DISBURSEMENT\",\n  \"drawRequestId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n  \"effectiveDate\": \"2024-01-01\",\n  \"feePaymentAmountCents\": 10000,\n  \"id\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n  \"interestPaymentAmountCents\": 10000,\n  \"invoiceId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n  \"issuedProductId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n  \"platformInvoiceId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n  \"principalPaymentAmountCents\": 80000,\n  \"settledDate\": \"2024-01-03\",\n  \"status\": \"FAILED\",\n  \"totalPaymentAmountCents\": 100000,\n  \"updatedAt\": \"2022-06-01 03:57:26.115000+00:00\",\n  \"feeType\": \"INSUFFICIENT_FUNDS\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0ed4982-73ea-4f7d-9549-e1e66da12aa0",
+              "name": "BadRequestException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kanmon payment order UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"BadRequestException\",\n  \"message\": \"Bad Request\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "12212c2f-3b3f-4fb8-9342-96cd1939e15d",
+              "name": "ForbiddenException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kanmon payment order UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"ForbiddenException\",\n  \"message\": \"Forbidden\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2f5f7db3-7dd2-4cfb-9eb4-541253c66d30",
+              "name": "PaymentOrderNotFoundException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kanmon payment order UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"PaymentOrderNotFoundException\",\n  \"message\": \"Internal Server Error\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a9be342-41b2-464e-8b62-244b4e5a79e3",
+              "name": "TooManyRequestsException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kanmon payment order UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Maximum number of requests allowed per minute.",
+                  "key": "X-RateLimit-Limit",
+                  "value": "4472"
+                },
+                {
+                  "disabled": false,
+                  "description": "Number of remaining requests available.",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "4472"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"TooManyRequestsException\",\n  \"message\": \"Too Many Requests\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a3ea41dd-7eea-4712-863c-f6ca5720561a",
+              "name": "InternalServerErrorException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "payments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kanmon payment order UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"InternalServerErrorException\",\n  \"message\": \"Internal Server Error\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "11f7cd1d-9f14-4537-be90-450c930d8356",
+          "name": "Fetch payment schedule for an issued product",
+          "request": {
+            "name": "Fetch payment schedule for an issued product",
+            "description": {
+              "content": "Deprecated. Prefer Fetch payment intents (`getPaymentIntents`) instead.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "platform",
+                "v2",
+                "issued-products",
+                ":id",
+                "payment-schedule"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "drawRequestIds",
+                  "value": "<string>",
+                  "description": "A comma delimited list of Kanmon’s unique draw request IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "invoiceIds",
+                  "value": "<string>",
+                  "description": "A comma delimited list of Kanmon’s unique IDs for invoices."
+                },
+                {
+                  "disabled": false,
+                  "key": "platformInvoiceIds",
+                  "value": "<string>",
+                  "description": "A comma delimited list of your platform’s unique IDs for invoices."
+                },
+                {
+                  "disabled": false,
+                  "key": "direction",
+                  "value": "<string>",
+                  "description": "The direction of the payment."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The status of the payment."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<number>",
+                  "description": "The number of records to skip when performing pagination. Defaults to `0`."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>",
+                  "description": "The number of records to limit when performing pagination. Defaults to `100`, which is the max."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The Kanmon issued product UUID."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0b191d76-7e17-45f8-966b-12897a1f6750",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "issued-products",
+                    ":id",
+                    "payment-schedule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "drawRequestIds",
+                      "value": "dd2ac3c3-249e-455c-a3bc-a0907cb82817,7f6126db-b592-4d17-bcdf-29663a54a80f"
+                    },
+                    {
+                      "key": "invoiceIds",
+                      "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34"
+                    },
+                    {
+                      "key": "platformInvoiceIds",
+                      "value": "12322,12331"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "REPAYMENT"
+                    },
+                    {
+                      "key": "status",
+                      "value": "PAID"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kanmon issued product UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"limit\": 100,\n    \"offset\": 0,\n    \"totalCount\": 100\n  },\n  \"paymentSchedule\": [\n    {\n      \"effectiveDate\": \"2024-01-01\",\n      \"totalPaymentAmountCents\": 100000,\n      \"paymentOrder\": {\n        \"createdAt\": \"2022-06-01 03:57:26.115000+00:00\",\n        \"direction\": \"DISBURSEMENT\",\n        \"drawRequestId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n        \"effectiveDate\": \"2024-01-01\",\n        \"feePaymentAmountCents\": 10000,\n        \"id\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n        \"interestPaymentAmountCents\": 10000,\n        \"invoiceId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n        \"issuedProductId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n        \"platformInvoiceId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n        \"principalPaymentAmountCents\": 80000,\n        \"settledDate\": \"2024-01-03\",\n        \"status\": \"PAID\",\n        \"totalPaymentAmountCents\": 100000,\n        \"updatedAt\": \"2022-06-01 03:57:26.115000+00:00\",\n        \"feeType\": \"INSUFFICIENT_FUNDS\"\n      }\n    },\n    {\n      \"effectiveDate\": \"2024-01-01\",\n      \"totalPaymentAmountCents\": 100000,\n      \"paymentOrder\": {\n        \"createdAt\": \"2022-06-01 03:57:26.115000+00:00\",\n        \"direction\": \"DISBURSEMENT\",\n        \"drawRequestId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n        \"effectiveDate\": \"2024-01-01\",\n        \"feePaymentAmountCents\": 10000,\n        \"id\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n        \"interestPaymentAmountCents\": 10000,\n        \"invoiceId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n        \"issuedProductId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n        \"platformInvoiceId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n        \"principalPaymentAmountCents\": 80000,\n        \"settledDate\": \"2024-01-03\",\n        \"status\": \"PAID\",\n        \"totalPaymentAmountCents\": 100000,\n        \"updatedAt\": \"2022-06-01 03:57:26.115000+00:00\",\n        \"feeType\": \"INSUFFICIENT_FUNDS\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80eaed8d-d7e9-461a-b289-96b038b99d3f",
+              "name": "BadRequestException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "issued-products",
+                    ":id",
+                    "payment-schedule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "drawRequestIds",
+                      "value": "dd2ac3c3-249e-455c-a3bc-a0907cb82817,7f6126db-b592-4d17-bcdf-29663a54a80f"
+                    },
+                    {
+                      "key": "invoiceIds",
+                      "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34"
+                    },
+                    {
+                      "key": "platformInvoiceIds",
+                      "value": "12322,12331"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "REPAYMENT"
+                    },
+                    {
+                      "key": "status",
+                      "value": "PAID"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kanmon issued product UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"BadRequestException\",\n  \"message\": \"Bad Request\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "81af9c78-11ef-40b3-beaf-bf327c370fd3",
+              "name": "ForbiddenException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "issued-products",
+                    ":id",
+                    "payment-schedule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "drawRequestIds",
+                      "value": "dd2ac3c3-249e-455c-a3bc-a0907cb82817,7f6126db-b592-4d17-bcdf-29663a54a80f"
+                    },
+                    {
+                      "key": "invoiceIds",
+                      "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34"
+                    },
+                    {
+                      "key": "platformInvoiceIds",
+                      "value": "12322,12331"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "REPAYMENT"
+                    },
+                    {
+                      "key": "status",
+                      "value": "PAID"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kanmon issued product UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"ForbiddenException\",\n  \"message\": \"Forbidden\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa41a406-38a5-4692-a01c-a3010f0232d1",
+              "name": "IssuedProductNotFoundException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "issued-products",
+                    ":id",
+                    "payment-schedule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "drawRequestIds",
+                      "value": "dd2ac3c3-249e-455c-a3bc-a0907cb82817,7f6126db-b592-4d17-bcdf-29663a54a80f"
+                    },
+                    {
+                      "key": "invoiceIds",
+                      "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34"
+                    },
+                    {
+                      "key": "platformInvoiceIds",
+                      "value": "12322,12331"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "REPAYMENT"
+                    },
+                    {
+                      "key": "status",
+                      "value": "PAID"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kanmon issued product UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"IssuedProductNotFoundException\",\n  \"message\": \"Internal Server Error\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23d4390c-b2e3-44ec-9ef3-3522749c9ef7",
+              "name": "TooManyRequestsException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "issued-products",
+                    ":id",
+                    "payment-schedule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "drawRequestIds",
+                      "value": "dd2ac3c3-249e-455c-a3bc-a0907cb82817,7f6126db-b592-4d17-bcdf-29663a54a80f"
+                    },
+                    {
+                      "key": "invoiceIds",
+                      "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34"
+                    },
+                    {
+                      "key": "platformInvoiceIds",
+                      "value": "12322,12331"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "REPAYMENT"
+                    },
+                    {
+                      "key": "status",
+                      "value": "PAID"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kanmon issued product UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Maximum number of requests allowed per minute.",
+                  "key": "X-RateLimit-Limit",
+                  "value": "4472"
+                },
+                {
+                  "disabled": false,
+                  "description": "Number of remaining requests available.",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "4472"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"TooManyRequestsException\",\n  \"message\": \"Too Many Requests\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "070f7f95-adce-4fd0-b6da-f123e1a0057c",
+              "name": "InternalServerErrorException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "issued-products",
+                    ":id",
+                    "payment-schedule"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "drawRequestIds",
+                      "value": "dd2ac3c3-249e-455c-a3bc-a0907cb82817,7f6126db-b592-4d17-bcdf-29663a54a80f"
+                    },
+                    {
+                      "key": "invoiceIds",
+                      "value": "60eaa08c-f7a5-4f3a-860d-a16dde5771d6,70eaa08c-f7a5-4f3a-860d-a16dde5771e34"
+                    },
+                    {
+                      "key": "platformInvoiceIds",
+                      "value": "12322,12331"
+                    },
+                    {
+                      "key": "direction",
+                      "value": "REPAYMENT"
+                    },
+                    {
+                      "key": "status",
+                      "value": "PAID"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The Kanmon issued product UUID."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"InternalServerErrorException\",\n  \"message\": \"Internal Server Error\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca0cfbd7-bd49-4d41-85ee-210cebbc8deb",
+          "name": "Fetch payment intents",
+          "request": {
+            "name": "Fetch payment intents",
+            "description": {
+              "content": "A payment intent represents a planned payment on an issued product, such as a disbursement, scheduled repayment, fee, or refund. It tracks intended amounts, whether the payment is late, settlement progress via the confirmed and pending amount fields, and the payment orders that actually move funds. Payment intents may be cancelled when superseded — for example, by an early payoff.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "platform",
+                "v2",
+                "payment-intents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "ids",
+                  "value": "<string>",
+                  "description": "A comma delimited list of Kanmon’s unique payment intent IDs."
+                },
+                {
+                  "disabled": false,
+                  "key": "invoiceIds",
+                  "value": "<string>",
+                  "description": "A comma delimited list of Kanmon’s unique IDs for invoices."
+                },
+                {
+                  "disabled": false,
+                  "key": "drawRequestIds",
+                  "value": "<string>",
+                  "description": "A comma delimited list of Kanmon’s unique IDs for draw requests."
+                },
+                {
+                  "disabled": false,
+                  "key": "issuedProductIds",
+                  "value": "<string>",
+                  "description": "A comma delimited list of Kanmon’s unique IDs for issued products."
+                },
+                {
+                  "disabled": false,
+                  "key": "businessIds",
+                  "value": "<string>",
+                  "description": "A comma delimited list of Kanmon’s unique IDs for businesses."
+                },
+                {
+                  "disabled": false,
+                  "key": "triggers",
+                  "value": "<string>",
+                  "description": "A comma delimited list of payment intent triggers to filter by.<table>\n\n<tr>\n<td>DISBURSEMENT</td>\n<td>Funds disbursed to the business.</td>\n</tr>\n<tr>\n<td>DISBURSEMENT_RETURN</td>\n<td>Return of previously disbursed funds. Only relevant for some AP financing setups.</td>\n</tr>\n<tr>\n<td>SCHEDULED_REPAYMENT</td>\n<td>A repayment scheduled on the payment schedule.</td>\n</tr>\n<tr>\n<td>EARLY_PAYOFF</td>\n<td>An early payoff of outstanding principal and interest. Early payoffs will cancel remaining scheduled repayments for installment products once they settle.</td>\n</tr>\n<tr>\n<td>REFINANCE_PAYOFF</td>\n<td>A bookkeeping record to pay off existing principal as part of refinancing into a new loan agreement.</td>\n</tr>\n<tr>\n<td>FEE</td>\n<td>A fee charged to the business, such as a maintenance or transaction fee.</td>\n</tr>\n<tr>\n<td>REFUND</td>\n<td>A refund or rebate issued to the business.</td>\n</tr>\n<tr>\n<td>MINIMUM_PAYMENT</td>\n<td>A minimum payment, relevant only for Integrated MCA products.</td>\n</tr>\n</table>"
+                },
+                {
+                  "disabled": false,
+                  "key": "cancelled",
+                  "value": "<boolean>",
+                  "description": "When true, return only cancelled payment intents. When false, return only non-cancelled payment intents."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "<number>",
+                  "description": "The number of records to skip when performing pagination. Defaults to `0`."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<number>",
+                  "description": "The number of records to limit when performing pagination. Defaults to `100`, which is the max."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}"
+                },
+                {
+                  "key": "in",
+                  "value": "header"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "53ab93dc-5b1a-45eb-a099-031c4e7fc851",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "payment-intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "3789e162-b5ba-45a9-a8ea-27682ed7ea66,fa075e48-014f-46c6-a8cc-b2b9b74c5e4a"
+                    },
+                    {
+                      "key": "invoiceIds",
+                      "value": "2a479896-c24c-4bd3-a8af-b3e15092974a,92eede22-dccc-4bb7-bae7-74b62a403c9d"
+                    },
+                    {
+                      "key": "drawRequestIds",
+                      "value": "6ea29646-8f2a-456c-a58a-fe3caa640bc4,a01d5deb-f25a-4299-8fd7-34b1f2a2757d"
+                    },
+                    {
+                      "key": "issuedProductIds",
+                      "value": "b77f03df-f9bc-4faa-b4ee-8dd12a27848f,56692a55-9fb0-43e8-8af9-03a799f17268"
+                    },
+                    {
+                      "key": "businessIds",
+                      "value": "8d0f3d97-3c2d-4811-871e-8b8fe9c93136,85fb1f58-2b85-42f8-903b-77973d941d39"
+                    },
+                    {
+                      "key": "triggers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cancelled",
+                      "value": "false"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"limit\": 100,\n    \"offset\": 0,\n    \"totalCount\": 100\n  },\n  \"paymentIntents\": [\n    {\n      \"cancelledAt\": \"2024-01-03 03:57:26.115000+00:00\",\n      \"confirmedFeeAmountCents\": 10000,\n      \"confirmedInterestAmountCents\": 10000,\n      \"confirmedPrincipalAmountCents\": 80000,\n      \"confirmedRemainingBalanceCents\": 0,\n      \"confirmedTotalAmountCents\": 100000,\n      \"createdAt\": \"2022-06-01 03:57:26.115000+00:00\",\n      \"direction\": \"REPAYMENT\",\n      \"drawRequestId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"feeAmountCents\": 10000,\n      \"id\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"interestAmountCents\": 10000,\n      \"invoiceId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"isLate\": false,\n      \"issuedProductId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"paymentOrders\": [\n        {\n          \"createdAt\": \"2022-06-01 03:57:26.115000+00:00\",\n          \"direction\": \"DISBURSEMENT\",\n          \"drawRequestId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n          \"effectiveDate\": \"2024-01-01\",\n          \"feePaymentAmountCents\": 10000,\n          \"id\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n          \"interestPaymentAmountCents\": 10000,\n          \"invoiceId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n          \"issuedProductId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n          \"platformInvoiceId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n          \"principalPaymentAmountCents\": 80000,\n          \"settledDate\": \"2024-01-03\",\n          \"status\": \"PAID\",\n          \"totalPaymentAmountCents\": 100000,\n          \"updatedAt\": \"2022-06-01 03:57:26.115000+00:00\",\n          \"feeType\": \"INSUFFICIENT_FUNDS\"\n        },\n        {\n          \"createdAt\": \"2022-06-01 03:57:26.115000+00:00\",\n          \"direction\": \"DISBURSEMENT\",\n          \"drawRequestId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n          \"effectiveDate\": \"2024-01-01\",\n          \"feePaymentAmountCents\": 10000,\n          \"id\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n          \"interestPaymentAmountCents\": 10000,\n          \"invoiceId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n          \"issuedProductId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n          \"platformInvoiceId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n          \"principalPaymentAmountCents\": 80000,\n          \"settledDate\": \"2024-01-03\",\n          \"status\": \"PAID\",\n          \"totalPaymentAmountCents\": 100000,\n          \"updatedAt\": \"2022-06-01 03:57:26.115000+00:00\",\n          \"feeType\": \"INSUFFICIENT_FUNDS\"\n        }\n      ],\n      \"pendingFeeAmountCents\": 0,\n      \"pendingInterestAmountCents\": 0,\n      \"pendingPrincipalAmountCents\": 0,\n      \"pendingRemainingBalanceCents\": 0,\n      \"pendingTotalAmountCents\": 0,\n      \"principalAmountCents\": 80000,\n      \"scheduledPaymentDate\": \"2024-01-01\",\n      \"totalAmountCents\": 100000,\n      \"trigger\": \"SCHEDULED_REPAYMENT\",\n      \"updatedAt\": \"2022-06-01 03:57:26.115000+00:00\",\n      \"feeType\": \"INSUFFICIENT_FUNDS\"\n    },\n    {\n      \"cancelledAt\": \"2024-01-03 03:57:26.115000+00:00\",\n      \"confirmedFeeAmountCents\": 10000,\n      \"confirmedInterestAmountCents\": 10000,\n      \"confirmedPrincipalAmountCents\": 80000,\n      \"confirmedRemainingBalanceCents\": 0,\n      \"confirmedTotalAmountCents\": 100000,\n      \"createdAt\": \"2022-06-01 03:57:26.115000+00:00\",\n      \"direction\": \"REPAYMENT\",\n      \"drawRequestId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"feeAmountCents\": 10000,\n      \"id\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"interestAmountCents\": 10000,\n      \"invoiceId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"isLate\": false,\n      \"issuedProductId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n      \"paymentOrders\": [\n        {\n          \"createdAt\": \"2022-06-01 03:57:26.115000+00:00\",\n          \"direction\": \"DISBURSEMENT\",\n          \"drawRequestId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n          \"effectiveDate\": \"2024-01-01\",\n          \"feePaymentAmountCents\": 10000,\n          \"id\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n          \"interestPaymentAmountCents\": 10000,\n          \"invoiceId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n          \"issuedProductId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n          \"platformInvoiceId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n          \"principalPaymentAmountCents\": 80000,\n          \"settledDate\": \"2024-01-03\",\n          \"status\": \"PAID\",\n          \"totalPaymentAmountCents\": 100000,\n          \"updatedAt\": \"2022-06-01 03:57:26.115000+00:00\",\n          \"feeType\": \"INSUFFICIENT_FUNDS\"\n        },\n        {\n          \"createdAt\": \"2022-06-01 03:57:26.115000+00:00\",\n          \"direction\": \"DISBURSEMENT\",\n          \"drawRequestId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n          \"effectiveDate\": \"2024-01-01\",\n          \"feePaymentAmountCents\": 10000,\n          \"id\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n          \"interestPaymentAmountCents\": 10000,\n          \"invoiceId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n          \"issuedProductId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n          \"platformInvoiceId\": \"2b5d0f14-9b73-4f44-a82a-2182a9ff77bb\",\n          \"principalPaymentAmountCents\": 80000,\n          \"settledDate\": \"2024-01-03\",\n          \"status\": \"PAID\",\n          \"totalPaymentAmountCents\": 100000,\n          \"updatedAt\": \"2022-06-01 03:57:26.115000+00:00\",\n          \"feeType\": \"INSUFFICIENT_FUNDS\"\n        }\n      ],\n      \"pendingFeeAmountCents\": 0,\n      \"pendingInterestAmountCents\": 0,\n      \"pendingPrincipalAmountCents\": 0,\n      \"pendingRemainingBalanceCents\": 0,\n      \"pendingTotalAmountCents\": 0,\n      \"principalAmountCents\": 80000,\n      \"scheduledPaymentDate\": \"2024-01-01\",\n      \"totalAmountCents\": 100000,\n      \"trigger\": \"SCHEDULED_REPAYMENT\",\n      \"updatedAt\": \"2022-06-01 03:57:26.115000+00:00\",\n      \"feeType\": \"INSUFFICIENT_FUNDS\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f355b399-7749-4f00-b69c-aa0494fc9660",
+              "name": "BadRequestException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "payment-intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "3789e162-b5ba-45a9-a8ea-27682ed7ea66,fa075e48-014f-46c6-a8cc-b2b9b74c5e4a"
+                    },
+                    {
+                      "key": "invoiceIds",
+                      "value": "2a479896-c24c-4bd3-a8af-b3e15092974a,92eede22-dccc-4bb7-bae7-74b62a403c9d"
+                    },
+                    {
+                      "key": "drawRequestIds",
+                      "value": "6ea29646-8f2a-456c-a58a-fe3caa640bc4,a01d5deb-f25a-4299-8fd7-34b1f2a2757d"
+                    },
+                    {
+                      "key": "issuedProductIds",
+                      "value": "b77f03df-f9bc-4faa-b4ee-8dd12a27848f,56692a55-9fb0-43e8-8af9-03a799f17268"
+                    },
+                    {
+                      "key": "businessIds",
+                      "value": "8d0f3d97-3c2d-4811-871e-8b8fe9c93136,85fb1f58-2b85-42f8-903b-77973d941d39"
+                    },
+                    {
+                      "key": "triggers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cancelled",
+                      "value": "false"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"BadRequestException\",\n  \"message\": \"Bad Request\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d63683e-f6a3-4f96-8249-7dff2b3702fa",
+              "name": "ForbiddenException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "payment-intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "3789e162-b5ba-45a9-a8ea-27682ed7ea66,fa075e48-014f-46c6-a8cc-b2b9b74c5e4a"
+                    },
+                    {
+                      "key": "invoiceIds",
+                      "value": "2a479896-c24c-4bd3-a8af-b3e15092974a,92eede22-dccc-4bb7-bae7-74b62a403c9d"
+                    },
+                    {
+                      "key": "drawRequestIds",
+                      "value": "6ea29646-8f2a-456c-a58a-fe3caa640bc4,a01d5deb-f25a-4299-8fd7-34b1f2a2757d"
+                    },
+                    {
+                      "key": "issuedProductIds",
+                      "value": "b77f03df-f9bc-4faa-b4ee-8dd12a27848f,56692a55-9fb0-43e8-8af9-03a799f17268"
+                    },
+                    {
+                      "key": "businessIds",
+                      "value": "8d0f3d97-3c2d-4811-871e-8b8fe9c93136,85fb1f58-2b85-42f8-903b-77973d941d39"
+                    },
+                    {
+                      "key": "triggers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cancelled",
+                      "value": "false"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"ForbiddenException\",\n  \"message\": \"Forbidden\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e437e966-f86b-4b80-ae69-32f422db479d",
+              "name": "TooManyRequestsException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "payment-intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "3789e162-b5ba-45a9-a8ea-27682ed7ea66,fa075e48-014f-46c6-a8cc-b2b9b74c5e4a"
+                    },
+                    {
+                      "key": "invoiceIds",
+                      "value": "2a479896-c24c-4bd3-a8af-b3e15092974a,92eede22-dccc-4bb7-bae7-74b62a403c9d"
+                    },
+                    {
+                      "key": "drawRequestIds",
+                      "value": "6ea29646-8f2a-456c-a58a-fe3caa640bc4,a01d5deb-f25a-4299-8fd7-34b1f2a2757d"
+                    },
+                    {
+                      "key": "issuedProductIds",
+                      "value": "b77f03df-f9bc-4faa-b4ee-8dd12a27848f,56692a55-9fb0-43e8-8af9-03a799f17268"
+                    },
+                    {
+                      "key": "businessIds",
+                      "value": "8d0f3d97-3c2d-4811-871e-8b8fe9c93136,85fb1f58-2b85-42f8-903b-77973d941d39"
+                    },
+                    {
+                      "key": "triggers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cancelled",
+                      "value": "false"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Maximum number of requests allowed per minute.",
+                  "key": "X-RateLimit-Limit",
+                  "value": "4472"
+                },
+                {
+                  "disabled": false,
+                  "description": "Number of remaining requests available.",
+                  "key": "X-RateLimit-Remaining",
+                  "value": "4472"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"TooManyRequestsException\",\n  \"message\": \"Too Many Requests\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4a8cfe02-9b25-47ea-b1e1-0224029dbdc7",
+              "name": "InternalServerErrorException",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "platform",
+                    "v2",
+                    "payment-intents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "ids",
+                      "value": "3789e162-b5ba-45a9-a8ea-27682ed7ea66,fa075e48-014f-46c6-a8cc-b2b9b74c5e4a"
+                    },
+                    {
+                      "key": "invoiceIds",
+                      "value": "2a479896-c24c-4bd3-a8af-b3e15092974a,92eede22-dccc-4bb7-bae7-74b62a403c9d"
+                    },
+                    {
+                      "key": "drawRequestIds",
+                      "value": "6ea29646-8f2a-456c-a58a-fe3caa640bc4,a01d5deb-f25a-4299-8fd7-34b1f2a2757d"
+                    },
+                    {
+                      "key": "issuedProductIds",
+                      "value": "b77f03df-f9bc-4faa-b4ee-8dd12a27848f,56692a55-9fb0-43e8-8af9-03a799f17268"
+                    },
+                    {
+                      "key": "businessIds",
+                      "value": "8d0f3d97-3c2d-4811-871e-8b8fe9c93136,85fb1f58-2b85-42f8-903b-77973d941d39"
+                    },
+                    {
+                      "key": "triggers",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cancelled",
+                      "value": "false"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "<number>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<number>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"InternalServerErrorException\",\n  \"message\": \"Internal Server Error\",\n  \"timestamp\": \"2022-06-01 03:57:26.115000+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.kanmon.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3f19f0c0-96be-4652-b6c6-7ee8c597baaf",
+    "name": "Kanmon Public V2 Bank Accounts Payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Kanmon's public api. Contains all of the endpoints for both capital providers and platforms",
+      "type": "text/plain"
+    }
+  }
+}

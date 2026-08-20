@@ -39,6 +39,14 @@ tags:
 - Lending
 - Working Capital
 - Invoice Financing
+tags_raw:
+- Company
+- Fintech
+- Embedded Finance
+- Embedded Lending
+- Lending
+- Working Capital
+- Invoice Financing
 - API
 maintainers:
 - FN: Kin Lane
@@ -182,6 +190,8 @@ apis:
   humanURL: https://kanmon.dev
   baseURL: https://api.kanmon.com
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI

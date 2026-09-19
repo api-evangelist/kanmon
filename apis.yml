@@ -84,6 +84,8 @@ apis:
   humanURL: https://kanmon.dev
   baseURL: https://api.kanmon.com
   tags:
+  - Business
+  tags_raw:
   - Businesses
   properties:
   - type: OpenAPI

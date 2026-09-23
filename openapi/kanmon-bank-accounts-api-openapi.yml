@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   contact: {}
   description: Kanmon's public api. Contains all of the endpoints for both capital providers and platforms
@@ -151,7 +151,9 @@ paths:
       x-accepts:
       - application/json
     post:
-      description: "We only support creating disbursement checking accounts at the moment. Each business can only have one disbursement checking account.\n      Please contact Kanmon to enable access to bank account APIs."
+      description: 'We only support creating disbursement checking accounts at the moment. Each business can only have one disbursement checking account.
+
+        Please contact Kanmon to enable access to bank account APIs.'
       operationId: createBusinessBankAccount
       parameters: []
       requestBody:
@@ -320,7 +322,9 @@ paths:
       x-accepts:
       - application/json
     patch:
-      description: "We only support creating disbursement checking accounts at the moment. Each business can only have one disbursement checking account.\n        Please contact Kanmon to enable access to bank account APIs."
+      description: 'We only support creating disbursement checking accounts at the moment. Each business can only have one disbursement checking account.
+
+        Please contact Kanmon to enable access to bank account APIs.'
       operationId: updateBusinessBankAccount
       parameters:
       - description: Either the Kanmon bank account UUID or your platform’s bank account ID, depending on `idType`.
@@ -475,20 +479,20 @@ components:
       - roles
       - routingNumber
       type: object
-    InternalServerErrorException:
+    TooManyRequestsException:
       example:
-        errorCode: InternalServerErrorException
-        message: Internal Server Error
+        errorCode: TooManyRequestsException
+        message: Too Many Requests
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - InternalServerErrorException
+          - TooManyRequestsException
           type: string
         message:
           description: The human readable description of the error.
-          example: Internal Server Error
+          example: Too Many Requests
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -499,86 +503,29 @@ components:
       - message
       - timestamp
       type: object
-    GetBusinessBankAccountsResponse:
+    UpdateBusinessAccountRequestBody:
       example:
-        pagination: ''
-        bankAccounts:
-        - routingNumber: '123456789'
-          createdAt: 2022-06-01 03:57:26.115000+00:00
-          accountName: My bank account
-          accountType: CHECKING
-          roles:
-          - DISBURSEMENT
-          id: 1193fdaf-630c-4771-a629-8da7a87947d2
-          accountNumber: '123456789'
-          platformBankAccountId: '12345'
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
-        - routingNumber: '123456789'
-          createdAt: 2022-06-01 03:57:26.115000+00:00
-          accountName: My bank account
-          accountType: CHECKING
-          roles:
-          - DISBURSEMENT
-          id: 1193fdaf-630c-4771-a629-8da7a87947d2
-          accountNumber: '123456789'
-          platformBankAccountId: '12345'
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
+        routingNumber: '123456789'
+        accountName: My account
+        accountNumber: '123456789'
+        platformBankAccountId: '12345'
       properties:
-        bankAccounts:
-          description: Array of business bank accounts.
-          items:
-            $ref: '#/components/schemas/BusinessBankAccount'
-          type: array
-        pagination:
-          allOf:
-          - $ref: '#/components/schemas/PaginationResult'
-          description: Pagination metadata.
-      required:
-      - bankAccounts
-      - pagination
-      type: object
-    PaginationResult:
-      properties:
-        limit:
-          description: The number of records to limit when performing pagination.
-          example: 100
-          type: number
-        offset:
-          description: The number of records to skip when performing pagination.
-          example: 0
-          type: number
-        totalCount:
-          description: The total number of records that matched the query.
-          example: 100
-          type: number
-      required:
-      - limit
-      - offset
-      - totalCount
-      type: object
-    BankAccountNotFoundException:
-      example:
-        errorCode: BankAccountNotFoundException
-        message: An error occurred.
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - BankAccountNotFoundException
+        platformBankAccountId:
+          description: Your platform’s unique ID for the bank account.
+          example: '12345'
           type: string
-        message:
-          description: The human readable description of the error.
-          example: An error occurred.
+        accountName:
+          description: The business defined bank account name.
+          example: My account
           type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
+        accountNumber:
+          description: The business’s bank account number. Only digits, no formatting.
+          example: '123456789'
           type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
+        routingNumber:
+          description: The business’s bank routing number. Should be a 9 digits number, no formatting.
+          example: '123456789'
+          type: string
       type: object
     BadRequestException:
       example:
@@ -628,20 +575,101 @@ components:
       - message
       - timestamp
       type: object
-    TooManyRequestsException:
+    GetBusinessBankAccountsResponse:
       example:
-        errorCode: TooManyRequestsException
-        message: Too Many Requests
+        pagination: ''
+        bankAccounts:
+        - routingNumber: '123456789'
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          accountName: My bank account
+          accountType: CHECKING
+          roles:
+          - DISBURSEMENT
+          id: 1193fdaf-630c-4771-a629-8da7a87947d2
+          accountNumber: '123456789'
+          platformBankAccountId: '12345'
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+        - routingNumber: '123456789'
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          accountName: My bank account
+          accountType: CHECKING
+          roles:
+          - DISBURSEMENT
+          id: 1193fdaf-630c-4771-a629-8da7a87947d2
+          accountNumber: '123456789'
+          platformBankAccountId: '12345'
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        bankAccounts:
+          description: Array of business bank accounts.
+          items:
+            $ref: '#/components/schemas/BusinessBankAccount'
+          type: array
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/PaginationResult'
+          description: Pagination metadata.
+      required:
+      - bankAccounts
+      - pagination
+      type: object
+    BankAccountAlreadyExistException:
+      example:
+        errorCode: BankAccountAlreadyExistException
+        message: An error occurred.
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - TooManyRequestsException
+          - BankAccountAlreadyExistException
           type: string
         message:
           description: The human readable description of the error.
-          example: Too Many Requests
+          example: An error occurred.
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    PaginationResult:
+      properties:
+        limit:
+          description: The number of records to limit when performing pagination.
+          example: 100
+          type: number
+        offset:
+          description: The number of records to skip when performing pagination.
+          example: 0
+          type: number
+        totalCount:
+          description: The total number of records that matched the query.
+          example: 100
+          type: number
+      required:
+      - limit
+      - offset
+      - totalCount
+      type: object
+    InternalServerErrorException:
+      example:
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - InternalServerErrorException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -676,8 +704,9 @@ components:
         accountName:
           description: The business bank account’s name.
           example: My bank account
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         accountNumber:
           description: The business’s bank account number. Only digits, no formatting.
           example: '123456789'
@@ -720,6 +749,30 @@ components:
       - routingNumber
       - updatedAt
       type: object
+    BankAccountNotFoundException:
+      example:
+        errorCode: BankAccountNotFoundException
+        message: An error occurred.
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BankAccountNotFoundException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: An error occurred.
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
     ForbiddenException:
       example:
         errorCode: ForbiddenException
@@ -734,54 +787,6 @@ components:
         message:
           description: The human readable description of the error.
           example: Forbidden
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    UpdateBusinessAccountRequestBody:
-      example:
-        routingNumber: '123456789'
-        accountName: My account
-        accountNumber: '123456789'
-        platformBankAccountId: '12345'
-      properties:
-        platformBankAccountId:
-          description: Your platform’s unique ID for the bank account.
-          example: '12345'
-          type: string
-        accountName:
-          description: The business defined bank account name.
-          example: My account
-          type: string
-        accountNumber:
-          description: The business’s bank account number. Only digits, no formatting.
-          example: '123456789'
-          type: string
-        routingNumber:
-          description: The business’s bank routing number. Should be a 9 digits number, no formatting.
-          example: '123456789'
-          type: string
-      type: object
-    BankAccountAlreadyExistException:
-      example:
-        errorCode: BankAccountAlreadyExistException
-        message: An error occurred.
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - BankAccountAlreadyExistException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: An error occurred.
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.

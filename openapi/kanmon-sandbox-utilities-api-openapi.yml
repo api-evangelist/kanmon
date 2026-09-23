@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   contact: {}
   description: Kanmon's public api. Contains all of the endpoints for both capital providers and platforms
-  title: Kanmon Public V2 Bank Accounts Sandbox Utilities API
+  title: Kanmon Public V2 Sandbox Utilities API
   version: 2.0.0
 servers:
 - description: Production
@@ -176,6 +176,54 @@ paths:
       - application/json
 components:
   schemas:
+    TooManyRequestsException:
+      example:
+        errorCode: TooManyRequestsException
+        message: Too Many Requests
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - TooManyRequestsException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Too Many Requests
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    BadRequestException:
+      example:
+        errorCode: BadRequestException
+        message: Bad Request
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BadRequestException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Bad Request
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
     Business:
       example:
         createdAt: 2022-06-01 03:57:26.115000+00:00
@@ -207,8 +255,9 @@ components:
         name:
           description: The business’s name.
           example: My Business
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         address:
           allOf:
           - $ref: '#/components/schemas/Address'
@@ -219,22 +268,24 @@ components:
             country: USA
             zipcode: '94401'
             addressLineOne: 123 Main Street
-          nullable: true
         ein:
           description: The business’s EIN. Only digits, no formatting.
           example: '123456789'
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         phoneNumber:
           description: The business’s phone number. No formatting characters, country code is optional.
           example: '+14155556789'
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         website:
           description: The business’s website.
           example: https://www.my-business.com
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         customInitializationName:
           description: A Custom Initialization controls custom implementation profiles for you in Kanmon. Custom Initializations enable a variety of specific configurations for your integration, including embedded UI customization, feature activation, and platform product-line identification. The Kanmon Team will work with you to establish a Custom Initialization and corresponding custom profile if your platform can benefit from this optional configuration. To identify each Custom Initialization, you can define a unique customInitializationName as a reference.
           example: custom
@@ -245,8 +296,9 @@ components:
         isSoleProprietorship:
           description: Whether the business is a sole proprietorship.
           example: false
-          nullable: true
-          type: boolean
+          type:
+          - boolean
+          - 'null'
         createdAt:
           description: Creation UTC ISO 8601 timestamp of the business.
           example: 2022-06-01 03:57:26.115000+00:00
@@ -265,38 +317,15 @@ components:
       - updatedAt
       - website
       type: object
-    InternalServerErrorException:
-      example:
-        errorCode: InternalServerErrorException
-        message: Internal Server Error
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - InternalServerErrorException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Internal Server Error
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
     Address:
       properties:
         addressLineOne:
           type: string
         addressLineTwo:
           example: Apt 123
-          nullable: true
-          type: string
+          type:
+          - string
+          - 'null'
         city:
           type: string
         state:
@@ -376,20 +405,20 @@ components:
       - state
       - zipcode
       type: object
-    TooManyRequestsException:
+    InternalServerErrorException:
       example:
-        errorCode: TooManyRequestsException
-        message: Too Many Requests
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - TooManyRequestsException
+          - InternalServerErrorException
           type: string
         message:
           description: The human readable description of the error.
-          example: Too Many Requests
+          example: Internal Server Error
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -414,30 +443,6 @@ components:
         message:
           description: The human readable description of the error.
           example: Forbidden
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    BadRequestException:
-      example:
-        errorCode: BadRequestException
-        message: Bad Request
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - BadRequestException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Bad Request
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.

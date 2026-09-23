@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   contact: {}
   description: Kanmon's public api. Contains all of the endpoints for both capital providers and platforms
-  title: Kanmon Public V2 Bank Accounts Payments API
+  title: Kanmon Public V2 Payments API
   version: 2.0.0
 servers:
 - description: Production
@@ -448,198 +448,6 @@ paths:
       - application/json
 components:
   schemas:
-    InternalServerErrorException:
-      example:
-        errorCode: InternalServerErrorException
-        message: Internal Server Error
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - InternalServerErrorException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Internal Server Error
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    PaymentOrder:
-      example:
-        drawRequestId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-        issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-        platformInvoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-        feeType: INSUFFICIENT_FUNDS
-        totalPaymentAmountCents: 100000
-        createdAt: 2022-06-01 03:57:26.115000+00:00
-        principalPaymentAmountCents: 80000
-        interestPaymentAmountCents: 10000
-        invoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-        id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-        settledDate: 2024-01-03
-        effectiveDate: 2024-01-01
-        feePaymentAmountCents: 10000
-        direction: DISBURSEMENT
-        status: FAILED
-        updatedAt: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        id:
-          description: The UUID representing the payment order in Kanmon.
-          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          type: string
-        issuedProductId:
-          description: The UUID representing the issued product in Kanmon.
-          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          type: string
-        drawRequestId:
-          description: The UUID representing the draw request in Kanmon. (only present for Line of Credit).
-          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          nullable: true
-          type: string
-        invoiceId:
-          description: The UUID representing the invoice in Kanmon. (only present for Invoice Financing).
-          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          nullable: true
-          type: string
-        platformInvoiceId:
-          description: Your platform’s unique ID for the invoice. (only present for Invoice Financing).
-          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          nullable: true
-          type: string
-        effectiveDate:
-          description: The effective UTC ISO 8601 date that the payment will process.
-          example: 2024-01-01
-          type: string
-        settledDate:
-          description: The UTC ISO 8601 date that the payment was settled.
-          example: 2024-01-03
-          nullable: true
-          type: string
-        totalPaymentAmountCents:
-          description: The total payment amount - in cents.
-          example: 100000
-          type: number
-        principalPaymentAmountCents:
-          description: The principal payment amount - in cents. (null for disbursements).
-          example: 80000
-          nullable: true
-          type: number
-        interestPaymentAmountCents:
-          description: The interest payment amount - in cents. (null for disbursements).
-          example: 10000
-          nullable: true
-          type: number
-        feePaymentAmountCents:
-          description: The fee payment amount - in cents. (null for disbursements).
-          example: 10000
-          nullable: true
-          type: number
-        feeType:
-          description: The type of the fee that was charged. (only present when `feePaymentAmountCents` is not 0 or null).
-          enum:
-          - LATE_PAYMENT
-          - INSUFFICIENT_FUNDS
-          - TRANSACTION_FEE
-          - MAINTENANCE
-          - EXTENSION_FEE
-          example: INSUFFICIENT_FUNDS
-          nullable: true
-          type: string
-        direction:
-          description: The direction of the payment.
-          enum:
-          - DISBURSEMENT
-          - REPAYMENT
-          example: DISBURSEMENT
-          type: string
-        status:
-          $ref: '#/components/schemas/PaymentOrderStatus'
-        createdAt:
-          description: Creation UTC ISO 8601 timestamp of the payment order.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-        updatedAt:
-          description: Last updated UTC ISO 8601 timestamp of the payment order.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - createdAt
-      - direction
-      - drawRequestId
-      - effectiveDate
-      - feePaymentAmountCents
-      - id
-      - interestPaymentAmountCents
-      - invoiceId
-      - issuedProductId
-      - platformInvoiceId
-      - principalPaymentAmountCents
-      - settledDate
-      - status
-      - totalPaymentAmountCents
-      - updatedAt
-      type: object
-    PaginationResult:
-      properties:
-        limit:
-          description: The number of records to limit when performing pagination.
-          example: 100
-          type: number
-        offset:
-          description: The number of records to skip when performing pagination.
-          example: 0
-          type: number
-        totalCount:
-          description: The total number of records that matched the query.
-          example: 100
-          type: number
-      required:
-      - limit
-      - offset
-      - totalCount
-      type: object
-    PaymentScheduleItem:
-      example:
-        totalPaymentAmountCents: 100000
-        paymentOrder: ''
-        effectiveDate: 2024-01-01
-      properties:
-        effectiveDate:
-          description: The effective UTC ISO 8601 date that the payment will process.
-          example: 2024-01-01
-          type: string
-        totalPaymentAmountCents:
-          description: The total payment amount - in cents.
-          example: 100000
-          type: number
-        paymentOrder:
-          allOf:
-          - $ref: '#/components/schemas/PaymentOrder'
-          description: The payment order for this schedule item
-          nullable: true
-      required:
-      - effectiveDate
-      - totalPaymentAmountCents
-      type: object
-    PaymentIntentTriggerType:
-      enum:
-      - DISBURSEMENT
-      - DISBURSEMENT_RETURN
-      - SCHEDULED_REPAYMENT
-      - EARLY_PAYOFF
-      - REFINANCE_PAYOFF
-      - FEE
-      - REFUND
-      - MINIMUM_PAYMENT
-      type: string
     TooManyRequestsException:
       example:
         errorCode: TooManyRequestsException
@@ -663,328 +471,6 @@ components:
       - errorCode
       - message
       - timestamp
-      type: object
-    PaymentOrderStatus:
-      description: The status of the payment.
-      enum:
-      - FAILED
-      - PAID
-      - PENDING
-      type: string
-    IssuedProductNotFoundException:
-      example:
-        errorCode: IssuedProductNotFoundException
-        message: Internal Server Error
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - IssuedProductNotFoundException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Internal Server Error
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    PaymentIntent:
-      example:
-        drawRequestId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-        confirmedRemainingBalanceCents: 0
-        confirmedPrincipalAmountCents: 80000
-        confirmedFeeAmountCents: 10000
-        createdAt: 2022-06-01 03:57:26.115000+00:00
-        totalAmountCents: 100000
-        paymentOrders:
-        - drawRequestId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          platformInvoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          feeType: INSUFFICIENT_FUNDS
-          totalPaymentAmountCents: 100000
-          createdAt: 2022-06-01 03:57:26.115000+00:00
-          principalPaymentAmountCents: 80000
-          interestPaymentAmountCents: 10000
-          invoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          settledDate: 2024-01-03
-          effectiveDate: 2024-01-01
-          feePaymentAmountCents: 10000
-          direction: DISBURSEMENT
-          status: FAILED
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
-        - drawRequestId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          platformInvoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          feeType: INSUFFICIENT_FUNDS
-          totalPaymentAmountCents: 100000
-          createdAt: 2022-06-01 03:57:26.115000+00:00
-          principalPaymentAmountCents: 80000
-          interestPaymentAmountCents: 10000
-          invoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          settledDate: 2024-01-03
-          effectiveDate: 2024-01-01
-          feePaymentAmountCents: 10000
-          direction: DISBURSEMENT
-          status: FAILED
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
-        pendingFeeAmountCents: 0
-        isLate: false
-        pendingInterestAmountCents: 0
-        pendingRemainingBalanceCents: 0
-        confirmedTotalAmountCents: 100000
-        id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-        interestAmountCents: 10000
-        pendingPrincipalAmountCents: 0
-        direction: REPAYMENT
-        updatedAt: 2022-06-01 03:57:26.115000+00:00
-        cancelledAt: 2024-01-03 03:57:26.115000+00:00
-        issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-        trigger: SCHEDULED_REPAYMENT
-        feeType: INSUFFICIENT_FUNDS
-        pendingTotalAmountCents: 0
-        principalAmountCents: 80000
-        confirmedInterestAmountCents: 10000
-        invoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-        feeAmountCents: 10000
-        scheduledPaymentDate: 2024-01-01
-      properties:
-        id:
-          description: The UUID representing the payment intent in Kanmon.
-          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          type: string
-        issuedProductId:
-          description: The UUID representing the issued product in Kanmon.
-          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          type: string
-        drawRequestId:
-          description: The UUID representing the draw request in Kanmon. (only present for Line of Credit).
-          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          nullable: true
-          type: string
-        invoiceId:
-          description: The UUID representing the invoice in Kanmon. (only present for Invoice Financing).
-          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          nullable: true
-          type: string
-        direction:
-          description: The direction of the payment.
-          enum:
-          - DISBURSEMENT
-          - REPAYMENT
-          example: REPAYMENT
-          type: string
-        trigger:
-          description: 'What caused this payment intent to be created.<table>
-
-
-            <tr>
-
-            <td>DISBURSEMENT</td>
-
-            <td>Funds disbursed to the business.</td>
-
-            </tr>
-
-            <tr>
-
-            <td>DISBURSEMENT_RETURN</td>
-
-            <td>Return of previously disbursed funds. Only relevant for some AP financing setups.</td>
-
-            </tr>
-
-            <tr>
-
-            <td>SCHEDULED_REPAYMENT</td>
-
-            <td>A repayment scheduled on the payment schedule.</td>
-
-            </tr>
-
-            <tr>
-
-            <td>EARLY_PAYOFF</td>
-
-            <td>An early payoff of outstanding principal and interest. Early payoffs will cancel remaining scheduled repayments for installment products once they settle.</td>
-
-            </tr>
-
-            <tr>
-
-            <td>REFINANCE_PAYOFF</td>
-
-            <td>A bookkeeping record to pay off existing principal as part of refinancing into a new loan agreement.</td>
-
-            </tr>
-
-            <tr>
-
-            <td>FEE</td>
-
-            <td>A fee charged to the business, such as a maintenance or transaction fee.</td>
-
-            </tr>
-
-            <tr>
-
-            <td>REFUND</td>
-
-            <td>A refund or rebate issued to the business.</td>
-
-            </tr>
-
-            <tr>
-
-            <td>MINIMUM_PAYMENT</td>
-
-            <td>A minimum payment, relevant only for Integrated MCA products.</td>
-
-            </tr>
-
-            </table>'
-          enum:
-          - DISBURSEMENT
-          - DISBURSEMENT_RETURN
-          - SCHEDULED_REPAYMENT
-          - EARLY_PAYOFF
-          - REFINANCE_PAYOFF
-          - FEE
-          - REFUND
-          - MINIMUM_PAYMENT
-          example: SCHEDULED_REPAYMENT
-          type: string
-        totalAmountCents:
-          description: The total intended payment amount - in cents.
-          example: 100000
-          type: number
-        principalAmountCents:
-          description: The intended principal payment amount - in cents. (null for disbursements).
-          example: 80000
-          nullable: true
-          type: number
-        interestAmountCents:
-          description: The intended interest payment amount - in cents. (null for disbursements).
-          example: 10000
-          nullable: true
-          type: number
-        feeAmountCents:
-          description: The intended fee payment amount - in cents. (null for disbursements).
-          example: 10000
-          nullable: true
-          type: number
-        feeType:
-          description: The type of the fee. (only present when `feeAmountCents` is not 0 or null).
-          enum:
-          - LATE_PAYMENT
-          - INSUFFICIENT_FUNDS
-          - TRANSACTION_FEE
-          - MAINTENANCE
-          - EXTENSION_FEE
-          example: INSUFFICIENT_FUNDS
-          nullable: true
-          type: string
-        scheduledPaymentDate:
-          description: The UTC ISO 8601 date that the payment is scheduled to process.
-          example: 2024-01-01
-          type: string
-        isLate:
-          description: Whether this scheduled repayment is past due and unpaid. Only applies to scheduled repayments that are not cancelled or fully paid.
-          example: false
-          type: boolean
-        confirmedPrincipalAmountCents:
-          description: The confirmed (settled) principal amount - in cents.
-          example: 80000
-          type: number
-        confirmedInterestAmountCents:
-          description: The confirmed (settled) interest amount - in cents.
-          example: 10000
-          type: number
-        confirmedFeeAmountCents:
-          description: The confirmed (settled) fee amount - in cents.
-          example: 10000
-          type: number
-        confirmedTotalAmountCents:
-          description: The confirmed (settled) total amount - in cents.
-          example: 100000
-          type: number
-        pendingPrincipalAmountCents:
-          description: The pending (in-flight) principal amount - in cents.
-          example: 0
-          type: number
-        pendingInterestAmountCents:
-          description: The pending (in-flight) interest amount - in cents.
-          example: 0
-          type: number
-        pendingFeeAmountCents:
-          description: The pending (in-flight) fee amount - in cents.
-          example: 0
-          type: number
-        pendingTotalAmountCents:
-          description: The pending (in-flight) total amount - in cents.
-          example: 0
-          type: number
-        confirmedRemainingBalanceCents:
-          description: The remaining balance after confirmed payments are applied - in cents.
-          example: 0
-          type: number
-        pendingRemainingBalanceCents:
-          description: The remaining balance after confirmed and pending payments are applied - in cents.
-          example: 0
-          type: number
-        cancelledAt:
-          description: The UTC ISO 8601 timestamp that the payment intent was cancelled.
-          example: 2024-01-03 03:57:26.115000+00:00
-          nullable: true
-          type: string
-        createdAt:
-          description: Creation UTC ISO 8601 timestamp of the payment intent.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-        updatedAt:
-          description: Last updated UTC ISO 8601 timestamp of the payment intent.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-        paymentOrders:
-          description: The payment orders associated with this payment intent.
-          items:
-            $ref: '#/components/schemas/PaymentOrder'
-          type: array
-      required:
-      - cancelledAt
-      - confirmedFeeAmountCents
-      - confirmedInterestAmountCents
-      - confirmedPrincipalAmountCents
-      - confirmedRemainingBalanceCents
-      - confirmedTotalAmountCents
-      - createdAt
-      - direction
-      - drawRequestId
-      - feeAmountCents
-      - id
-      - interestAmountCents
-      - invoiceId
-      - isLate
-      - issuedProductId
-      - paymentOrders
-      - pendingFeeAmountCents
-      - pendingInterestAmountCents
-      - pendingPrincipalAmountCents
-      - pendingRemainingBalanceCents
-      - pendingTotalAmountCents
-      - principalAmountCents
-      - scheduledPaymentDate
-      - totalAmountCents
-      - trigger
-      - updatedAt
       type: object
     GetPaymentIntentsResponse:
       example:
@@ -1122,20 +608,526 @@ components:
       - pagination
       - paymentIntents
       type: object
-    ForbiddenException:
+    PaymentOrderStatus:
+      description: The status of the payment.
+      enum:
+      - FAILED
+      - PAID
+      - PENDING
+      type: string
+    BadRequestException:
       example:
-        errorCode: ForbiddenException
-        message: Forbidden
+        errorCode: BadRequestException
+        message: Bad Request
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - ForbiddenException
+          - BadRequestException
           type: string
         message:
           description: The human readable description of the error.
-          example: Forbidden
+          example: Bad Request
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    PaymentIntent:
+      example:
+        drawRequestId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+        confirmedRemainingBalanceCents: 0
+        confirmedPrincipalAmountCents: 80000
+        confirmedFeeAmountCents: 10000
+        createdAt: 2022-06-01 03:57:26.115000+00:00
+        totalAmountCents: 100000
+        paymentOrders:
+        - drawRequestId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          platformInvoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          feeType: INSUFFICIENT_FUNDS
+          totalPaymentAmountCents: 100000
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          principalPaymentAmountCents: 80000
+          interestPaymentAmountCents: 10000
+          invoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          settledDate: 2024-01-03
+          effectiveDate: 2024-01-01
+          feePaymentAmountCents: 10000
+          direction: DISBURSEMENT
+          status: FAILED
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+        - drawRequestId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          platformInvoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          feeType: INSUFFICIENT_FUNDS
+          totalPaymentAmountCents: 100000
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          principalPaymentAmountCents: 80000
+          interestPaymentAmountCents: 10000
+          invoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          settledDate: 2024-01-03
+          effectiveDate: 2024-01-01
+          feePaymentAmountCents: 10000
+          direction: DISBURSEMENT
+          status: FAILED
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+        pendingFeeAmountCents: 0
+        isLate: false
+        pendingInterestAmountCents: 0
+        pendingRemainingBalanceCents: 0
+        confirmedTotalAmountCents: 100000
+        id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+        interestAmountCents: 10000
+        pendingPrincipalAmountCents: 0
+        direction: REPAYMENT
+        updatedAt: 2022-06-01 03:57:26.115000+00:00
+        cancelledAt: 2024-01-03 03:57:26.115000+00:00
+        issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+        trigger: SCHEDULED_REPAYMENT
+        feeType: INSUFFICIENT_FUNDS
+        pendingTotalAmountCents: 0
+        principalAmountCents: 80000
+        confirmedInterestAmountCents: 10000
+        invoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+        feeAmountCents: 10000
+        scheduledPaymentDate: 2024-01-01
+      properties:
+        id:
+          description: The UUID representing the payment intent in Kanmon.
+          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          type: string
+        issuedProductId:
+          description: The UUID representing the issued product in Kanmon.
+          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          type: string
+        drawRequestId:
+          description: The UUID representing the draw request in Kanmon. (only present for Line of Credit).
+          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          type:
+          - string
+          - 'null'
+        invoiceId:
+          description: The UUID representing the invoice in Kanmon. (only present for Invoice Financing).
+          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          type:
+          - string
+          - 'null'
+        direction:
+          description: The direction of the payment.
+          enum:
+          - DISBURSEMENT
+          - REPAYMENT
+          example: REPAYMENT
+          type: string
+        trigger:
+          description: 'What caused this payment intent to be created.<table>
+
+
+            <tr>
+
+            <td>DISBURSEMENT</td>
+
+            <td>Funds disbursed to the business.</td>
+
+            </tr>
+
+            <tr>
+
+            <td>DISBURSEMENT_RETURN</td>
+
+            <td>Return of previously disbursed funds. Only relevant for some AP financing setups.</td>
+
+            </tr>
+
+            <tr>
+
+            <td>SCHEDULED_REPAYMENT</td>
+
+            <td>A repayment scheduled on the payment schedule.</td>
+
+            </tr>
+
+            <tr>
+
+            <td>EARLY_PAYOFF</td>
+
+            <td>An early payoff of outstanding principal and interest. Early payoffs will cancel remaining scheduled repayments for installment products once they settle.</td>
+
+            </tr>
+
+            <tr>
+
+            <td>REFINANCE_PAYOFF</td>
+
+            <td>A bookkeeping record to pay off existing principal as part of refinancing into a new loan agreement.</td>
+
+            </tr>
+
+            <tr>
+
+            <td>FEE</td>
+
+            <td>A fee charged to the business, such as a maintenance or transaction fee.</td>
+
+            </tr>
+
+            <tr>
+
+            <td>REFUND</td>
+
+            <td>A refund or rebate issued to the business.</td>
+
+            </tr>
+
+            <tr>
+
+            <td>MINIMUM_PAYMENT</td>
+
+            <td>A minimum payment, relevant only for Integrated MCA products.</td>
+
+            </tr>
+
+            </table>'
+          enum:
+          - DISBURSEMENT
+          - DISBURSEMENT_RETURN
+          - SCHEDULED_REPAYMENT
+          - EARLY_PAYOFF
+          - REFINANCE_PAYOFF
+          - FEE
+          - REFUND
+          - MINIMUM_PAYMENT
+          example: SCHEDULED_REPAYMENT
+          type: string
+        totalAmountCents:
+          description: The total intended payment amount - in cents.
+          example: 100000
+          type: number
+        principalAmountCents:
+          description: The intended principal payment amount - in cents. (null for disbursements).
+          example: 80000
+          type:
+          - number
+          - 'null'
+        interestAmountCents:
+          description: The intended interest payment amount - in cents. (null for disbursements).
+          example: 10000
+          type:
+          - number
+          - 'null'
+        feeAmountCents:
+          description: The intended fee payment amount - in cents. (null for disbursements).
+          example: 10000
+          type:
+          - number
+          - 'null'
+        feeType:
+          description: The type of the fee. (only present when `feeAmountCents` is not 0 or null).
+          enum:
+          - LATE_PAYMENT
+          - INSUFFICIENT_FUNDS
+          - TRANSACTION_FEE
+          - MAINTENANCE
+          - EXTENSION_FEE
+          example: INSUFFICIENT_FUNDS
+          type:
+          - string
+          - 'null'
+        scheduledPaymentDate:
+          description: The UTC ISO 8601 date that the payment is scheduled to process.
+          example: 2024-01-01
+          type: string
+        isLate:
+          description: Whether this scheduled repayment is past due and unpaid. Only applies to scheduled repayments that are not cancelled or fully paid.
+          example: false
+          type: boolean
+        confirmedPrincipalAmountCents:
+          description: The confirmed (settled) principal amount - in cents.
+          example: 80000
+          type: number
+        confirmedInterestAmountCents:
+          description: The confirmed (settled) interest amount - in cents.
+          example: 10000
+          type: number
+        confirmedFeeAmountCents:
+          description: The confirmed (settled) fee amount - in cents.
+          example: 10000
+          type: number
+        confirmedTotalAmountCents:
+          description: The confirmed (settled) total amount - in cents.
+          example: 100000
+          type: number
+        pendingPrincipalAmountCents:
+          description: The pending (in-flight) principal amount - in cents.
+          example: 0
+          type: number
+        pendingInterestAmountCents:
+          description: The pending (in-flight) interest amount - in cents.
+          example: 0
+          type: number
+        pendingFeeAmountCents:
+          description: The pending (in-flight) fee amount - in cents.
+          example: 0
+          type: number
+        pendingTotalAmountCents:
+          description: The pending (in-flight) total amount - in cents.
+          example: 0
+          type: number
+        confirmedRemainingBalanceCents:
+          description: The remaining balance after confirmed payments are applied - in cents.
+          example: 0
+          type: number
+        pendingRemainingBalanceCents:
+          description: The remaining balance after confirmed and pending payments are applied - in cents.
+          example: 0
+          type: number
+        cancelledAt:
+          description: The UTC ISO 8601 timestamp that the payment intent was cancelled.
+          example: 2024-01-03 03:57:26.115000+00:00
+          type:
+          - string
+          - 'null'
+        createdAt:
+          description: Creation UTC ISO 8601 timestamp of the payment intent.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+        updatedAt:
+          description: Last updated UTC ISO 8601 timestamp of the payment intent.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+        paymentOrders:
+          description: The payment orders associated with this payment intent.
+          items:
+            $ref: '#/components/schemas/PaymentOrder'
+          type: array
+      required:
+      - cancelledAt
+      - confirmedFeeAmountCents
+      - confirmedInterestAmountCents
+      - confirmedPrincipalAmountCents
+      - confirmedRemainingBalanceCents
+      - confirmedTotalAmountCents
+      - createdAt
+      - direction
+      - drawRequestId
+      - feeAmountCents
+      - id
+      - interestAmountCents
+      - invoiceId
+      - isLate
+      - issuedProductId
+      - paymentOrders
+      - pendingFeeAmountCents
+      - pendingInterestAmountCents
+      - pendingPrincipalAmountCents
+      - pendingRemainingBalanceCents
+      - pendingTotalAmountCents
+      - principalAmountCents
+      - scheduledPaymentDate
+      - totalAmountCents
+      - trigger
+      - updatedAt
+      type: object
+    PaymentIntentTriggerType:
+      enum:
+      - DISBURSEMENT
+      - DISBURSEMENT_RETURN
+      - SCHEDULED_REPAYMENT
+      - EARLY_PAYOFF
+      - REFINANCE_PAYOFF
+      - FEE
+      - REFUND
+      - MINIMUM_PAYMENT
+      type: string
+    IssuedProductNotFoundException:
+      example:
+        errorCode: IssuedProductNotFoundException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - IssuedProductNotFoundException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    PaginationResult:
+      properties:
+        limit:
+          description: The number of records to limit when performing pagination.
+          example: 100
+          type: number
+        offset:
+          description: The number of records to skip when performing pagination.
+          example: 0
+          type: number
+        totalCount:
+          description: The total number of records that matched the query.
+          example: 100
+          type: number
+      required:
+      - limit
+      - offset
+      - totalCount
+      type: object
+    PaymentOrder:
+      example:
+        drawRequestId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+        issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+        platformInvoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+        feeType: INSUFFICIENT_FUNDS
+        totalPaymentAmountCents: 100000
+        createdAt: 2022-06-01 03:57:26.115000+00:00
+        principalPaymentAmountCents: 80000
+        interestPaymentAmountCents: 10000
+        invoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+        id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+        settledDate: 2024-01-03
+        effectiveDate: 2024-01-01
+        feePaymentAmountCents: 10000
+        direction: DISBURSEMENT
+        status: FAILED
+        updatedAt: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        id:
+          description: The UUID representing the payment order in Kanmon.
+          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          type: string
+        issuedProductId:
+          description: The UUID representing the issued product in Kanmon.
+          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          type: string
+        drawRequestId:
+          description: The UUID representing the draw request in Kanmon. (only present for Line of Credit).
+          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          type:
+          - string
+          - 'null'
+        invoiceId:
+          description: The UUID representing the invoice in Kanmon. (only present for Invoice Financing).
+          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          type:
+          - string
+          - 'null'
+        platformInvoiceId:
+          description: Your platform’s unique ID for the invoice. (only present for Invoice Financing).
+          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          type:
+          - string
+          - 'null'
+        effectiveDate:
+          description: The effective UTC ISO 8601 date that the payment will process.
+          example: 2024-01-01
+          type: string
+        settledDate:
+          description: The UTC ISO 8601 date that the payment was settled.
+          example: 2024-01-03
+          type:
+          - string
+          - 'null'
+        totalPaymentAmountCents:
+          description: The total payment amount - in cents.
+          example: 100000
+          type: number
+        principalPaymentAmountCents:
+          description: The principal payment amount - in cents. (null for disbursements).
+          example: 80000
+          type:
+          - number
+          - 'null'
+        interestPaymentAmountCents:
+          description: The interest payment amount - in cents. (null for disbursements).
+          example: 10000
+          type:
+          - number
+          - 'null'
+        feePaymentAmountCents:
+          description: The fee payment amount - in cents. (null for disbursements).
+          example: 10000
+          type:
+          - number
+          - 'null'
+        feeType:
+          description: The type of the fee that was charged. (only present when `feePaymentAmountCents` is not 0 or null).
+          enum:
+          - LATE_PAYMENT
+          - INSUFFICIENT_FUNDS
+          - TRANSACTION_FEE
+          - MAINTENANCE
+          - EXTENSION_FEE
+          example: INSUFFICIENT_FUNDS
+          type:
+          - string
+          - 'null'
+        direction:
+          description: The direction of the payment.
+          enum:
+          - DISBURSEMENT
+          - REPAYMENT
+          example: DISBURSEMENT
+          type: string
+        status:
+          $ref: '#/components/schemas/PaymentOrderStatus'
+        createdAt:
+          description: Creation UTC ISO 8601 timestamp of the payment order.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+        updatedAt:
+          description: Last updated UTC ISO 8601 timestamp of the payment order.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - createdAt
+      - direction
+      - drawRequestId
+      - effectiveDate
+      - feePaymentAmountCents
+      - id
+      - interestPaymentAmountCents
+      - invoiceId
+      - issuedProductId
+      - platformInvoiceId
+      - principalPaymentAmountCents
+      - settledDate
+      - status
+      - totalPaymentAmountCents
+      - updatedAt
+      type: object
+    InternalServerErrorException:
+      example:
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - InternalServerErrorException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -1170,6 +1162,52 @@ components:
       - message
       - timestamp
       type: object
+    PaymentScheduleItem:
+      example:
+        totalPaymentAmountCents: 100000
+        paymentOrder: ''
+        effectiveDate: 2024-01-01
+      properties:
+        effectiveDate:
+          description: The effective UTC ISO 8601 date that the payment will process.
+          example: 2024-01-01
+          type: string
+        totalPaymentAmountCents:
+          description: The total payment amount - in cents.
+          example: 100000
+          type: number
+        paymentOrder:
+          allOf:
+          - $ref: '#/components/schemas/PaymentOrder'
+          description: The payment order for this schedule item
+      required:
+      - effectiveDate
+      - totalPaymentAmountCents
+      type: object
+    ForbiddenException:
+      example:
+        errorCode: ForbiddenException
+        message: Forbidden
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - ForbiddenException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Forbidden
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
     GetPaymentScheduleResponse:
       example:
         pagination: ''
@@ -1193,30 +1231,6 @@ components:
       required:
       - pagination
       - paymentSchedule
-      type: object
-    BadRequestException:
-      example:
-        errorCode: BadRequestException
-        message: Bad Request
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - BadRequestException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Bad Request
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
       type: object
   securitySchemes:
     Authorization:

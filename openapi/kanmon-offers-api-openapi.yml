@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   contact: {}
   description: Kanmon's public api. Contains all of the endpoints for both capital providers and platforms
-  title: Kanmon Public V2 Bank Accounts Offers API
+  title: Kanmon Public V2 Offers API
   version: 2.0.0
 servers:
 - description: Production
@@ -218,20 +218,6 @@ paths:
       - application/json
 components:
   schemas:
-    FixedDateInvoiceRepaymentWindow:
-      properties:
-        repaymentType:
-          enum:
-          - FIXED_DATE
-          type: string
-        monthlyRepaymentDay:
-          description: The day on which the repayment is due. E.g. a value of `15` means the repayment is due on the 15th.
-          example: 15
-          type: number
-      required:
-      - monthlyRepaymentDay
-      - repaymentType
-      type: object
     InvoicePaymentPlan:
       properties:
         id:
@@ -254,48 +240,28 @@ components:
       - repaymentWindow
       - transactionFeePercentage
       type: object
-    PaymentPlanRepaymentSchedule:
+    ProductType:
+      enum:
+      - INVOICE_FINANCING
+      - TERM_LOAN
+      - MCA
+      - LINE_OF_CREDIT
+      - INTEGRATED_MCA
+      - ACCOUNTS_PAYABLE_FINANCING
+      type: string
+    FixedDurationInvoiceRepaymentWindow:
       properties:
-        schedule:
-          description: An array of repayment schedule items that represents how the invoice will be paid back over multiple repayments.
-          items:
-            $ref: '#/components/schemas/PaymentPlanRepaymentScheduleItem'
-          type: array
-      required:
-      - schedule
-      type: object
-    PaymentPlanRepaymentScheduleItem:
-      properties:
+        repaymentType:
+          enum:
+          - FIXED_DURATION
+          type: string
         repaymentDurationDays:
           description: This amount of days after which the repayment duration is due.
           example: 30
           type: number
-        repaymentPercentage:
-          description: The percentage of the payment that is due for this repayment. E.g. a value of `50` means 50%.
-          example: 50
-          type: number
       required:
       - repaymentDurationDays
-      - repaymentPercentage
-      type: object
-    PaginationResult:
-      properties:
-        limit:
-          description: The number of records to limit when performing pagination.
-          example: 100
-          type: number
-        offset:
-          description: The number of records to skip when performing pagination.
-          example: 0
-          type: number
-        totalCount:
-          description: The total number of records that matched the query.
-          example: 100
-          type: number
-      required:
-      - limit
-      - offset
-      - totalCount
+      - repaymentType
       type: object
     IntegratedMcaOfferTerms:
       properties:
@@ -324,8 +290,9 @@ components:
         monthlyMinimumPaymentAmountCents:
           description: The monthly minimum payment amount - in cents. `null` if there is no monthly minimum payment.
           example: 100000
-          nullable: true
-          type: number
+          type:
+          - number
+          - 'null'
         feeAmountCents:
           description: The calculated fee amount in cents.
           example: 300000
@@ -340,35 +307,175 @@ components:
       - repaymentPercentage
       - totalRepaymentCents
       type: object
-    FixedDurationInvoiceRepaymentWindow:
+    MultipleDurationInvoiceRepaymentWindow:
       properties:
         repaymentType:
           enum:
-          - FIXED_DURATION
+          - MULTIPLE_DURATION
           type: string
-        repaymentDurationDays:
-          description: This amount of days after which the repayment duration is due.
-          example: 30
-          type: number
+        repaymentSchedule:
+          $ref: '#/components/schemas/PaymentPlanRepaymentSchedule'
       required:
-      - repaymentDurationDays
+      - repaymentSchedule
       - repaymentType
+      type: object
+    ForbiddenException:
+      example:
+        errorCode: ForbiddenException
+        message: Forbidden
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - ForbiddenException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Forbidden
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    TooManyRequestsException:
+      example:
+        errorCode: TooManyRequestsException
+        message: Too Many Requests
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - TooManyRequestsException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Too Many Requests
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    Offer_terms:
+      description: Terms of the offer.
+      discriminator:
+        mapping:
+          TERM_LOAN: '#/components/schemas/TermLoanOfferTerms'
+          INVOICE_FINANCING: '#/components/schemas/InvoiceFinancingOfferTerms'
+          MCA: '#/components/schemas/McaOfferTerms'
+          INTEGRATED_MCA: '#/components/schemas/IntegratedMcaOfferTerms'
+          LINE_OF_CREDIT: '#/components/schemas/LineOfCreditOfferTerms'
+          ACCOUNTS_PAYABLE_FINANCING: '#/components/schemas/InvoiceFinancingOfferTerms'
+        propertyName: productType
+      oneOf:
+      - $ref: '#/components/schemas/TermLoanOfferTerms'
+      - $ref: '#/components/schemas/InvoiceFinancingOfferTerms'
+      - $ref: '#/components/schemas/McaOfferTerms'
+      - $ref: '#/components/schemas/IntegratedMcaOfferTerms'
+      - $ref: '#/components/schemas/LineOfCreditOfferTerms'
+    Offer:
+      example:
+        expiredAt: 2023-12-29 03:57:26.115000+00:00
+        createdAt: 2023-12-15 03:57:26.115000+00:00
+        platformBusinessId: '12345'
+        terms:
+          maxLoanAmountCents: 1000000
+          loanAmountCents: 1000000
+          durationMonths: 6
+          feePercentage: 3
+          interestRatePercentage: 10
+          productType: INVOICE_FINANCING
+        businessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+        id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+        selectedAt: 2023-12-15 03:57:26.115000+00:00
+        updatedAt: 2023-12-15 03:57:26.115000+00:00
+      properties:
+        id:
+          description: A unique id representing the offer object.
+          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          type: string
+        businessId:
+          description: The UUID representing the business in Kanmon.
+          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          type: string
+        platformBusinessId:
+          description: Your platform’s unique ID for the business.
+          example: '12345'
+          type:
+          - string
+          - 'null'
+        terms:
+          $ref: '#/components/schemas/Offer_terms'
+        expiredAt:
+          description: The ISO 8601 timestamp for when the offer expires.
+          example: 2023-12-29 03:57:26.115000+00:00
+          type:
+          - string
+          - 'null'
+        selectedAt:
+          description: If the offer has been selected by the business, the ISO 8601 timestamp for when it was selected.
+          example: 2023-12-15 03:57:26.115000+00:00
+          type:
+          - string
+          - 'null'
+        createdAt:
+          description: Creation ISO 8601 timestamp of the offer.
+          example: 2023-12-15 03:57:26.115000+00:00
+          type: string
+        updatedAt:
+          description: Last updated ISO 8601 timestamp of the offer.
+          example: 2023-12-15 03:57:26.115000+00:00
+          type: string
+      required:
+      - businessId
+      - createdAt
+      - expiredAt
+      - id
+      - platformBusinessId
+      - selectedAt
+      - terms
+      - updatedAt
       type: object
     RepaymentCadence:
       enum:
       - WEEKLY
       - MONTHLY
       type: string
-    InternalServerErrorException:
+    FixedDateInvoiceRepaymentWindow:
+      properties:
+        repaymentType:
+          enum:
+          - FIXED_DATE
+          type: string
+        monthlyRepaymentDay:
+          description: The day on which the repayment is due. E.g. a value of `15` means the repayment is due on the 15th.
+          example: 15
+          type: number
+      required:
+      - monthlyRepaymentDay
+      - repaymentType
+      type: object
+    OfferNotFoundException:
       example:
-        errorCode: InternalServerErrorException
+        errorCode: OfferNotFoundException
         message: Internal Server Error
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - InternalServerErrorException
+          - OfferNotFoundException
           type: string
         message:
           description: The human readable description of the error.
@@ -382,6 +489,69 @@ components:
       - errorCode
       - message
       - timestamp
+      type: object
+    McaOfferTerms:
+      properties:
+        productType:
+          $ref: '#/components/schemas/ProductType'
+        advanceAmountCents:
+          description: The loan amount - in cents.
+          example: 1000000
+          type: number
+        repaymentPercentage:
+          description: The repayment percentage for calculating repayment amounts. E.g. a value of a `20` means 20%. If a business has $100 of income over a repayment period, the repayment amount would be $20.
+          example: 20
+          type: number
+        feeFactor:
+          description: The fee percentage charged as the borrowing cost of the loan. E.g. a value of `1.3` means a 30% fee.
+          example: 1.3
+          type: number
+        repaymentFrequency:
+          description: The repayment frequency of the loan. E.g. biweekly repayment occurs every 14 days, weekly repayment occurs every 7 days, etc.
+          enum:
+          - DAILY
+          - WEEKLY
+          - BIWEEKLY
+          - MONTHLY
+          example: WEEKLY
+          type: string
+        totalRepaymentCents:
+          description: The total repayment amount in cents required to settle and close the debt. E.g. for a $10,000 loan with a fee factor of 1.3, the repayment amount equates to $13,000.
+          example: 1300000
+          type: number
+        maxAdvanceAmountCents:
+          description: The maximum loan amount - in cents.
+          example: 1000000
+          type: number
+        feeAmountCents:
+          description: The calculated fee amount in cents.
+          example: 300000
+          type: number
+      required:
+      - advanceAmountCents
+      - feeAmountCents
+      - feeFactor
+      - maxAdvanceAmountCents
+      - productType
+      - repaymentFrequency
+      - repaymentPercentage
+      - totalRepaymentCents
+      type: object
+    InvoicePaymentPlan_repaymentWindow:
+      description: The repayment window
+      oneOf:
+      - $ref: '#/components/schemas/FixedDateInvoiceRepaymentWindow'
+      - $ref: '#/components/schemas/FixedDurationInvoiceRepaymentWindow'
+      - $ref: '#/components/schemas/MultipleDurationInvoiceRepaymentWindow'
+    PaymentPlanRepaymentSchedule:
+      properties:
+        schedule:
+          description: An array of repayment schedule items that represents how the invoice will be paid back over multiple repayments.
+          items:
+            $ref: '#/components/schemas/PaymentPlanRepaymentScheduleItem'
+          type: array
+      required:
+      - schedule
       type: object
     GetOffersResponse:
       example:
@@ -470,110 +640,6 @@ components:
       - repaymentDurationMonths
       - totalLimitCents
       type: object
-    InvoiceFinancingOfferTerms:
-      properties:
-        productType:
-          $ref: '#/components/schemas/ProductType'
-        totalLimitCents:
-          description: The total limit allowed for this offer - in cents.
-          example: 1000000
-          type: number
-        pricingPlans:
-          description: The pricing plans available for this offer.
-          items:
-            $ref: '#/components/schemas/InvoicePaymentPlan'
-          type: array
-      required:
-      - pricingPlans
-      - productType
-      - totalLimitCents
-      type: object
-    ProductType:
-      enum:
-      - INVOICE_FINANCING
-      - TERM_LOAN
-      - MCA
-      - LINE_OF_CREDIT
-      - INTEGRATED_MCA
-      - ACCOUNTS_PAYABLE_FINANCING
-      type: string
-    InvoicePaymentPlan_repaymentWindow:
-      description: The repayment window
-      oneOf:
-      - $ref: '#/components/schemas/FixedDateInvoiceRepaymentWindow'
-      - $ref: '#/components/schemas/FixedDurationInvoiceRepaymentWindow'
-      - $ref: '#/components/schemas/MultipleDurationInvoiceRepaymentWindow'
-    McaOfferTerms:
-      properties:
-        productType:
-          $ref: '#/components/schemas/ProductType'
-        advanceAmountCents:
-          description: The loan amount - in cents.
-          example: 1000000
-          type: number
-        repaymentPercentage:
-          description: The repayment percentage for calculating repayment amounts. E.g. a value of a `20` means 20%. If a business has $100 of income over a repayment period, the repayment amount would be $20.
-          example: 20
-          type: number
-        feeFactor:
-          description: The fee percentage charged as the borrowing cost of the loan. E.g. a value of `1.3` means a 30% fee.
-          example: 1.3
-          type: number
-        repaymentFrequency:
-          description: The repayment frequency of the loan. E.g. biweekly repayment occurs every 14 days, weekly repayment occurs every 7 days, etc.
-          enum:
-          - DAILY
-          - WEEKLY
-          - BIWEEKLY
-          - MONTHLY
-          example: WEEKLY
-          type: string
-        totalRepaymentCents:
-          description: The total repayment amount in cents required to settle and close the debt. E.g. for a $10,000 loan with a fee factor of 1.3, the repayment amount equates to $13,000.
-          example: 1300000
-          type: number
-        maxAdvanceAmountCents:
-          description: The maximum loan amount - in cents.
-          example: 1000000
-          type: number
-        feeAmountCents:
-          description: The calculated fee amount in cents.
-          example: 300000
-          type: number
-      required:
-      - advanceAmountCents
-      - feeAmountCents
-      - feeFactor
-      - maxAdvanceAmountCents
-      - productType
-      - repaymentFrequency
-      - repaymentPercentage
-      - totalRepaymentCents
-      type: object
-    ForbiddenException:
-      example:
-        errorCode: ForbiddenException
-        message: Forbidden
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - ForbiddenException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Forbidden
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
     BadRequestException:
       example:
         errorCode: BadRequestException
@@ -598,88 +664,35 @@ components:
       - message
       - timestamp
       type: object
-    MultipleDurationInvoiceRepaymentWindow:
+    PaginationResult:
       properties:
-        repaymentType:
-          enum:
-          - MULTIPLE_DURATION
-          type: string
-        repaymentSchedule:
-          $ref: '#/components/schemas/PaymentPlanRepaymentSchedule'
+        limit:
+          description: The number of records to limit when performing pagination.
+          example: 100
+          type: number
+        offset:
+          description: The number of records to skip when performing pagination.
+          example: 0
+          type: number
+        totalCount:
+          description: The total number of records that matched the query.
+          example: 100
+          type: number
       required:
-      - repaymentSchedule
-      - repaymentType
+      - limit
+      - offset
+      - totalCount
       type: object
-    Offer:
+    InternalServerErrorException:
       example:
-        expiredAt: 2023-12-29 03:57:26.115000+00:00
-        createdAt: 2023-12-15 03:57:26.115000+00:00
-        platformBusinessId: '12345'
-        terms:
-          maxLoanAmountCents: 1000000
-          loanAmountCents: 1000000
-          durationMonths: 6
-          feePercentage: 3
-          interestRatePercentage: 10
-          productType: INVOICE_FINANCING
-        businessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-        id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-        selectedAt: 2023-12-15 03:57:26.115000+00:00
-        updatedAt: 2023-12-15 03:57:26.115000+00:00
-      properties:
-        id:
-          description: A unique id representing the offer object.
-          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          type: string
-        businessId:
-          description: The UUID representing the business in Kanmon.
-          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          type: string
-        platformBusinessId:
-          description: Your platform’s unique ID for the business.
-          example: '12345'
-          nullable: true
-          type: string
-        terms:
-          $ref: '#/components/schemas/Offer_terms'
-        expiredAt:
-          description: The ISO 8601 timestamp for when the offer expires.
-          example: 2023-12-29 03:57:26.115000+00:00
-          nullable: true
-          type: string
-        selectedAt:
-          description: If the offer has been selected by the business, the ISO 8601 timestamp for when it was selected.
-          example: 2023-12-15 03:57:26.115000+00:00
-          nullable: true
-          type: string
-        createdAt:
-          description: Creation ISO 8601 timestamp of the offer.
-          example: 2023-12-15 03:57:26.115000+00:00
-          type: string
-        updatedAt:
-          description: Last updated ISO 8601 timestamp of the offer.
-          example: 2023-12-15 03:57:26.115000+00:00
-          type: string
-      required:
-      - businessId
-      - createdAt
-      - expiredAt
-      - id
-      - platformBusinessId
-      - selectedAt
-      - terms
-      - updatedAt
-      type: object
-    OfferNotFoundException:
-      example:
-        errorCode: OfferNotFoundException
+        errorCode: InternalServerErrorException
         message: Internal Server Error
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - OfferNotFoundException
+          - InternalServerErrorException
           type: string
         message:
           description: The human readable description of the error.
@@ -694,46 +707,37 @@ components:
       - message
       - timestamp
       type: object
-    Offer_terms:
-      description: Terms of the offer.
-      discriminator:
-        mapping:
-          TERM_LOAN: '#/components/schemas/TermLoanOfferTerms'
-          INVOICE_FINANCING: '#/components/schemas/InvoiceFinancingOfferTerms'
-          MCA: '#/components/schemas/McaOfferTerms'
-          INTEGRATED_MCA: '#/components/schemas/IntegratedMcaOfferTerms'
-          LINE_OF_CREDIT: '#/components/schemas/LineOfCreditOfferTerms'
-          ACCOUNTS_PAYABLE_FINANCING: '#/components/schemas/InvoiceFinancingOfferTerms'
-        propertyName: productType
-      oneOf:
-      - $ref: '#/components/schemas/TermLoanOfferTerms'
-      - $ref: '#/components/schemas/InvoiceFinancingOfferTerms'
-      - $ref: '#/components/schemas/McaOfferTerms'
-      - $ref: '#/components/schemas/IntegratedMcaOfferTerms'
-      - $ref: '#/components/schemas/LineOfCreditOfferTerms'
-    TooManyRequestsException:
-      example:
-        errorCode: TooManyRequestsException
-        message: Too Many Requests
-        timestamp: 2022-06-01 03:57:26.115000+00:00
+    InvoiceFinancingOfferTerms:
       properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - TooManyRequestsException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Too Many Requests
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
+        productType:
+          $ref: '#/components/schemas/ProductType'
+        totalLimitCents:
+          description: The total limit allowed for this offer - in cents.
+          example: 1000000
+          type: number
+        pricingPlans:
+          description: The pricing plans available for this offer.
+          items:
+            $ref: '#/components/schemas/InvoicePaymentPlan'
+          type: array
       required:
-      - errorCode
-      - message
-      - timestamp
+      - pricingPlans
+      - productType
+      - totalLimitCents
+      type: object
+    PaymentPlanRepaymentScheduleItem:
+      properties:
+        repaymentDurationDays:
+          description: This amount of days after which the repayment duration is due.
+          example: 30
+          type: number
+        repaymentPercentage:
+          description: The percentage of the payment that is due for this repayment. E.g. a value of `50` means 50%.
+          example: 50
+          type: number
+      required:
+      - repaymentDurationDays
+      - repaymentPercentage
       type: object
     TermLoanOfferTerms:
       example:

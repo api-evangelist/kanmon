@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   contact: {}
   description: Kanmon's public api. Contains all of the endpoints for both capital providers and platforms
-  title: Kanmon Public V2 Bank Accounts Integrated MCA API
+  title: Kanmon Public V2 Integrated MCA API
   version: 2.0.0
 servers:
 - description: Production
@@ -303,35 +303,85 @@ paths:
       - application/json
 components:
   schemas:
-    createIntegratedMcaReceivable_409_response:
-      oneOf:
-      - $ref: '#/components/schemas/IncorrectProductTypeException'
-      - $ref: '#/components/schemas/IntegratedMcaReceivableAlreadyExistsException'
-    GetIntegratedMcaPaymentWindowsResponse:
+    TooManyRequestsException:
       example:
-        paymentWindows:
-        - windowStartDate: 2022-06-01 03:57:26.115000+00:00
-          totalRepaymentAmountCentsInWindow: 1000000
-          minimumPaymentAmountCentsInWindow: 100000
-          windowEndDate: 2022-07-01 03:57:26.115000+00:00
-        - windowStartDate: 2022-06-01 03:57:26.115000+00:00
-          totalRepaymentAmountCentsInWindow: 1000000
-          minimumPaymentAmountCentsInWindow: 100000
-          windowEndDate: 2022-07-01 03:57:26.115000+00:00
+        errorCode: TooManyRequestsException
+        message: Too Many Requests
+        timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
-        paymentWindows:
-          description: The payment periods for the integrated MCA.
-          items:
-            $ref: '#/components/schemas/IntegratedMcaPaymentWindow'
-          type: array
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - TooManyRequestsException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Too Many Requests
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
       required:
-      - paymentWindows
+      - errorCode
+      - message
+      - timestamp
       type: object
-    createIntegratedMcaReceivable_400_response:
-      oneOf:
-      - $ref: '#/components/schemas/BadRequestException'
-      - $ref: '#/components/schemas/NoRemainingBalanceException'
-      - $ref: '#/components/schemas/IncorrectRepaymentAmountException'
+    CreateIntegratedMcaReceivableBody:
+      example:
+        issuedProductId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+        chargeAmountCents: 1000000
+        transactionTime: 2022-06-01 03:57:26.115000+00:00
+        transactionId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+        repaymentAmountCents: 100000
+      properties:
+        issuedProductId:
+          description: The unique identifier for the issued product within Kanmon.
+          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          type: string
+        chargeAmountCents:
+          description: The charge amount - in cents.
+          example: 1000000
+          type: number
+        repaymentAmountCents:
+          description: "\n  <p>The repayment amount - in cents. It should be the lesser of:\n    <br/>\n    ( repayment percentage &times; charge amount ) or remaining balance\n  </p>\n"
+          example: 100000
+          type: number
+        transactionId:
+          description: Your platform’s unique ID for the transaction.
+          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          type: string
+        transactionTime:
+          description: Creation UTC ISO 8601 timestamp of the transaction.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - chargeAmountCents
+      - issuedProductId
+      - repaymentAmountCents
+      - transactionId
+      - transactionTime
+      type: object
+    IntegratedMcaReceivableAlreadyExistsException:
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - IntegratedMcaReceivableAlreadyExistsException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
     IncorrectProductTypeException:
       example:
         errorCode: IncorrectProductTypeException
@@ -356,20 +406,20 @@ components:
       - message
       - timestamp
       type: object
-    InternalServerErrorException:
+    BadRequestException:
       example:
-        errorCode: InternalServerErrorException
-        message: Internal Server Error
+        errorCode: BadRequestException
+        message: Bad Request
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - InternalServerErrorException
+          - BadRequestException
           type: string
         message:
           description: The human readable description of the error.
-          example: Internal Server Error
+          example: Bad Request
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -380,16 +430,20 @@ components:
       - message
       - timestamp
       type: object
-    IncorrectRepaymentAmountException:
+    BusinessHasNoIntegratedMcaProductException:
+      example:
+        errorCode: BusinessHasNoIntegratedMcaProductException
+        message: An error occurred.
+        timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - IncorrectRepaymentAmountException
+          - BusinessHasNoIntegratedMcaProductException
           type: string
         message:
           description: The human readable description of the error.
-          example: Internal Server Error
+          example: An error occurred.
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -400,39 +454,25 @@ components:
       - message
       - timestamp
       type: object
-    GetIntegratedMcaReceivablesResponse:
+    GetIntegratedMcaPaymentWindowsResponse:
       example:
-        pagination: ''
-        integratedMcaReceivables:
-        - createdAt: 2022-06-01 03:57:26.115000+00:00
-          issuedProductId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          id: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          chargeAmountCents: 1000000
-          transactionTime: 2022-06-01 03:57:26.115000+00:00
-          transactionId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          repaymentAmountCents: 100000
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
-        - createdAt: 2022-06-01 03:57:26.115000+00:00
-          issuedProductId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          id: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          chargeAmountCents: 1000000
-          transactionTime: 2022-06-01 03:57:26.115000+00:00
-          transactionId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          repaymentAmountCents: 100000
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
+        paymentWindows:
+        - windowStartDate: 2022-06-01 03:57:26.115000+00:00
+          totalRepaymentAmountCentsInWindow: 1000000
+          minimumPaymentAmountCentsInWindow: 100000
+          windowEndDate: 2022-07-01 03:57:26.115000+00:00
+        - windowStartDate: 2022-06-01 03:57:26.115000+00:00
+          totalRepaymentAmountCentsInWindow: 1000000
+          minimumPaymentAmountCentsInWindow: 100000
+          windowEndDate: 2022-07-01 03:57:26.115000+00:00
       properties:
-        integratedMcaReceivables:
-          description: The integrated MCA receivables that were created.
+        paymentWindows:
+          description: The payment periods for the integrated MCA.
           items:
-            $ref: '#/components/schemas/IntegratedMcaReceivable'
+            $ref: '#/components/schemas/IntegratedMcaPaymentWindow'
           type: array
-        pagination:
-          allOf:
-          - $ref: '#/components/schemas/PaginationResult'
-          description: Pagination metadata.
       required:
-      - integratedMcaReceivables
-      - pagination
+      - paymentWindows
       type: object
     PaginationResult:
       properties:
@@ -506,20 +546,20 @@ components:
       - transactionTime
       - updatedAt
       type: object
-    TooManyRequestsException:
+    InternalServerErrorException:
       example:
-        errorCode: TooManyRequestsException
-        message: Too Many Requests
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - TooManyRequestsException
+          - InternalServerErrorException
           type: string
         message:
           description: The human readable description of the error.
-          example: Too Many Requests
+          example: Internal Server Error
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -529,6 +569,44 @@ components:
       - errorCode
       - message
       - timestamp
+      type: object
+    createIntegratedMcaReceivable_409_response:
+      oneOf:
+      - $ref: '#/components/schemas/IncorrectProductTypeException'
+      - $ref: '#/components/schemas/IntegratedMcaReceivableAlreadyExistsException'
+    GetIntegratedMcaReceivablesResponse:
+      example:
+        pagination: ''
+        integratedMcaReceivables:
+        - createdAt: 2022-06-01 03:57:26.115000+00:00
+          issuedProductId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          id: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          chargeAmountCents: 1000000
+          transactionTime: 2022-06-01 03:57:26.115000+00:00
+          transactionId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          repaymentAmountCents: 100000
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+        - createdAt: 2022-06-01 03:57:26.115000+00:00
+          issuedProductId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          id: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          chargeAmountCents: 1000000
+          transactionTime: 2022-06-01 03:57:26.115000+00:00
+          transactionId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          repaymentAmountCents: 100000
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        integratedMcaReceivables:
+          description: The integrated MCA receivables that were created.
+          items:
+            $ref: '#/components/schemas/IntegratedMcaReceivable'
+          type: array
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/PaginationResult'
+          description: Pagination metadata.
+      required:
+      - integratedMcaReceivables
+      - pagination
       type: object
     IntegratedMcaPaymentWindow:
       example:
@@ -552,13 +630,34 @@ components:
         minimumPaymentAmountCentsInWindow:
           description: Minimum payment amount for this window - in cents. This is `null` if no minimum payment was collected.
           example: 100000
-          nullable: true
-          type: object
+          type:
+          - object
+          - 'null'
       required:
       - minimumPaymentAmountCentsInWindow
       - totalRepaymentAmountCentsInWindow
       - windowEndDate
       - windowStartDate
+      type: object
+    IncorrectRepaymentAmountException:
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - IncorrectRepaymentAmountException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
       type: object
     IssuedProductNotFoundException:
       example:
@@ -584,65 +683,11 @@ components:
       - message
       - timestamp
       type: object
-    BusinessHasNoIntegratedMcaProductException:
-      example:
-        errorCode: BusinessHasNoIntegratedMcaProductException
-        message: An error occurred.
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - BusinessHasNoIntegratedMcaProductException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: An error occurred.
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    CreateIntegratedMcaReceivableBody:
-      example:
-        issuedProductId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-        chargeAmountCents: 1000000
-        transactionTime: 2022-06-01 03:57:26.115000+00:00
-        transactionId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-        repaymentAmountCents: 100000
-      properties:
-        issuedProductId:
-          description: The unique identifier for the issued product within Kanmon.
-          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          type: string
-        chargeAmountCents:
-          description: The charge amount - in cents.
-          example: 1000000
-          type: number
-        repaymentAmountCents:
-          description: "\n  <p>The repayment amount - in cents. It should be the lesser of:\n    <br/>\n    ( repayment percentage &times; charge amount ) or remaining balance\n  </p>\n"
-          example: 100000
-          type: number
-        transactionId:
-          description: Your platform’s unique ID for the transaction.
-          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          type: string
-        transactionTime:
-          description: Creation UTC ISO 8601 timestamp of the transaction.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - chargeAmountCents
-      - issuedProductId
-      - repaymentAmountCents
-      - transactionId
-      - transactionTime
-      type: object
+    createIntegratedMcaReceivable_400_response:
+      oneOf:
+      - $ref: '#/components/schemas/BadRequestException'
+      - $ref: '#/components/schemas/NoRemainingBalanceException'
+      - $ref: '#/components/schemas/IncorrectRepaymentAmountException'
     ForbiddenException:
       example:
         errorCode: ForbiddenException
@@ -667,26 +712,6 @@ components:
       - message
       - timestamp
       type: object
-    IntegratedMcaReceivableAlreadyExistsException:
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - IntegratedMcaReceivableAlreadyExistsException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Internal Server Error
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
     NoRemainingBalanceException:
       properties:
         errorCode:
@@ -697,30 +722,6 @@ components:
         message:
           description: The human readable description of the error.
           example: Internal Server Error
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    BadRequestException:
-      example:
-        errorCode: BadRequestException
-        message: Bad Request
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - BadRequestException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Bad Request
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.

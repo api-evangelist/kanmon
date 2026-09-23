@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   contact: {}
   description: Kanmon's public api. Contains all of the endpoints for both capital providers and platforms
-  title: Kanmon Public V2 Bank Accounts Draw Requests API
+  title: Kanmon Public V2 Draw Requests API
   version: 2.0.0
 servers:
 - description: Production
@@ -227,73 +227,6 @@ paths:
       - application/json
 components:
   schemas:
-    InternalServerErrorException:
-      example:
-        errorCode: InternalServerErrorException
-        message: Internal Server Error
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - InternalServerErrorException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Internal Server Error
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    DrawRequestNotFoundException:
-      example:
-        errorCode: DrawRequestNotFoundException
-        message: Internal Server Error
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - DrawRequestNotFoundException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Internal Server Error
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    PaginationResult:
-      properties:
-        limit:
-          description: The number of records to limit when performing pagination.
-          example: 100
-          type: number
-        offset:
-          description: The number of records to skip when performing pagination.
-          example: 0
-          type: number
-        totalCount:
-          description: The total number of records that matched the query.
-          example: 100
-          type: number
-      required:
-      - limit
-      - offset
-      - totalCount
-      type: object
     TooManyRequestsException:
       example:
         errorCode: TooManyRequestsException
@@ -318,34 +251,20 @@ components:
       - message
       - timestamp
       type: object
-    DrawRequestState:
-      description: The state of the draw request.
-      enum:
-      - DRAW_REQUEST_CREATED
-      - DRAW_REQUEST_FUNDED
-      - DRAW_REQUEST_PAID_IN_FULL
-      - REJECTED
-      - DEFAULTED
-      type: string
-    RepaymentCadence:
-      enum:
-      - WEEKLY
-      - MONTHLY
-      type: string
-    ForbiddenException:
+    BadRequestException:
       example:
-        errorCode: ForbiddenException
-        message: Forbidden
+        errorCode: BadRequestException
+        message: Bad Request
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - ForbiddenException
+          - BadRequestException
           type: string
         message:
           description: The human readable description of the error.
-          example: Forbidden
+          example: Bad Request
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -404,6 +323,87 @@ components:
       - drawRequests
       - pagination
       type: object
+    PaginationResult:
+      properties:
+        limit:
+          description: The number of records to limit when performing pagination.
+          example: 100
+          type: number
+        offset:
+          description: The number of records to skip when performing pagination.
+          example: 0
+          type: number
+        totalCount:
+          description: The total number of records that matched the query.
+          example: 100
+          type: number
+      required:
+      - limit
+      - offset
+      - totalCount
+      type: object
+    RepaymentCadence:
+      enum:
+      - WEEKLY
+      - MONTHLY
+      type: string
+    InternalServerErrorException:
+      example:
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - InternalServerErrorException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    DrawRequestNotFoundException:
+      example:
+        errorCode: DrawRequestNotFoundException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - DrawRequestNotFoundException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    DrawRequestState:
+      description: The state of the draw request.
+      enum:
+      - DRAW_REQUEST_CREATED
+      - DRAW_REQUEST_FUNDED
+      - DRAW_REQUEST_PAID_IN_FULL
+      - REJECTED
+      - DEFAULTED
+      type: string
     DrawRequest:
       example:
         gracePeriodDays: 30
@@ -496,20 +496,20 @@ components:
       - status
       - updatedAt
       type: object
-    BadRequestException:
+    ForbiddenException:
       example:
-        errorCode: BadRequestException
-        message: Bad Request
+        errorCode: ForbiddenException
+        message: Forbidden
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - BadRequestException
+          - ForbiddenException
           type: string
         message:
           description: The human readable description of the error.
-          example: Bad Request
+          example: Forbidden
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.

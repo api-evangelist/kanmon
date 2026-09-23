@@ -1,8 +1,8 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   contact: {}
   description: Kanmon's public api. Contains all of the endpoints for both capital providers and platforms
-  title: Kanmon Public V2 Bank Accounts Connect Tokens API
+  title: Kanmon Public V2 Connect Tokens API
   version: 2.0.0
 servers:
 - description: Production
@@ -93,17 +93,6 @@ paths:
       - application/json
 components:
   schemas:
-    ConnectToken:
-      example:
-        connectToken: 24470124-e9d4-4a0b-9a1a-d575418ae050
-      properties:
-        connectToken:
-          description: The connect token. Pass this to the Kanmon Connect widget.
-          example: 24470124-e9d4-4a0b-9a1a-d575418ae050
-          type: string
-      required:
-      - connectToken
-      type: object
     UserNotFoundException:
       example:
         errorCode: UserNotFoundException
@@ -127,44 +116,6 @@ components:
       - errorCode
       - message
       - timestamp
-      type: object
-    InternalServerErrorException:
-      example:
-        errorCode: InternalServerErrorException
-        message: Internal Server Error
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - InternalServerErrorException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Internal Server Error
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    CreateConnectTokenRequestBody:
-      example:
-        platformUserId: '12345'
-        userId: 145dd895-3243-4741-8e38-6275b6a81d85
-      properties:
-        userId:
-          description: UUID representing the user in Kanmon. Either `userId` or `platformUserId` is required.
-          example: 145dd895-3243-4741-8e38-6275b6a81d85
-          type: string
-        platformUserId:
-          description: Your platform’s unique ID for the user. Either `userId` or `platformUserId` is required.
-          example: '12345'
-          type: string
       type: object
     TooManyRequestsException:
       example:
@@ -190,29 +141,16 @@ components:
       - message
       - timestamp
       type: object
-    ForbiddenException:
+    ConnectToken:
       example:
-        errorCode: ForbiddenException
-        message: Forbidden
-        timestamp: 2022-06-01 03:57:26.115000+00:00
+        connectToken: 24470124-e9d4-4a0b-9a1a-d575418ae050
       properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - ForbiddenException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Forbidden
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
+        connectToken:
+          description: The connect token. Pass this to the Kanmon Connect widget.
+          example: 24470124-e9d4-4a0b-9a1a-d575418ae050
           type: string
       required:
-      - errorCode
-      - message
-      - timestamp
+      - connectToken
       type: object
     BadRequestException:
       example:
@@ -228,6 +166,68 @@ components:
         message:
           description: The human readable description of the error.
           example: Bad Request
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    CreateConnectTokenRequestBody:
+      example:
+        platformUserId: '12345'
+        userId: 145dd895-3243-4741-8e38-6275b6a81d85
+      properties:
+        userId:
+          description: UUID representing the user in Kanmon. Either `userId` or `platformUserId` is required.
+          example: 145dd895-3243-4741-8e38-6275b6a81d85
+          type: string
+        platformUserId:
+          description: Your platform’s unique ID for the user. Either `userId` or `platformUserId` is required.
+          example: '12345'
+          type: string
+      type: object
+    InternalServerErrorException:
+      example:
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - InternalServerErrorException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    ForbiddenException:
+      example:
+        errorCode: ForbiddenException
+        message: Forbidden
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - ForbiddenException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Forbidden
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.

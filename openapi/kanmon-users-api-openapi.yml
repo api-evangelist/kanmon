@@ -508,16 +508,16 @@ paths:
       - application/json
 components:
   schemas:
-    BusinessNotFoundException:
+    PrimaryBusinessOwnerAlreadyExistsForBusinessException:
       example:
-        errorCode: BusinessNotFoundException
+        errorCode: PrimaryBusinessOwnerAlreadyExistsForBusinessException
         message: An error occurred.
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - BusinessNotFoundException
+          - PrimaryBusinessOwnerAlreadyExistsForBusinessException
           type: string
         message:
           description: The human readable description of the error.
@@ -532,16 +532,216 @@ components:
       - message
       - timestamp
       type: object
-    UserAlreadyExistsWithPlatformUserIdException:
+    Address:
+      properties:
+        addressLineOne:
+          type: string
+        addressLineTwo:
+          example: Apt 123
+          type:
+          - string
+          - 'null'
+        city:
+          type: string
+        state:
+          description: The 2 character abbreviated state
+          enum:
+          - AL
+          - KY
+          - OH
+          - AK
+          - LA
+          - OK
+          - AZ
+          - ME
+          - OR
+          - AR
+          - MD
+          - PA
+          - AS
+          - MA
+          - PR
+          - CA
+          - MI
+          - RI
+          - CO
+          - MN
+          - SC
+          - CT
+          - MS
+          - SD
+          - DE
+          - MO
+          - TN
+          - DC
+          - MT
+          - TX
+          - FL
+          - NE
+          - TT
+          - GA
+          - NV
+          - UT
+          - GU
+          - NH
+          - VT
+          - HI
+          - NJ
+          - VA
+          - ID
+          - NM
+          - VI
+          - IL
+          - NY
+          - WA
+          - IN
+          - NC
+          - WV
+          - IA
+          - ND
+          - WI
+          - KS
+          - MP
+          - WY
+          example: CA
+          type: string
+        zipcode:
+          description: Zip code can be 5 digits, 9 digits, or 5+4 including a hyphen or plus sign, e.g. 90210, 902101234, 90210-1234 or 90210+1234
+          example: '94401'
+          type: string
+        country:
+          description: USA
+          example: USA
+          type: string
+      required:
+      - addressLineOne
+      - city
+      - country
+      - state
+      - zipcode
+      type: object
+    UpdateUserRequestBody:
+      example:
+        firstName: John
+        lastName: Smith
+        metadata: '{}'
+        phoneNumber: '+14155556789'
+        address:
+          city: San Mateo
+          state: CA
+          country: USA
+          zipcode: '94401'
+          addressLineOne: 123 Main Street
+        roles:
+        - PRIMARY_OWNER
+        email: user@gmail.com
+      properties:
+        firstName:
+          description: The user’s first name.
+          example: John
+          type: string
+        lastName:
+          description: The user’s last name.
+          example: Smith
+          type: string
+        phoneNumber:
+          description: The user’s phone number. No formatting characters, country code is optional.
+          example: '+14155556789'
+          type: string
+        address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: The user’s address. The address is optional. If you provide the address, you need to provide all the required fields in the address. The address must be a street address, not a PO Box.
+          example:
+            city: San Mateo
+            state: CA
+            country: USA
+            zipcode: '94401'
+            addressLineOne: 123 Main Street
+        email:
+          description: The user’s email.
+          example: user@gmail.com
+          type: string
+        roles:
+          description: The user’s roles. If no roles are defined, the user will be prompted to select a role within Kanmon. <br/><br/>A primary owner is a user with the authority to issue debt on behalf of the business. This means the user can complete onboarding, receive offers, choose to accept offers, sign financing agreements, and service an active issued product. <br/><br/>An operator is a user with permission to service an active issued product. Examples are uploading invoices on behalf of the business, checking the status of payments, etc. <br /><br/>A secondary owner is a beneficial owner of the business who must complete KYC. This means the user can sign financing agreements when required and service an active issued product. During onboarding, the primary owner invites secondary owners. Secondary owners are directed to a separate Kanmon-hosted page where they complete onboarding, sign legal documents, and KYC. They can also access servicing from that page. Kanmon sends a `USER.CREATED` webhook when a secondary owner is created.
+          example:
+          - PRIMARY_OWNER
+          items:
+            enum:
+            - PRIMARY_OWNER
+            - OPERATOR
+            type: string
+          type: array
+        metadata:
+          description: Metadata from your system that you want to associate the user with.
+          type: object
+      type: object
+    MergeUsersResponseBody:
+      example:
+        mergedUsers:
+        - lastName: Smith
+          metadata: '{}'
+          address:
+            city: San Mateo
+            state: CA
+            country: USA
+            zipcode: '94401'
+            addressLineOne: 123 Main Street
+          roles:
+          - PRIMARY_OWNER
+          businessId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          isUsCitizen: true
+          firstName: John
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          platformBusinessId: '12345'
+          phoneNumber: '+14155556789'
+          platformUserId: '12345'
+          id: 1193fdaf-630c-4771-a629-8da7a87947d2
+          email: user@gmail.com
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+        - lastName: Smith
+          metadata: '{}'
+          address:
+            city: San Mateo
+            state: CA
+            country: USA
+            zipcode: '94401'
+            addressLineOne: 123 Main Street
+          roles:
+          - PRIMARY_OWNER
+          businessId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          isUsCitizen: true
+          firstName: John
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          platformBusinessId: '12345'
+          phoneNumber: '+14155556789'
+          platformUserId: '12345'
+          id: 1193fdaf-630c-4771-a629-8da7a87947d2
+          email: user@gmail.com
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        mergedUsers:
+          description: An array of users that were merged into the target business.
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+      required:
+      - mergedUsers
+      type: object
+    ForbiddenException:
+      example:
+        errorCode: ForbiddenException
+        message: Forbidden
+        timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - UserAlreadyExistsWithPlatformUserIdException
+          - ForbiddenException
           type: string
         message:
           description: The human readable description of the error.
-          example: An error occurred.
+          example: Forbidden
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -551,64 +751,6 @@ components:
       - errorCode
       - message
       - timestamp
-      type: object
-    GetUsersResponse:
-      example:
-        pagination: ''
-        users:
-        - lastName: Smith
-          metadata: '{}'
-          address:
-            city: San Mateo
-            state: CA
-            country: USA
-            zipcode: '94401'
-            addressLineOne: 123 Main Street
-          roles:
-          - PRIMARY_OWNER
-          businessId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          isUsCitizen: true
-          firstName: John
-          createdAt: 2022-06-01 03:57:26.115000+00:00
-          platformBusinessId: '12345'
-          phoneNumber: '+14155556789'
-          platformUserId: '12345'
-          id: 1193fdaf-630c-4771-a629-8da7a87947d2
-          email: user@gmail.com
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
-        - lastName: Smith
-          metadata: '{}'
-          address:
-            city: San Mateo
-            state: CA
-            country: USA
-            zipcode: '94401'
-            addressLineOne: 123 Main Street
-          roles:
-          - PRIMARY_OWNER
-          businessId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          isUsCitizen: true
-          firstName: John
-          createdAt: 2022-06-01 03:57:26.115000+00:00
-          platformBusinessId: '12345'
-          phoneNumber: '+14155556789'
-          platformUserId: '12345'
-          id: 1193fdaf-630c-4771-a629-8da7a87947d2
-          email: user@gmail.com
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        users:
-          description: Array of users.
-          items:
-            $ref: '#/components/schemas/User'
-          type: array
-        pagination:
-          allOf:
-          - $ref: '#/components/schemas/PaginationResult'
-          description: Pagination metadata.
-      required:
-      - pagination
-      - users
       type: object
     User:
       example:
@@ -724,20 +866,91 @@ components:
       - platformBusinessId
       - updatedAt
       type: object
-    ForbiddenException:
+    PaginationResult:
+      properties:
+        limit:
+          description: The number of records to limit when performing pagination.
+          example: 100
+          type: number
+        offset:
+          description: The number of records to skip when performing pagination.
+          example: 0
+          type: number
+        totalCount:
+          description: The total number of records that matched the query.
+          example: 100
+          type: number
+      required:
+      - limit
+      - offset
+      - totalCount
+      type: object
+    updateUser_409_response:
+      oneOf:
+      - $ref: '#/components/schemas/UserAlreadyExistsWithEmailException'
+      - $ref: '#/components/schemas/PrimaryBusinessOwnerAlreadyExistsForBusinessException'
+    UserAlreadyExistsWithEmailException:
       example:
-        errorCode: ForbiddenException
-        message: Forbidden
+        errorCode: UserAlreadyExistsWithEmailException
+        message: An error occurred.
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - ForbiddenException
+          - UserAlreadyExistsWithEmailException
           type: string
         message:
           description: The human readable description of the error.
-          example: Forbidden
+          example: An error occurred.
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    BusinessNotFoundException:
+      example:
+        errorCode: BusinessNotFoundException
+        message: An error occurred.
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BusinessNotFoundException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: An error occurred.
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    UserNotFoundException:
+      example:
+        errorCode: UserNotFoundException
+        message: An error occurred.
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - UserNotFoundException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: An error occurred.
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -762,82 +975,6 @@ components:
         message:
           description: The human readable description of the error.
           example: Too Many Requests
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    updateUser_409_response:
-      oneOf:
-      - $ref: '#/components/schemas/UserAlreadyExistsWithEmailException'
-      - $ref: '#/components/schemas/PrimaryBusinessOwnerAlreadyExistsForBusinessException'
-    PrimaryBusinessOwnerAlreadyExistsForBusinessException:
-      example:
-        errorCode: PrimaryBusinessOwnerAlreadyExistsForBusinessException
-        message: An error occurred.
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - PrimaryBusinessOwnerAlreadyExistsForBusinessException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: An error occurred.
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    MergeUsersRequestBody:
-      example:
-        sourceBusinessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-        sourcePlatformBusinessId: '12345'
-        targetBusinessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-        targetPlatformBusinessId: '67890'
-      properties:
-        sourcePlatformBusinessId:
-          description: Your platform’s unique business ID for the business to merge users from. Either `sourcePlatformBusinessId` or `sourceBusinessId` is required.
-          example: '12345'
-          type: string
-        sourceBusinessId:
-          description: The UUID representing the business in Kanmon to merge users from. Either `sourcePlatformBusinessId` or `sourceBusinessId` is required.
-          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          type: string
-        targetPlatformBusinessId:
-          description: Your platform’s unique business ID for the business to merge users to. Either `targetPlatformBusinessId` or `targetBusinessId` is required.
-          example: '67890'
-          type: string
-        targetBusinessId:
-          description: The UUID representing the business in Kanmon to merge users to. Either `targetPlatformBusinessId` or `targetBusinessId` is required.
-          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          type: string
-      type: object
-    UserNotFoundException:
-      example:
-        errorCode: UserNotFoundException
-        message: An error occurred.
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - UserNotFoundException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: An error occurred.
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -926,25 +1063,16 @@ components:
       required:
       - platformUserId
       type: object
-    createUser_409_response:
-      oneOf:
-      - $ref: '#/components/schemas/PrimaryBusinessOwnerAlreadyExistsForBusinessException'
-      - $ref: '#/components/schemas/UserAlreadyExistsWithPlatformUserIdException'
-      - $ref: '#/components/schemas/UserAlreadyExistsWithEmailException'
-    BadRequestException:
-      example:
-        errorCode: BadRequestException
-        message: Bad Request
-        timestamp: 2022-06-01 03:57:26.115000+00:00
+    UserAlreadyExistsWithPlatformUserIdException:
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - BadRequestException
+          - UserAlreadyExistsWithPlatformUserIdException
           type: string
         message:
           description: The human readable description of the error.
-          example: Bad Request
+          example: An error occurred.
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -955,112 +1083,29 @@ components:
       - message
       - timestamp
       type: object
-    PaginationResult:
+    MergeUsersRequestBody:
+      example:
+        sourceBusinessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+        sourcePlatformBusinessId: '12345'
+        targetBusinessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+        targetPlatformBusinessId: '67890'
       properties:
-        limit:
-          description: The number of records to limit when performing pagination.
-          example: 100
-          type: number
-        offset:
-          description: The number of records to skip when performing pagination.
-          example: 0
-          type: number
-        totalCount:
-          description: The total number of records that matched the query.
-          example: 100
-          type: number
-      required:
-      - limit
-      - offset
-      - totalCount
-      type: object
-    Address:
-      properties:
-        addressLineOne:
+        sourcePlatformBusinessId:
+          description: Your platform’s unique business ID for the business to merge users from. Either `sourcePlatformBusinessId` or `sourceBusinessId` is required.
+          example: '12345'
           type: string
-        addressLineTwo:
-          example: Apt 123
-          type:
-          - string
-          - 'null'
-        city:
+        sourceBusinessId:
+          description: The UUID representing the business in Kanmon to merge users from. Either `sourcePlatformBusinessId` or `sourceBusinessId` is required.
+          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
           type: string
-        state:
-          description: The 2 character abbreviated state
-          enum:
-          - AL
-          - KY
-          - OH
-          - AK
-          - LA
-          - OK
-          - AZ
-          - ME
-          - OR
-          - AR
-          - MD
-          - PA
-          - AS
-          - MA
-          - PR
-          - CA
-          - MI
-          - RI
-          - CO
-          - MN
-          - SC
-          - CT
-          - MS
-          - SD
-          - DE
-          - MO
-          - TN
-          - DC
-          - MT
-          - TX
-          - FL
-          - NE
-          - TT
-          - GA
-          - NV
-          - UT
-          - GU
-          - NH
-          - VT
-          - HI
-          - NJ
-          - VA
-          - ID
-          - NM
-          - VI
-          - IL
-          - NY
-          - WA
-          - IN
-          - NC
-          - WV
-          - IA
-          - ND
-          - WI
-          - KS
-          - MP
-          - WY
-          example: CA
+        targetPlatformBusinessId:
+          description: Your platform’s unique business ID for the business to merge users to. Either `targetPlatformBusinessId` or `targetBusinessId` is required.
+          example: '67890'
           type: string
-        zipcode:
-          description: Zip code can be 5 digits, 9 digits, or 5+4 including a hyphen or plus sign, e.g. 90210, 902101234, 90210-1234 or 90210+1234
-          example: '94401'
+        targetBusinessId:
+          description: The UUID representing the business in Kanmon to merge users to. Either `targetPlatformBusinessId` or `targetBusinessId` is required.
+          example: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
           type: string
-        country:
-          description: USA
-          example: USA
-          type: string
-      required:
-      - addressLineOne
-      - city
-      - country
-      - state
-      - zipcode
       type: object
     InternalServerErrorException:
       example:
@@ -1086,76 +1131,20 @@ components:
       - message
       - timestamp
       type: object
-    UpdateUserRequestBody:
+    BadRequestException:
       example:
-        firstName: John
-        lastName: Smith
-        metadata: '{}'
-        phoneNumber: '+14155556789'
-        address:
-          city: San Mateo
-          state: CA
-          country: USA
-          zipcode: '94401'
-          addressLineOne: 123 Main Street
-        roles:
-        - PRIMARY_OWNER
-        email: user@gmail.com
-      properties:
-        firstName:
-          description: The user’s first name.
-          example: John
-          type: string
-        lastName:
-          description: The user’s last name.
-          example: Smith
-          type: string
-        phoneNumber:
-          description: The user’s phone number. No formatting characters, country code is optional.
-          example: '+14155556789'
-          type: string
-        address:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: The user’s address. The address is optional. If you provide the address, you need to provide all the required fields in the address. The address must be a street address, not a PO Box.
-          example:
-            city: San Mateo
-            state: CA
-            country: USA
-            zipcode: '94401'
-            addressLineOne: 123 Main Street
-        email:
-          description: The user’s email.
-          example: user@gmail.com
-          type: string
-        roles:
-          description: The user’s roles. If no roles are defined, the user will be prompted to select a role within Kanmon. <br/><br/>A primary owner is a user with the authority to issue debt on behalf of the business. This means the user can complete onboarding, receive offers, choose to accept offers, sign financing agreements, and service an active issued product. <br/><br/>An operator is a user with permission to service an active issued product. Examples are uploading invoices on behalf of the business, checking the status of payments, etc. <br /><br/>A secondary owner is a beneficial owner of the business who must complete KYC. This means the user can sign financing agreements when required and service an active issued product. During onboarding, the primary owner invites secondary owners. Secondary owners are directed to a separate Kanmon-hosted page where they complete onboarding, sign legal documents, and KYC. They can also access servicing from that page. Kanmon sends a `USER.CREATED` webhook when a secondary owner is created.
-          example:
-          - PRIMARY_OWNER
-          items:
-            enum:
-            - PRIMARY_OWNER
-            - OPERATOR
-            type: string
-          type: array
-        metadata:
-          description: Metadata from your system that you want to associate the user with.
-          type: object
-      type: object
-    UserAlreadyExistsWithEmailException:
-      example:
-        errorCode: UserAlreadyExistsWithEmailException
-        message: An error occurred.
+        errorCode: BadRequestException
+        message: Bad Request
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - UserAlreadyExistsWithEmailException
+          - BadRequestException
           type: string
         message:
           description: The human readable description of the error.
-          example: An error occurred.
+          example: Bad Request
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -1166,9 +1155,10 @@ components:
       - message
       - timestamp
       type: object
-    MergeUsersResponseBody:
+    GetUsersResponse:
       example:
-        mergedUsers:
+        pagination: ''
+        users:
         - lastName: Smith
           metadata: '{}'
           address:
@@ -1210,14 +1200,24 @@ components:
           email: user@gmail.com
           updatedAt: 2022-06-01 03:57:26.115000+00:00
       properties:
-        mergedUsers:
-          description: An array of users that were merged into the target business.
+        users:
+          description: Array of users.
           items:
             $ref: '#/components/schemas/User'
           type: array
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/PaginationResult'
+          description: Pagination metadata.
       required:
-      - mergedUsers
+      - pagination
+      - users
       type: object
+    createUser_409_response:
+      oneOf:
+      - $ref: '#/components/schemas/PrimaryBusinessOwnerAlreadyExistsForBusinessException'
+      - $ref: '#/components/schemas/UserAlreadyExistsWithPlatformUserIdException'
+      - $ref: '#/components/schemas/UserAlreadyExistsWithEmailException'
   securitySchemes:
     Authorization:
       in: header

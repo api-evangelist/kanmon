@@ -448,30 +448,6 @@ paths:
       - application/json
 components:
   schemas:
-    TooManyRequestsException:
-      example:
-        errorCode: TooManyRequestsException
-        message: Too Many Requests
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - TooManyRequestsException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Too Many Requests
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
     GetPaymentIntentsResponse:
       example:
         pagination: ''
@@ -608,27 +584,20 @@ components:
       - pagination
       - paymentIntents
       type: object
-    PaymentOrderStatus:
-      description: The status of the payment.
-      enum:
-      - FAILED
-      - PAID
-      - PENDING
-      type: string
-    BadRequestException:
+    PaymentOrderNotFoundException:
       example:
-        errorCode: BadRequestException
-        message: Bad Request
+        errorCode: PaymentOrderNotFoundException
+        message: Internal Server Error
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - BadRequestException
+          - PaymentOrderNotFoundException
           type: string
         message:
           description: The human readable description of the error.
-          example: Bad Request
+          example: Internal Server Error
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -937,16 +906,82 @@ components:
       - trigger
       - updatedAt
       type: object
-    PaymentIntentTriggerType:
+    InternalServerErrorException:
+      example:
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - InternalServerErrorException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    ForbiddenException:
+      example:
+        errorCode: ForbiddenException
+        message: Forbidden
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - ForbiddenException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Forbidden
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    PaymentScheduleItem:
+      example:
+        totalPaymentAmountCents: 100000
+        paymentOrder: ''
+        effectiveDate: 2024-01-01
+      properties:
+        effectiveDate:
+          description: The effective UTC ISO 8601 date that the payment will process.
+          example: 2024-01-01
+          type: string
+        totalPaymentAmountCents:
+          description: The total payment amount - in cents.
+          example: 100000
+          type: number
+        paymentOrder:
+          allOf:
+          - $ref: '#/components/schemas/PaymentOrder'
+          description: The payment order for this schedule item
+      required:
+      - effectiveDate
+      - totalPaymentAmountCents
+      type: object
+    PaymentOrderStatus:
+      description: The status of the payment.
       enum:
-      - DISBURSEMENT
-      - DISBURSEMENT_RETURN
-      - SCHEDULED_REPAYMENT
-      - EARLY_PAYOFF
-      - REFINANCE_PAYOFF
-      - FEE
-      - REFUND
-      - MINIMUM_PAYMENT
+      - FAILED
+      - PAID
+      - PENDING
       type: string
     IssuedProductNotFoundException:
       example:
@@ -962,6 +997,30 @@ components:
         message:
           description: The human readable description of the error.
           example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    TooManyRequestsException:
+      example:
+        errorCode: TooManyRequestsException
+        message: Too Many Requests
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - TooManyRequestsException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Too Many Requests
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -990,6 +1049,65 @@ components:
       - limit
       - offset
       - totalCount
+      type: object
+    BadRequestException:
+      example:
+        errorCode: BadRequestException
+        message: Bad Request
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BadRequestException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Bad Request
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    PaymentIntentTriggerType:
+      enum:
+      - DISBURSEMENT
+      - DISBURSEMENT_RETURN
+      - SCHEDULED_REPAYMENT
+      - EARLY_PAYOFF
+      - REFINANCE_PAYOFF
+      - FEE
+      - REFUND
+      - MINIMUM_PAYMENT
+      type: string
+    GetPaymentScheduleResponse:
+      example:
+        pagination: ''
+        paymentSchedule:
+        - totalPaymentAmountCents: 100000
+          paymentOrder: ''
+          effectiveDate: 2024-01-01
+        - totalPaymentAmountCents: 100000
+          paymentOrder: ''
+          effectiveDate: 2024-01-01
+      properties:
+        paymentSchedule:
+          description: Array of payment schedule items for an issued product.
+          items:
+            $ref: '#/components/schemas/PaymentScheduleItem'
+          type: array
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/PaginationResult'
+          description: Pagination metadata.
+      required:
+      - pagination
+      - paymentSchedule
       type: object
     PaymentOrder:
       example:
@@ -1113,124 +1231,6 @@ components:
       - status
       - totalPaymentAmountCents
       - updatedAt
-      type: object
-    InternalServerErrorException:
-      example:
-        errorCode: InternalServerErrorException
-        message: Internal Server Error
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - InternalServerErrorException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Internal Server Error
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    PaymentOrderNotFoundException:
-      example:
-        errorCode: PaymentOrderNotFoundException
-        message: Internal Server Error
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - PaymentOrderNotFoundException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Internal Server Error
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    PaymentScheduleItem:
-      example:
-        totalPaymentAmountCents: 100000
-        paymentOrder: ''
-        effectiveDate: 2024-01-01
-      properties:
-        effectiveDate:
-          description: The effective UTC ISO 8601 date that the payment will process.
-          example: 2024-01-01
-          type: string
-        totalPaymentAmountCents:
-          description: The total payment amount - in cents.
-          example: 100000
-          type: number
-        paymentOrder:
-          allOf:
-          - $ref: '#/components/schemas/PaymentOrder'
-          description: The payment order for this schedule item
-      required:
-      - effectiveDate
-      - totalPaymentAmountCents
-      type: object
-    ForbiddenException:
-      example:
-        errorCode: ForbiddenException
-        message: Forbidden
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - ForbiddenException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Forbidden
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    GetPaymentScheduleResponse:
-      example:
-        pagination: ''
-        paymentSchedule:
-        - totalPaymentAmountCents: 100000
-          paymentOrder: ''
-          effectiveDate: 2024-01-01
-        - totalPaymentAmountCents: 100000
-          paymentOrder: ''
-          effectiveDate: 2024-01-01
-      properties:
-        paymentSchedule:
-          description: Array of payment schedule items for an issued product.
-          items:
-            $ref: '#/components/schemas/PaymentScheduleItem'
-          type: array
-        pagination:
-          allOf:
-          - $ref: '#/components/schemas/PaginationResult'
-          description: Pagination metadata.
-      required:
-      - pagination
-      - paymentSchedule
       type: object
   securitySchemes:
     Authorization:

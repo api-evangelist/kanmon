@@ -420,6 +420,92 @@ paths:
       - application/json
 components:
   schemas:
+    BankAccountAlreadyExistException:
+      example:
+        errorCode: BankAccountAlreadyExistException
+        message: An error occurred.
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BankAccountAlreadyExistException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: An error occurred.
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    BankAccountNotFoundException:
+      example:
+        errorCode: BankAccountNotFoundException
+        message: An error occurred.
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BankAccountNotFoundException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: An error occurred.
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    GetBusinessBankAccountsResponse:
+      example:
+        pagination: ''
+        bankAccounts:
+        - routingNumber: '123456789'
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          accountName: My bank account
+          accountType: CHECKING
+          roles:
+          - DISBURSEMENT
+          id: 1193fdaf-630c-4771-a629-8da7a87947d2
+          accountNumber: '123456789'
+          platformBankAccountId: '12345'
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+        - routingNumber: '123456789'
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          accountName: My bank account
+          accountType: CHECKING
+          roles:
+          - DISBURSEMENT
+          id: 1193fdaf-630c-4771-a629-8da7a87947d2
+          accountNumber: '123456789'
+          platformBankAccountId: '12345'
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        bankAccounts:
+          description: Array of business bank accounts.
+          items:
+            $ref: '#/components/schemas/BusinessBankAccount'
+          type: array
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/PaginationResult'
+          description: Pagination metadata.
+      required:
+      - bankAccounts
+      - pagination
+      type: object
     CreateBusinessBankAccountRequestBody:
       example:
         routingNumber: '123456789'
@@ -479,6 +565,54 @@ components:
       - roles
       - routingNumber
       type: object
+    InternalServerErrorException:
+      example:
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - InternalServerErrorException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    ForbiddenException:
+      example:
+        errorCode: ForbiddenException
+        message: Forbidden
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - ForbiddenException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Forbidden
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
     TooManyRequestsException:
       example:
         errorCode: TooManyRequestsException
@@ -527,116 +661,6 @@ components:
           example: '123456789'
           type: string
       type: object
-    BadRequestException:
-      example:
-        errorCode: BadRequestException
-        message: Bad Request
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - BadRequestException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Bad Request
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    BusinessNotFoundException:
-      example:
-        errorCode: BusinessNotFoundException
-        message: An error occurred.
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - BusinessNotFoundException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: An error occurred.
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    GetBusinessBankAccountsResponse:
-      example:
-        pagination: ''
-        bankAccounts:
-        - routingNumber: '123456789'
-          createdAt: 2022-06-01 03:57:26.115000+00:00
-          accountName: My bank account
-          accountType: CHECKING
-          roles:
-          - DISBURSEMENT
-          id: 1193fdaf-630c-4771-a629-8da7a87947d2
-          accountNumber: '123456789'
-          platformBankAccountId: '12345'
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
-        - routingNumber: '123456789'
-          createdAt: 2022-06-01 03:57:26.115000+00:00
-          accountName: My bank account
-          accountType: CHECKING
-          roles:
-          - DISBURSEMENT
-          id: 1193fdaf-630c-4771-a629-8da7a87947d2
-          accountNumber: '123456789'
-          platformBankAccountId: '12345'
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        bankAccounts:
-          description: Array of business bank accounts.
-          items:
-            $ref: '#/components/schemas/BusinessBankAccount'
-          type: array
-        pagination:
-          allOf:
-          - $ref: '#/components/schemas/PaginationResult'
-          description: Pagination metadata.
-      required:
-      - bankAccounts
-      - pagination
-      type: object
-    BankAccountAlreadyExistException:
-      example:
-        errorCode: BankAccountAlreadyExistException
-        message: An error occurred.
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - BankAccountAlreadyExistException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: An error occurred.
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
     PaginationResult:
       properties:
         limit:
@@ -656,20 +680,20 @@ components:
       - offset
       - totalCount
       type: object
-    InternalServerErrorException:
+    BadRequestException:
       example:
-        errorCode: InternalServerErrorException
-        message: Internal Server Error
+        errorCode: BadRequestException
+        message: Bad Request
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - InternalServerErrorException
+          - BadRequestException
           type: string
         message:
           description: The human readable description of the error.
-          example: Internal Server Error
+          example: Bad Request
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -749,44 +773,20 @@ components:
       - routingNumber
       - updatedAt
       type: object
-    BankAccountNotFoundException:
+    BusinessNotFoundException:
       example:
-        errorCode: BankAccountNotFoundException
+        errorCode: BusinessNotFoundException
         message: An error occurred.
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - BankAccountNotFoundException
+          - BusinessNotFoundException
           type: string
         message:
           description: The human readable description of the error.
           example: An error occurred.
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    ForbiddenException:
-      example:
-        errorCode: ForbiddenException
-        message: Forbidden
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - ForbiddenException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Forbidden
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.

@@ -93,89 +93,6 @@ paths:
       - application/json
 components:
   schemas:
-    UserNotFoundException:
-      example:
-        errorCode: UserNotFoundException
-        message: An error occurred.
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - UserNotFoundException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: An error occurred.
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    TooManyRequestsException:
-      example:
-        errorCode: TooManyRequestsException
-        message: Too Many Requests
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - TooManyRequestsException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Too Many Requests
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    ConnectToken:
-      example:
-        connectToken: 24470124-e9d4-4a0b-9a1a-d575418ae050
-      properties:
-        connectToken:
-          description: The connect token. Pass this to the Kanmon Connect widget.
-          example: 24470124-e9d4-4a0b-9a1a-d575418ae050
-          type: string
-      required:
-      - connectToken
-      type: object
-    BadRequestException:
-      example:
-        errorCode: BadRequestException
-        message: Bad Request
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - BadRequestException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Bad Request
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
     CreateConnectTokenRequestBody:
       example:
         platformUserId: '12345'
@@ -237,6 +154,89 @@ components:
       - errorCode
       - message
       - timestamp
+      type: object
+    UserNotFoundException:
+      example:
+        errorCode: UserNotFoundException
+        message: An error occurred.
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - UserNotFoundException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: An error occurred.
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    TooManyRequestsException:
+      example:
+        errorCode: TooManyRequestsException
+        message: Too Many Requests
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - TooManyRequestsException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Too Many Requests
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    BadRequestException:
+      example:
+        errorCode: BadRequestException
+        message: Bad Request
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BadRequestException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Bad Request
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    ConnectToken:
+      example:
+        connectToken: 24470124-e9d4-4a0b-9a1a-d575418ae050
+      properties:
+        connectToken:
+          description: The connect token. Pass this to the Kanmon Connect widget.
+          example: 24470124-e9d4-4a0b-9a1a-d575418ae050
+          type: string
+      required:
+      - connectToken
       type: object
   securitySchemes:
     Authorization:

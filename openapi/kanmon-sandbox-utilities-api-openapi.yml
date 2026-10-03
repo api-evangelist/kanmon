@@ -176,29 +176,98 @@ paths:
       - application/json
 components:
   schemas:
-    InternalServerErrorException:
+    Business:
       example:
-        errorCode: InternalServerErrorException
-        message: Internal Server Error
-        timestamp: 2022-06-01 03:57:26.115000+00:00
+        createdAt: 2022-06-01 03:57:26.115000+00:00
+        website: https://www.my-business.com
+        metadata: '{}'
+        platformBusinessId: '12345'
+        address:
+          city: San Mateo
+          state: CA
+          country: USA
+          zipcode: '94401'
+          addressLineOne: 123 Main Street
+        phoneNumber: '+14155556789'
+        name: My Business
+        id: 1193fdaf-630c-4771-a629-8da7a87947d2
+        ein: '123456789'
+        isSoleProprietorship: false
+        customInitializationName: custom
+        updatedAt: 2022-06-01 03:57:26.115000+00:00
       properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - InternalServerErrorException
+        id:
+          description: The UUID representing the business in Kanmon.
+          example: 1193fdaf-630c-4771-a629-8da7a87947d2
           type: string
-        message:
-          description: The human readable description of the error.
-          example: Internal Server Error
+        platformBusinessId:
+          description: Your platform’s unique ID for the business.
+          example: '12345'
           type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
+        name:
+          description: The business’s name.
+          example: My Business
+          type:
+          - string
+          - 'null'
+        address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: The business’s address. The address is optional. If you provide the address, you need to provide all the required fields in the address. The address must be a street address, not a PO Box.
+          example:
+            city: San Mateo
+            state: CA
+            country: USA
+            zipcode: '94401'
+            addressLineOne: 123 Main Street
+        ein:
+          description: The business’s EIN. Only digits, no formatting.
+          example: '123456789'
+          type:
+          - string
+          - 'null'
+        phoneNumber:
+          description: The business’s phone number. No formatting characters, country code is optional.
+          example: '+14155556789'
+          type:
+          - string
+          - 'null'
+        website:
+          description: The business’s website.
+          example: https://www.my-business.com
+          type:
+          - string
+          - 'null'
+        customInitializationName:
+          description: A Custom Initialization controls custom implementation profiles for you in Kanmon. Custom Initializations enable a variety of specific configurations for your integration, including embedded UI customization, feature activation, and platform product-line identification. The Kanmon Team will work with you to establish a Custom Initialization and corresponding custom profile if your platform can benefit from this optional configuration. To identify each Custom Initialization, you can define a unique customInitializationName as a reference.
+          example: custom
+          type: string
+        metadata:
+          description: Metadata from your system that you want to associate the business with.
+          type: object
+        isSoleProprietorship:
+          description: Whether the business is a sole proprietorship.
+          example: false
+          type:
+          - boolean
+          - 'null'
+        createdAt:
+          description: Creation UTC ISO 8601 timestamp of the business.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+        updatedAt:
+          description: Last updated UTC ISO 8601 timestamp of the business.
           example: 2022-06-01 03:57:26.115000+00:00
           type: string
       required:
-      - errorCode
-      - message
-      - timestamp
+      - createdAt
+      - ein
+      - id
+      - metadata
+      - name
+      - phoneNumber
+      - updatedAt
+      - website
       type: object
     ForbiddenException:
       example:
@@ -224,20 +293,20 @@ components:
       - message
       - timestamp
       type: object
-    TooManyRequestsException:
+    InternalServerErrorException:
       example:
-        errorCode: TooManyRequestsException
-        message: Too Many Requests
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - TooManyRequestsException
+          - InternalServerErrorException
           type: string
         message:
           description: The human readable description of the error.
-          example: Too Many Requests
+          example: Internal Server Error
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -336,6 +405,30 @@ components:
       - state
       - zipcode
       type: object
+    TooManyRequestsException:
+      example:
+        errorCode: TooManyRequestsException
+        message: Too Many Requests
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - TooManyRequestsException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Too Many Requests
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
     BadRequestException:
       example:
         errorCode: BadRequestException
@@ -359,99 +452,6 @@ components:
       - errorCode
       - message
       - timestamp
-      type: object
-    Business:
-      example:
-        createdAt: 2022-06-01 03:57:26.115000+00:00
-        website: https://www.my-business.com
-        metadata: '{}'
-        platformBusinessId: '12345'
-        address:
-          city: San Mateo
-          state: CA
-          country: USA
-          zipcode: '94401'
-          addressLineOne: 123 Main Street
-        phoneNumber: '+14155556789'
-        name: My Business
-        id: 1193fdaf-630c-4771-a629-8da7a87947d2
-        ein: '123456789'
-        isSoleProprietorship: false
-        customInitializationName: custom
-        updatedAt: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        id:
-          description: The UUID representing the business in Kanmon.
-          example: 1193fdaf-630c-4771-a629-8da7a87947d2
-          type: string
-        platformBusinessId:
-          description: Your platform’s unique ID for the business.
-          example: '12345'
-          type: string
-        name:
-          description: The business’s name.
-          example: My Business
-          type:
-          - string
-          - 'null'
-        address:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: The business’s address. The address is optional. If you provide the address, you need to provide all the required fields in the address. The address must be a street address, not a PO Box.
-          example:
-            city: San Mateo
-            state: CA
-            country: USA
-            zipcode: '94401'
-            addressLineOne: 123 Main Street
-        ein:
-          description: The business’s EIN. Only digits, no formatting.
-          example: '123456789'
-          type:
-          - string
-          - 'null'
-        phoneNumber:
-          description: The business’s phone number. No formatting characters, country code is optional.
-          example: '+14155556789'
-          type:
-          - string
-          - 'null'
-        website:
-          description: The business’s website.
-          example: https://www.my-business.com
-          type:
-          - string
-          - 'null'
-        customInitializationName:
-          description: A Custom Initialization controls custom implementation profiles for you in Kanmon. Custom Initializations enable a variety of specific configurations for your integration, including embedded UI customization, feature activation, and platform product-line identification. The Kanmon Team will work with you to establish a Custom Initialization and corresponding custom profile if your platform can benefit from this optional configuration. To identify each Custom Initialization, you can define a unique customInitializationName as a reference.
-          example: custom
-          type: string
-        metadata:
-          description: Metadata from your system that you want to associate the business with.
-          type: object
-        isSoleProprietorship:
-          description: Whether the business is a sole proprietorship.
-          example: false
-          type:
-          - boolean
-          - 'null'
-        createdAt:
-          description: Creation UTC ISO 8601 timestamp of the business.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-        updatedAt:
-          description: Last updated UTC ISO 8601 timestamp of the business.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - createdAt
-      - ein
-      - id
-      - metadata
-      - name
-      - phoneNumber
-      - updatedAt
-      - website
       type: object
   securitySchemes:
     Authorization:

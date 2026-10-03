@@ -227,126 +227,6 @@ paths:
       - application/json
 components:
   schemas:
-    InternalServerErrorException:
-      example:
-        errorCode: InternalServerErrorException
-        message: Internal Server Error
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - InternalServerErrorException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Internal Server Error
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    DrawRequestNotFoundException:
-      example:
-        errorCode: DrawRequestNotFoundException
-        message: Internal Server Error
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - DrawRequestNotFoundException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Internal Server Error
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    ForbiddenException:
-      example:
-        errorCode: ForbiddenException
-        message: Forbidden
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - ForbiddenException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Forbidden
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    GetDrawRequestsResponse:
-      example:
-        drawRequests:
-        - gracePeriodDays: 30
-          remainingBalanceCents: 500000
-          feePercentage: 5
-          issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          disbursementAmountCents: 960000
-          createdAt: 2022-06-01 03:57:26.115000+00:00
-          amountCents: 1000000
-          repaymentCadence: WEEKLY
-          id: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          feeAmountCents: 40000
-          interestRatePercentage: 10
-          repaymentDurationMonths: 6
-          status: DRAW_REQUEST_CREATED
-          numPaymentPeriods: 3
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
-        - gracePeriodDays: 30
-          remainingBalanceCents: 500000
-          feePercentage: 5
-          issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          disbursementAmountCents: 960000
-          createdAt: 2022-06-01 03:57:26.115000+00:00
-          amountCents: 1000000
-          repaymentCadence: WEEKLY
-          id: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          feeAmountCents: 40000
-          interestRatePercentage: 10
-          repaymentDurationMonths: 6
-          status: DRAW_REQUEST_CREATED
-          numPaymentPeriods: 3
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
-        pagination: ''
-      properties:
-        drawRequests:
-          description: Array of draw requests.
-          items:
-            $ref: '#/components/schemas/DrawRequest'
-          type: array
-        pagination:
-          allOf:
-          - $ref: '#/components/schemas/PaginationResult'
-          description: Pagination metadata.
-      required:
-      - drawRequests
-      - pagination
-      type: object
     DrawRequest:
       example:
         gracePeriodDays: 30
@@ -439,20 +319,73 @@ components:
       - status
       - updatedAt
       type: object
-    TooManyRequestsException:
+    RepaymentCadence:
+      enum:
+      - WEEKLY
+      - MONTHLY
+      type: string
+    GetDrawRequestsResponse:
       example:
-        errorCode: TooManyRequestsException
-        message: Too Many Requests
+        drawRequests:
+        - gracePeriodDays: 30
+          remainingBalanceCents: 500000
+          feePercentage: 5
+          issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          disbursementAmountCents: 960000
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          amountCents: 1000000
+          repaymentCadence: WEEKLY
+          id: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          feeAmountCents: 40000
+          interestRatePercentage: 10
+          repaymentDurationMonths: 6
+          status: DRAW_REQUEST_CREATED
+          numPaymentPeriods: 3
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+        - gracePeriodDays: 30
+          remainingBalanceCents: 500000
+          feePercentage: 5
+          issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          disbursementAmountCents: 960000
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          amountCents: 1000000
+          repaymentCadence: WEEKLY
+          id: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          feeAmountCents: 40000
+          interestRatePercentage: 10
+          repaymentDurationMonths: 6
+          status: DRAW_REQUEST_CREATED
+          numPaymentPeriods: 3
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+        pagination: ''
+      properties:
+        drawRequests:
+          description: Array of draw requests.
+          items:
+            $ref: '#/components/schemas/DrawRequest'
+          type: array
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/PaginationResult'
+          description: Pagination metadata.
+      required:
+      - drawRequests
+      - pagination
+      type: object
+    DrawRequestNotFoundException:
+      example:
+        errorCode: DrawRequestNotFoundException
+        message: Internal Server Error
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - TooManyRequestsException
+          - DrawRequestNotFoundException
           type: string
         message:
           description: The human readable description of the error.
-          example: Too Many Requests
+          example: Internal Server Error
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -482,6 +415,87 @@ components:
       - offset
       - totalCount
       type: object
+    ForbiddenException:
+      example:
+        errorCode: ForbiddenException
+        message: Forbidden
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - ForbiddenException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Forbidden
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    InternalServerErrorException:
+      example:
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - InternalServerErrorException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    DrawRequestState:
+      description: The state of the draw request.
+      enum:
+      - DRAW_REQUEST_CREATED
+      - DRAW_REQUEST_FUNDED
+      - DRAW_REQUEST_PAID_IN_FULL
+      - REJECTED
+      - DEFAULTED
+      type: string
+    TooManyRequestsException:
+      example:
+        errorCode: TooManyRequestsException
+        message: Too Many Requests
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - TooManyRequestsException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Too Many Requests
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
     BadRequestException:
       example:
         errorCode: BadRequestException
@@ -506,20 +520,6 @@ components:
       - message
       - timestamp
       type: object
-    RepaymentCadence:
-      enum:
-      - WEEKLY
-      - MONTHLY
-      type: string
-    DrawRequestState:
-      description: The state of the draw request.
-      enum:
-      - DRAW_REQUEST_CREATED
-      - DRAW_REQUEST_FUNDED
-      - DRAW_REQUEST_PAID_IN_FULL
-      - REJECTED
-      - DEFAULTED
-      type: string
   securitySchemes:
     Authorization:
       in: header

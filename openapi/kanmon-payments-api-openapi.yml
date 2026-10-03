@@ -448,152 +448,56 @@ paths:
       - application/json
 components:
   schemas:
-    GetPaymentIntentsResponse:
+    PaymentScheduleItem:
       example:
-        pagination: ''
-        paymentIntents:
-        - drawRequestId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          confirmedRemainingBalanceCents: 0
-          confirmedPrincipalAmountCents: 80000
-          confirmedFeeAmountCents: 10000
-          createdAt: 2022-06-01 03:57:26.115000+00:00
-          totalAmountCents: 100000
-          paymentOrders:
-          - drawRequestId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-            issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-            platformInvoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-            feeType: INSUFFICIENT_FUNDS
-            totalPaymentAmountCents: 100000
-            createdAt: 2022-06-01 03:57:26.115000+00:00
-            principalPaymentAmountCents: 80000
-            interestPaymentAmountCents: 10000
-            invoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-            id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-            settledDate: 2024-01-03
-            effectiveDate: 2024-01-01
-            feePaymentAmountCents: 10000
-            direction: DISBURSEMENT
-            status: FAILED
-            updatedAt: 2022-06-01 03:57:26.115000+00:00
-          - drawRequestId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-            issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-            platformInvoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-            feeType: INSUFFICIENT_FUNDS
-            totalPaymentAmountCents: 100000
-            createdAt: 2022-06-01 03:57:26.115000+00:00
-            principalPaymentAmountCents: 80000
-            interestPaymentAmountCents: 10000
-            invoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-            id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-            settledDate: 2024-01-03
-            effectiveDate: 2024-01-01
-            feePaymentAmountCents: 10000
-            direction: DISBURSEMENT
-            status: FAILED
-            updatedAt: 2022-06-01 03:57:26.115000+00:00
-          pendingFeeAmountCents: 0
-          isLate: false
-          pendingInterestAmountCents: 0
-          pendingRemainingBalanceCents: 0
-          confirmedTotalAmountCents: 100000
-          id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          interestAmountCents: 10000
-          pendingPrincipalAmountCents: 0
-          direction: REPAYMENT
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
-          cancelledAt: 2024-01-03 03:57:26.115000+00:00
-          issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          trigger: SCHEDULED_REPAYMENT
-          feeType: INSUFFICIENT_FUNDS
-          pendingTotalAmountCents: 0
-          principalAmountCents: 80000
-          confirmedInterestAmountCents: 10000
-          invoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          feeAmountCents: 10000
-          scheduledPaymentDate: 2024-01-01
-        - drawRequestId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          confirmedRemainingBalanceCents: 0
-          confirmedPrincipalAmountCents: 80000
-          confirmedFeeAmountCents: 10000
-          createdAt: 2022-06-01 03:57:26.115000+00:00
-          totalAmountCents: 100000
-          paymentOrders:
-          - drawRequestId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-            issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-            platformInvoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-            feeType: INSUFFICIENT_FUNDS
-            totalPaymentAmountCents: 100000
-            createdAt: 2022-06-01 03:57:26.115000+00:00
-            principalPaymentAmountCents: 80000
-            interestPaymentAmountCents: 10000
-            invoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-            id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-            settledDate: 2024-01-03
-            effectiveDate: 2024-01-01
-            feePaymentAmountCents: 10000
-            direction: DISBURSEMENT
-            status: FAILED
-            updatedAt: 2022-06-01 03:57:26.115000+00:00
-          - drawRequestId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-            issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-            platformInvoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-            feeType: INSUFFICIENT_FUNDS
-            totalPaymentAmountCents: 100000
-            createdAt: 2022-06-01 03:57:26.115000+00:00
-            principalPaymentAmountCents: 80000
-            interestPaymentAmountCents: 10000
-            invoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-            id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-            settledDate: 2024-01-03
-            effectiveDate: 2024-01-01
-            feePaymentAmountCents: 10000
-            direction: DISBURSEMENT
-            status: FAILED
-            updatedAt: 2022-06-01 03:57:26.115000+00:00
-          pendingFeeAmountCents: 0
-          isLate: false
-          pendingInterestAmountCents: 0
-          pendingRemainingBalanceCents: 0
-          confirmedTotalAmountCents: 100000
-          id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          interestAmountCents: 10000
-          pendingPrincipalAmountCents: 0
-          direction: REPAYMENT
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
-          cancelledAt: 2024-01-03 03:57:26.115000+00:00
-          issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          trigger: SCHEDULED_REPAYMENT
-          feeType: INSUFFICIENT_FUNDS
-          pendingTotalAmountCents: 0
-          principalAmountCents: 80000
-          confirmedInterestAmountCents: 10000
-          invoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          feeAmountCents: 10000
-          scheduledPaymentDate: 2024-01-01
+        totalPaymentAmountCents: 100000
+        paymentOrder: ''
+        effectiveDate: 2024-01-01
       properties:
-        paymentIntents:
-          description: A payment intent represents a planned payment on an issued product, such as a disbursement, scheduled repayment, fee, or refund. It tracks intended amounts, whether the payment is late, settlement progress via the confirmed and pending amount fields, and the payment orders that actually move funds. Payment intents may be cancelled when superseded — for example, by an early payoff.
-          items:
-            $ref: '#/components/schemas/PaymentIntent'
-          type: array
-        pagination:
+        effectiveDate:
+          description: The effective UTC ISO 8601 date that the payment will process.
+          example: 2024-01-01
+          type: string
+        totalPaymentAmountCents:
+          description: The total payment amount - in cents.
+          example: 100000
+          type: number
+        paymentOrder:
           allOf:
-          - $ref: '#/components/schemas/PaginationResult'
-          description: Pagination metadata.
+          - $ref: '#/components/schemas/PaymentOrder'
+          description: The payment order for this schedule item
       required:
-      - pagination
-      - paymentIntents
+      - effectiveDate
+      - totalPaymentAmountCents
       type: object
-    PaymentOrderNotFoundException:
+    PaymentOrderStatus:
+      description: The status of the payment.
+      enum:
+      - FAILED
+      - PAID
+      - PENDING
+      type: string
+    PaymentIntentTriggerType:
+      enum:
+      - DISBURSEMENT
+      - DISBURSEMENT_RETURN
+      - SCHEDULED_REPAYMENT
+      - EARLY_PAYOFF
+      - REFINANCE_PAYOFF
+      - FEE
+      - REFUND
+      - MINIMUM_PAYMENT
+      type: string
+    IssuedProductNotFoundException:
       example:
-        errorCode: PaymentOrderNotFoundException
+        errorCode: IssuedProductNotFoundException
         message: Internal Server Error
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - PaymentOrderNotFoundException
+          - IssuedProductNotFoundException
           type: string
         message:
           description: The human readable description of the error.
@@ -906,6 +810,161 @@ components:
       - trigger
       - updatedAt
       type: object
+    PaginationResult:
+      properties:
+        limit:
+          description: The number of records to limit when performing pagination.
+          example: 100
+          type: number
+        offset:
+          description: The number of records to skip when performing pagination.
+          example: 0
+          type: number
+        totalCount:
+          description: The total number of records that matched the query.
+          example: 100
+          type: number
+      required:
+      - limit
+      - offset
+      - totalCount
+      type: object
+    GetPaymentIntentsResponse:
+      example:
+        pagination: ''
+        paymentIntents:
+        - drawRequestId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          confirmedRemainingBalanceCents: 0
+          confirmedPrincipalAmountCents: 80000
+          confirmedFeeAmountCents: 10000
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          totalAmountCents: 100000
+          paymentOrders:
+          - drawRequestId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+            issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+            platformInvoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+            feeType: INSUFFICIENT_FUNDS
+            totalPaymentAmountCents: 100000
+            createdAt: 2022-06-01 03:57:26.115000+00:00
+            principalPaymentAmountCents: 80000
+            interestPaymentAmountCents: 10000
+            invoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+            id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+            settledDate: 2024-01-03
+            effectiveDate: 2024-01-01
+            feePaymentAmountCents: 10000
+            direction: DISBURSEMENT
+            status: FAILED
+            updatedAt: 2022-06-01 03:57:26.115000+00:00
+          - drawRequestId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+            issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+            platformInvoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+            feeType: INSUFFICIENT_FUNDS
+            totalPaymentAmountCents: 100000
+            createdAt: 2022-06-01 03:57:26.115000+00:00
+            principalPaymentAmountCents: 80000
+            interestPaymentAmountCents: 10000
+            invoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+            id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+            settledDate: 2024-01-03
+            effectiveDate: 2024-01-01
+            feePaymentAmountCents: 10000
+            direction: DISBURSEMENT
+            status: FAILED
+            updatedAt: 2022-06-01 03:57:26.115000+00:00
+          pendingFeeAmountCents: 0
+          isLate: false
+          pendingInterestAmountCents: 0
+          pendingRemainingBalanceCents: 0
+          confirmedTotalAmountCents: 100000
+          id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          interestAmountCents: 10000
+          pendingPrincipalAmountCents: 0
+          direction: REPAYMENT
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+          cancelledAt: 2024-01-03 03:57:26.115000+00:00
+          issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          trigger: SCHEDULED_REPAYMENT
+          feeType: INSUFFICIENT_FUNDS
+          pendingTotalAmountCents: 0
+          principalAmountCents: 80000
+          confirmedInterestAmountCents: 10000
+          invoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          feeAmountCents: 10000
+          scheduledPaymentDate: 2024-01-01
+        - drawRequestId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          confirmedRemainingBalanceCents: 0
+          confirmedPrincipalAmountCents: 80000
+          confirmedFeeAmountCents: 10000
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          totalAmountCents: 100000
+          paymentOrders:
+          - drawRequestId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+            issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+            platformInvoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+            feeType: INSUFFICIENT_FUNDS
+            totalPaymentAmountCents: 100000
+            createdAt: 2022-06-01 03:57:26.115000+00:00
+            principalPaymentAmountCents: 80000
+            interestPaymentAmountCents: 10000
+            invoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+            id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+            settledDate: 2024-01-03
+            effectiveDate: 2024-01-01
+            feePaymentAmountCents: 10000
+            direction: DISBURSEMENT
+            status: FAILED
+            updatedAt: 2022-06-01 03:57:26.115000+00:00
+          - drawRequestId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+            issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+            platformInvoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+            feeType: INSUFFICIENT_FUNDS
+            totalPaymentAmountCents: 100000
+            createdAt: 2022-06-01 03:57:26.115000+00:00
+            principalPaymentAmountCents: 80000
+            interestPaymentAmountCents: 10000
+            invoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+            id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+            settledDate: 2024-01-03
+            effectiveDate: 2024-01-01
+            feePaymentAmountCents: 10000
+            direction: DISBURSEMENT
+            status: FAILED
+            updatedAt: 2022-06-01 03:57:26.115000+00:00
+          pendingFeeAmountCents: 0
+          isLate: false
+          pendingInterestAmountCents: 0
+          pendingRemainingBalanceCents: 0
+          confirmedTotalAmountCents: 100000
+          id: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          interestAmountCents: 10000
+          pendingPrincipalAmountCents: 0
+          direction: REPAYMENT
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+          cancelledAt: 2024-01-03 03:57:26.115000+00:00
+          issuedProductId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          trigger: SCHEDULED_REPAYMENT
+          feeType: INSUFFICIENT_FUNDS
+          pendingTotalAmountCents: 0
+          principalAmountCents: 80000
+          confirmedInterestAmountCents: 10000
+          invoiceId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          feeAmountCents: 10000
+          scheduledPaymentDate: 2024-01-01
+      properties:
+        paymentIntents:
+          description: A payment intent represents a planned payment on an issued product, such as a disbursement, scheduled repayment, fee, or refund. It tracks intended amounts, whether the payment is late, settlement progress via the confirmed and pending amount fields, and the payment orders that actually move funds. Payment intents may be cancelled when superseded — for example, by an early payoff.
+          items:
+            $ref: '#/components/schemas/PaymentIntent'
+          type: array
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/PaginationResult'
+          description: Pagination metadata.
+      required:
+      - pagination
+      - paymentIntents
+      type: object
     InternalServerErrorException:
       example:
         errorCode: InternalServerErrorException
@@ -953,161 +1012,6 @@ components:
       - errorCode
       - message
       - timestamp
-      type: object
-    PaymentScheduleItem:
-      example:
-        totalPaymentAmountCents: 100000
-        paymentOrder: ''
-        effectiveDate: 2024-01-01
-      properties:
-        effectiveDate:
-          description: The effective UTC ISO 8601 date that the payment will process.
-          example: 2024-01-01
-          type: string
-        totalPaymentAmountCents:
-          description: The total payment amount - in cents.
-          example: 100000
-          type: number
-        paymentOrder:
-          allOf:
-          - $ref: '#/components/schemas/PaymentOrder'
-          description: The payment order for this schedule item
-      required:
-      - effectiveDate
-      - totalPaymentAmountCents
-      type: object
-    PaymentOrderStatus:
-      description: The status of the payment.
-      enum:
-      - FAILED
-      - PAID
-      - PENDING
-      type: string
-    IssuedProductNotFoundException:
-      example:
-        errorCode: IssuedProductNotFoundException
-        message: Internal Server Error
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - IssuedProductNotFoundException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Internal Server Error
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    TooManyRequestsException:
-      example:
-        errorCode: TooManyRequestsException
-        message: Too Many Requests
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - TooManyRequestsException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Too Many Requests
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    PaginationResult:
-      properties:
-        limit:
-          description: The number of records to limit when performing pagination.
-          example: 100
-          type: number
-        offset:
-          description: The number of records to skip when performing pagination.
-          example: 0
-          type: number
-        totalCount:
-          description: The total number of records that matched the query.
-          example: 100
-          type: number
-      required:
-      - limit
-      - offset
-      - totalCount
-      type: object
-    BadRequestException:
-      example:
-        errorCode: BadRequestException
-        message: Bad Request
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - BadRequestException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Bad Request
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    PaymentIntentTriggerType:
-      enum:
-      - DISBURSEMENT
-      - DISBURSEMENT_RETURN
-      - SCHEDULED_REPAYMENT
-      - EARLY_PAYOFF
-      - REFINANCE_PAYOFF
-      - FEE
-      - REFUND
-      - MINIMUM_PAYMENT
-      type: string
-    GetPaymentScheduleResponse:
-      example:
-        pagination: ''
-        paymentSchedule:
-        - totalPaymentAmountCents: 100000
-          paymentOrder: ''
-          effectiveDate: 2024-01-01
-        - totalPaymentAmountCents: 100000
-          paymentOrder: ''
-          effectiveDate: 2024-01-01
-      properties:
-        paymentSchedule:
-          description: Array of payment schedule items for an issued product.
-          items:
-            $ref: '#/components/schemas/PaymentScheduleItem'
-          type: array
-        pagination:
-          allOf:
-          - $ref: '#/components/schemas/PaginationResult'
-          description: Pagination metadata.
-      required:
-      - pagination
-      - paymentSchedule
       type: object
     PaymentOrder:
       example:
@@ -1231,6 +1135,102 @@ components:
       - status
       - totalPaymentAmountCents
       - updatedAt
+      type: object
+    GetPaymentScheduleResponse:
+      example:
+        pagination: ''
+        paymentSchedule:
+        - totalPaymentAmountCents: 100000
+          paymentOrder: ''
+          effectiveDate: 2024-01-01
+        - totalPaymentAmountCents: 100000
+          paymentOrder: ''
+          effectiveDate: 2024-01-01
+      properties:
+        paymentSchedule:
+          description: Array of payment schedule items for an issued product.
+          items:
+            $ref: '#/components/schemas/PaymentScheduleItem'
+          type: array
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/PaginationResult'
+          description: Pagination metadata.
+      required:
+      - pagination
+      - paymentSchedule
+      type: object
+    PaymentOrderNotFoundException:
+      example:
+        errorCode: PaymentOrderNotFoundException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - PaymentOrderNotFoundException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    TooManyRequestsException:
+      example:
+        errorCode: TooManyRequestsException
+        message: Too Many Requests
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - TooManyRequestsException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Too Many Requests
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    BadRequestException:
+      example:
+        errorCode: BadRequestException
+        message: Bad Request
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BadRequestException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Bad Request
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
       type: object
   securitySchemes:
     Authorization:

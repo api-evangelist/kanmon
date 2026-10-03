@@ -107,20 +107,31 @@ components:
           example: '12345'
           type: string
       type: object
-    InternalServerErrorException:
+    ConnectToken:
       example:
-        errorCode: InternalServerErrorException
-        message: Internal Server Error
+        connectToken: 24470124-e9d4-4a0b-9a1a-d575418ae050
+      properties:
+        connectToken:
+          description: The connect token. Pass this to the Kanmon Connect widget.
+          example: 24470124-e9d4-4a0b-9a1a-d575418ae050
+          type: string
+      required:
+      - connectToken
+      type: object
+    UserNotFoundException:
+      example:
+        errorCode: UserNotFoundException
+        message: An error occurred.
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - InternalServerErrorException
+          - UserNotFoundException
           type: string
         message:
           description: The human readable description of the error.
-          example: Internal Server Error
+          example: An error occurred.
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -155,20 +166,20 @@ components:
       - message
       - timestamp
       type: object
-    UserNotFoundException:
+    InternalServerErrorException:
       example:
-        errorCode: UserNotFoundException
-        message: An error occurred.
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - UserNotFoundException
+          - InternalServerErrorException
           type: string
         message:
           description: The human readable description of the error.
-          example: An error occurred.
+          example: Internal Server Error
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -226,17 +237,6 @@ components:
       - errorCode
       - message
       - timestamp
-      type: object
-    ConnectToken:
-      example:
-        connectToken: 24470124-e9d4-4a0b-9a1a-d575418ae050
-      properties:
-        connectToken:
-          description: The connect token. Pass this to the Kanmon Connect widget.
-          example: 24470124-e9d4-4a0b-9a1a-d575418ae050
-          type: string
-      required:
-      - connectToken
       type: object
   securitySchemes:
     Authorization:

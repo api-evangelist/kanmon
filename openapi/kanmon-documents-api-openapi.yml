@@ -86,6 +86,32 @@ paths:
       - application/json
 components:
   schemas:
+    CreateBusinessDocumentsResponse:
+      example:
+        documents:
+        - originalFileName: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          platformBusinessId: '12345'
+          documentType: INVOICE
+          businessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          id: 1193fdaf-630c-4771-a629-8da7a87947d2
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+        - originalFileName: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          platformBusinessId: '12345'
+          documentType: INVOICE
+          businessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          id: 1193fdaf-630c-4771-a629-8da7a87947d2
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        documents:
+          description: The documents that were uploaded.
+          items:
+            $ref: '#/components/schemas/BusinessDocument'
+          type: array
+      required:
+      - documents
+      type: object
     BusinessDocument:
       example:
         originalFileName: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
@@ -133,6 +159,11 @@ components:
       - platformBusinessId
       - updatedAt
       type: object
+    BusinessDocumentType:
+      description: The type of document that is uploaded.
+      enum:
+      - INVOICE
+      type: string
     InternalServerErrorException:
       example:
         errorCode: InternalServerErrorException
@@ -156,6 +187,25 @@ components:
       - errorCode
       - message
       - timestamp
+      type: object
+    UploadBankDocumentsRequest:
+      properties:
+        invoices:
+          description: Invoices to be uploaded. The file format must be PDF. The limit is 10 files, 10 MB per file.
+          items:
+            format: binary
+            type: string
+          type: array
+        businessId:
+          description: The unique identifier for business within Kanmon. Either of `businessId` or `platformBusinessId` is required.
+          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          type: string
+        platformBusinessId:
+          description: The unique identifier for business in your platform. Either of `businessId` or `platformBusinessId` is required.
+          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          type: string
+      required:
+      - invoices
       type: object
     ForbiddenException:
       example:
@@ -205,11 +255,6 @@ components:
       - message
       - timestamp
       type: object
-    BusinessDocumentType:
-      description: The type of document that is uploaded.
-      enum:
-      - INVOICE
-      type: string
     BadRequestException:
       example:
         errorCode: BadRequestException
@@ -233,51 +278,6 @@ components:
       - errorCode
       - message
       - timestamp
-      type: object
-    CreateBusinessDocumentsResponse:
-      example:
-        documents:
-        - originalFileName: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          createdAt: 2022-06-01 03:57:26.115000+00:00
-          platformBusinessId: '12345'
-          documentType: INVOICE
-          businessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          id: 1193fdaf-630c-4771-a629-8da7a87947d2
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
-        - originalFileName: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          createdAt: 2022-06-01 03:57:26.115000+00:00
-          platformBusinessId: '12345'
-          documentType: INVOICE
-          businessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          id: 1193fdaf-630c-4771-a629-8da7a87947d2
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        documents:
-          description: The documents that were uploaded.
-          items:
-            $ref: '#/components/schemas/BusinessDocument'
-          type: array
-      required:
-      - documents
-      type: object
-    UploadBankDocumentsRequest:
-      properties:
-        invoices:
-          description: Invoices to be uploaded. The file format must be PDF. The limit is 10 files, 10 MB per file.
-          items:
-            format: binary
-            type: string
-          type: array
-        businessId:
-          description: The unique identifier for business within Kanmon. Either of `businessId` or `platformBusinessId` is required.
-          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          type: string
-        platformBusinessId:
-          description: The unique identifier for business in your platform. Either of `businessId` or `platformBusinessId` is required.
-          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          type: string
-      required:
-      - invoices
       type: object
   securitySchemes:
     Authorization:

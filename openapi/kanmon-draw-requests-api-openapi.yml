@@ -227,6 +227,92 @@ paths:
       - application/json
 components:
   schemas:
+    DrawRequestState:
+      description: The state of the draw request.
+      enum:
+      - DRAW_REQUEST_CREATED
+      - DRAW_REQUEST_FUNDED
+      - DRAW_REQUEST_PAID_IN_FULL
+      - REJECTED
+      - DEFAULTED
+      type: string
+    BadRequestException:
+      example:
+        errorCode: BadRequestException
+        message: Bad Request
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BadRequestException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Bad Request
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    InternalServerErrorException:
+      example:
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - InternalServerErrorException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    DrawRequestNotFoundException:
+      example:
+        errorCode: DrawRequestNotFoundException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - DrawRequestNotFoundException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    RepaymentCadence:
+      enum:
+      - WEEKLY
+      - MONTHLY
+      type: string
     DrawRequest:
       example:
         gracePeriodDays: 30
@@ -319,11 +405,49 @@ components:
       - status
       - updatedAt
       type: object
-    RepaymentCadence:
-      enum:
-      - WEEKLY
-      - MONTHLY
-      type: string
+    PaginationResult:
+      properties:
+        limit:
+          description: The number of records to limit when performing pagination.
+          example: 100
+          type: number
+        offset:
+          description: The number of records to skip when performing pagination.
+          example: 0
+          type: number
+        totalCount:
+          description: The total number of records that matched the query.
+          example: 100
+          type: number
+      required:
+      - limit
+      - offset
+      - totalCount
+      type: object
+    ForbiddenException:
+      example:
+        errorCode: ForbiddenException
+        message: Forbidden
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - ForbiddenException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Forbidden
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
     GetDrawRequestsResponse:
       example:
         drawRequests:
@@ -372,106 +496,6 @@ components:
       - drawRequests
       - pagination
       type: object
-    DrawRequestNotFoundException:
-      example:
-        errorCode: DrawRequestNotFoundException
-        message: Internal Server Error
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - DrawRequestNotFoundException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Internal Server Error
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    PaginationResult:
-      properties:
-        limit:
-          description: The number of records to limit when performing pagination.
-          example: 100
-          type: number
-        offset:
-          description: The number of records to skip when performing pagination.
-          example: 0
-          type: number
-        totalCount:
-          description: The total number of records that matched the query.
-          example: 100
-          type: number
-      required:
-      - limit
-      - offset
-      - totalCount
-      type: object
-    ForbiddenException:
-      example:
-        errorCode: ForbiddenException
-        message: Forbidden
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - ForbiddenException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Forbidden
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    InternalServerErrorException:
-      example:
-        errorCode: InternalServerErrorException
-        message: Internal Server Error
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - InternalServerErrorException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Internal Server Error
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    DrawRequestState:
-      description: The state of the draw request.
-      enum:
-      - DRAW_REQUEST_CREATED
-      - DRAW_REQUEST_FUNDED
-      - DRAW_REQUEST_PAID_IN_FULL
-      - REJECTED
-      - DEFAULTED
-      type: string
     TooManyRequestsException:
       example:
         errorCode: TooManyRequestsException
@@ -486,30 +510,6 @@ components:
         message:
           description: The human readable description of the error.
           example: Too Many Requests
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    BadRequestException:
-      example:
-        errorCode: BadRequestException
-        message: Bad Request
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - BadRequestException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Bad Request
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.

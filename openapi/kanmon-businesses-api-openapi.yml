@@ -521,79 +521,20 @@ paths:
       - application/json
 components:
   schemas:
-    UpdateBusinessRequestBody:
+    InternalServerErrorException:
       example:
-        website: https://www.my-business.com
-        metadata: '{}'
-        platformBusinessId: '12345'
-        address:
-          city: San Mateo
-          state: CA
-          country: USA
-          zipcode: '94401'
-          addressLineOne: 123 Main Street
-        phoneNumber: '+14155556789'
-        name: My Business
-        ein: '123456789'
-        isSoleProprietorship: false
-        customInitializationName: custom
-      properties:
-        name:
-          description: The business’s name.
-          example: My Business
-          type: string
-        platformBusinessId:
-          description: Your platform’s unique ID for the business.
-          example: '12345'
-          type: string
-        address:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: The business’s address. The address is optional. If you provide the address, you need to provide all the required fields in the address. The address must be a street address, not a PO Box.
-          example:
-            city: San Mateo
-            state: CA
-            country: USA
-            zipcode: '94401'
-            addressLineOne: 123 Main Street
-        ein:
-          description: The business’s EIN. Only digits, no formatting.
-          example: '123456789'
-          type: string
-        phoneNumber:
-          description: The business’s phone number. No formatting characters, country code is optional.
-          example: '+14155556789'
-          type: string
-        website:
-          description: The business’s website.
-          example: https://www.my-business.com
-          type: string
-        customInitializationName:
-          description: A Custom Initialization controls custom implementation profiles for you in Kanmon. Custom Initializations enable a variety of specific configurations for your integration, including embedded UI customization, feature activation, and platform product-line identification. The Kanmon Team will work with you to establish a Custom Initialization and corresponding custom profile if your platform can benefit from this optional configuration. To identify each Custom Initialization, you can define a unique customInitializationName as a reference.
-          example: custom
-          type: object
-        metadata:
-          description: Metadata from your system that you want to associate the business with.
-          type: object
-        isSoleProprietorship:
-          description: Whether the business is a sole proprietorship.
-          example: false
-          type: boolean
-      type: object
-    BusinessAlreadyExistsException:
-      example:
-        errorCode: BusinessAlreadyExistsException
-        message: An error occurred.
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - BusinessAlreadyExistsException
+          - InternalServerErrorException
           type: string
         message:
           description: The human readable description of the error.
-          example: An error occurred.
+          example: Internal Server Error
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -604,37 +545,29 @@ components:
       - message
       - timestamp
       type: object
-    GetActivityLogsResponse:
+    BadRequestException:
       example:
-        pagination: ''
-        activityLogs:
-        - createdAt: 2022-06-01 03:57:26.115000+00:00
-          platformBusinessId: '12345'
-          payload: '{}'
-          businessId: 1193fdaf-630c-4771-a629-8da7a87947d2
-          id: 1193fdaf-630c-4771-a629-8da7a87947d2
-          eventType: BUSINESS.NEW_ACCOUNT
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
-        - createdAt: 2022-06-01 03:57:26.115000+00:00
-          platformBusinessId: '12345'
-          payload: '{}'
-          businessId: 1193fdaf-630c-4771-a629-8da7a87947d2
-          id: 1193fdaf-630c-4771-a629-8da7a87947d2
-          eventType: BUSINESS.NEW_ACCOUNT
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
+        errorCode: BadRequestException
+        message: Bad Request
+        timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
-        activityLogs:
-          description: An array of activity logs.
-          items:
-            $ref: '#/components/schemas/ActivityLog'
-          type: array
-        pagination:
-          allOf:
-          - $ref: '#/components/schemas/PaginationResult'
-          description: Pagination metadata.
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BadRequestException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Bad Request
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
       required:
-      - activityLogs
-      - pagination
+      - errorCode
+      - message
+      - timestamp
       type: object
     CreateBusinessRequestBody:
       example:
@@ -696,6 +629,109 @@ components:
           type: boolean
       required:
       - platformBusinessId
+      type: object
+    ActivityLog:
+      example:
+        createdAt: 2022-06-01 03:57:26.115000+00:00
+        platformBusinessId: '12345'
+        payload: '{}'
+        businessId: 1193fdaf-630c-4771-a629-8da7a87947d2
+        id: 1193fdaf-630c-4771-a629-8da7a87947d2
+        eventType: BUSINESS.NEW_ACCOUNT
+        updatedAt: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        id:
+          description: The UUID representing the activity log item in Kanmon.
+          example: 1193fdaf-630c-4771-a629-8da7a87947d2
+          type: string
+        businessId:
+          description: The UUID representing the business in Kanmon.
+          example: 1193fdaf-630c-4771-a629-8da7a87947d2
+          type: string
+        platformBusinessId:
+          description: Your platform’s unique business ID for the user.
+          example: '12345'
+          type:
+          - string
+          - 'null'
+        payload:
+          description: 'Event details and schema: https://kanmon.dev/docs/webhook-events'
+          type: object
+        eventType:
+          description: A description of the log event type.
+          example: BUSINESS.NEW_ACCOUNT
+          type: string
+        createdAt:
+          description: Creation UTC ISO 8601 timestamp of the business.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+        updatedAt:
+          description: Last updated UTC ISO 8601 timestamp of the business.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - businessId
+      - createdAt
+      - eventType
+      - id
+      - payload
+      - platformBusinessId
+      - updatedAt
+      type: object
+    createBusiness_404_response:
+      oneOf:
+      - $ref: '#/components/schemas/BusinessNotFoundException'
+      - $ref: '#/components/schemas/CustomInitializationNotFoundException'
+    GetActivityLogsResponse:
+      example:
+        pagination: ''
+        activityLogs:
+        - createdAt: 2022-06-01 03:57:26.115000+00:00
+          platformBusinessId: '12345'
+          payload: '{}'
+          businessId: 1193fdaf-630c-4771-a629-8da7a87947d2
+          id: 1193fdaf-630c-4771-a629-8da7a87947d2
+          eventType: BUSINESS.NEW_ACCOUNT
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+        - createdAt: 2022-06-01 03:57:26.115000+00:00
+          platformBusinessId: '12345'
+          payload: '{}'
+          businessId: 1193fdaf-630c-4771-a629-8da7a87947d2
+          id: 1193fdaf-630c-4771-a629-8da7a87947d2
+          eventType: BUSINESS.NEW_ACCOUNT
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        activityLogs:
+          description: An array of activity logs.
+          items:
+            $ref: '#/components/schemas/ActivityLog'
+          type: array
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/PaginationResult'
+          description: Pagination metadata.
+      required:
+      - activityLogs
+      - pagination
+      type: object
+    PaginationResult:
+      properties:
+        limit:
+          description: The number of records to limit when performing pagination.
+          example: 100
+          type: number
+        offset:
+          description: The number of records to skip when performing pagination.
+          example: 0
+          type: number
+        totalCount:
+          description: The total number of records that matched the query.
+          example: 100
+          type: number
+      required:
+      - limit
+      - offset
+      - totalCount
       type: object
     Business:
       example:
@@ -790,45 +826,6 @@ components:
       - updatedAt
       - website
       type: object
-    PaginationResult:
-      properties:
-        limit:
-          description: The number of records to limit when performing pagination.
-          example: 100
-          type: number
-        offset:
-          description: The number of records to skip when performing pagination.
-          example: 0
-          type: number
-        totalCount:
-          description: The total number of records that matched the query.
-          example: 100
-          type: number
-      required:
-      - limit
-      - offset
-      - totalCount
-      type: object
-    CustomInitializationNotFoundException:
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - CustomInitializationNotFoundException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: An error occurred.
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
     BusinessNotFoundException:
       example:
         errorCode: BusinessNotFoundException
@@ -843,6 +840,106 @@ components:
         message:
           description: The human readable description of the error.
           example: An error occurred.
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    ForbiddenException:
+      example:
+        errorCode: ForbiddenException
+        message: Forbidden
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - ForbiddenException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Forbidden
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    GetBusinessesResponse:
+      example:
+        pagination: ''
+        businesses:
+        - createdAt: 2022-06-01 03:57:26.115000+00:00
+          website: https://www.my-business.com
+          metadata: '{}'
+          platformBusinessId: '12345'
+          address:
+            city: San Mateo
+            state: CA
+            country: USA
+            zipcode: '94401'
+            addressLineOne: 123 Main Street
+          phoneNumber: '+14155556789'
+          name: My Business
+          id: 1193fdaf-630c-4771-a629-8da7a87947d2
+          ein: '123456789'
+          isSoleProprietorship: false
+          customInitializationName: custom
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+        - createdAt: 2022-06-01 03:57:26.115000+00:00
+          website: https://www.my-business.com
+          metadata: '{}'
+          platformBusinessId: '12345'
+          address:
+            city: San Mateo
+            state: CA
+            country: USA
+            zipcode: '94401'
+            addressLineOne: 123 Main Street
+          phoneNumber: '+14155556789'
+          name: My Business
+          id: 1193fdaf-630c-4771-a629-8da7a87947d2
+          ein: '123456789'
+          isSoleProprietorship: false
+          customInitializationName: custom
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        businesses:
+          description: Array of businesses.
+          items:
+            $ref: '#/components/schemas/Business'
+          type: array
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/PaginationResult'
+          description: Pagination metadata.
+      required:
+      - businesses
+      - pagination
+      type: object
+    TooManyRequestsException:
+      example:
+        errorCode: TooManyRequestsException
+        message: Too Many Requests
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - TooManyRequestsException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Too Many Requests
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -941,20 +1038,16 @@ components:
       - state
       - zipcode
       type: object
-    InternalServerErrorException:
-      example:
-        errorCode: InternalServerErrorException
-        message: Internal Server Error
-        timestamp: 2022-06-01 03:57:26.115000+00:00
+    CustomInitializationNotFoundException:
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - InternalServerErrorException
+          - CustomInitializationNotFoundException
           type: string
         message:
           description: The human readable description of the error.
-          example: Internal Server Error
+          example: An error occurred.
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -965,20 +1058,20 @@ components:
       - message
       - timestamp
       type: object
-    ForbiddenException:
+    BusinessAlreadyExistsException:
       example:
-        errorCode: ForbiddenException
-        message: Forbidden
+        errorCode: BusinessAlreadyExistsException
+        message: An error occurred.
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - ForbiddenException
+          - BusinessAlreadyExistsException
           type: string
         message:
           description: The human readable description of the error.
-          example: Forbidden
+          example: An error occurred.
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -989,157 +1082,64 @@ components:
       - message
       - timestamp
       type: object
-    createBusiness_404_response:
-      oneOf:
-      - $ref: '#/components/schemas/BusinessNotFoundException'
-      - $ref: '#/components/schemas/CustomInitializationNotFoundException'
-    TooManyRequestsException:
+    UpdateBusinessRequestBody:
       example:
-        errorCode: TooManyRequestsException
-        message: Too Many Requests
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - TooManyRequestsException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Too Many Requests
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    BadRequestException:
-      example:
-        errorCode: BadRequestException
-        message: Bad Request
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - BadRequestException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Bad Request
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    GetBusinessesResponse:
-      example:
-        pagination: ''
-        businesses:
-        - createdAt: 2022-06-01 03:57:26.115000+00:00
-          website: https://www.my-business.com
-          metadata: '{}'
-          platformBusinessId: '12345'
-          address:
-            city: San Mateo
-            state: CA
-            country: USA
-            zipcode: '94401'
-            addressLineOne: 123 Main Street
-          phoneNumber: '+14155556789'
-          name: My Business
-          id: 1193fdaf-630c-4771-a629-8da7a87947d2
-          ein: '123456789'
-          isSoleProprietorship: false
-          customInitializationName: custom
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
-        - createdAt: 2022-06-01 03:57:26.115000+00:00
-          website: https://www.my-business.com
-          metadata: '{}'
-          platformBusinessId: '12345'
-          address:
-            city: San Mateo
-            state: CA
-            country: USA
-            zipcode: '94401'
-            addressLineOne: 123 Main Street
-          phoneNumber: '+14155556789'
-          name: My Business
-          id: 1193fdaf-630c-4771-a629-8da7a87947d2
-          ein: '123456789'
-          isSoleProprietorship: false
-          customInitializationName: custom
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        businesses:
-          description: Array of businesses.
-          items:
-            $ref: '#/components/schemas/Business'
-          type: array
-        pagination:
-          allOf:
-          - $ref: '#/components/schemas/PaginationResult'
-          description: Pagination metadata.
-      required:
-      - businesses
-      - pagination
-      type: object
-    ActivityLog:
-      example:
-        createdAt: 2022-06-01 03:57:26.115000+00:00
+        website: https://www.my-business.com
+        metadata: '{}'
         platformBusinessId: '12345'
-        payload: '{}'
-        businessId: 1193fdaf-630c-4771-a629-8da7a87947d2
-        id: 1193fdaf-630c-4771-a629-8da7a87947d2
-        eventType: BUSINESS.NEW_ACCOUNT
-        updatedAt: 2022-06-01 03:57:26.115000+00:00
+        address:
+          city: San Mateo
+          state: CA
+          country: USA
+          zipcode: '94401'
+          addressLineOne: 123 Main Street
+        phoneNumber: '+14155556789'
+        name: My Business
+        ein: '123456789'
+        isSoleProprietorship: false
+        customInitializationName: custom
       properties:
-        id:
-          description: The UUID representing the activity log item in Kanmon.
-          example: 1193fdaf-630c-4771-a629-8da7a87947d2
-          type: string
-        businessId:
-          description: The UUID representing the business in Kanmon.
-          example: 1193fdaf-630c-4771-a629-8da7a87947d2
+        name:
+          description: The business’s name.
+          example: My Business
           type: string
         platformBusinessId:
-          description: Your platform’s unique business ID for the user.
+          description: Your platform’s unique ID for the business.
           example: '12345'
-          type:
-          - string
-          - 'null'
-        payload:
-          description: 'Event details and schema: https://kanmon.dev/docs/webhook-events'
+          type: string
+        address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: The business’s address. The address is optional. If you provide the address, you need to provide all the required fields in the address. The address must be a street address, not a PO Box.
+          example:
+            city: San Mateo
+            state: CA
+            country: USA
+            zipcode: '94401'
+            addressLineOne: 123 Main Street
+        ein:
+          description: The business’s EIN. Only digits, no formatting.
+          example: '123456789'
+          type: string
+        phoneNumber:
+          description: The business’s phone number. No formatting characters, country code is optional.
+          example: '+14155556789'
+          type: string
+        website:
+          description: The business’s website.
+          example: https://www.my-business.com
+          type: string
+        customInitializationName:
+          description: A Custom Initialization controls custom implementation profiles for you in Kanmon. Custom Initializations enable a variety of specific configurations for your integration, including embedded UI customization, feature activation, and platform product-line identification. The Kanmon Team will work with you to establish a Custom Initialization and corresponding custom profile if your platform can benefit from this optional configuration. To identify each Custom Initialization, you can define a unique customInitializationName as a reference.
+          example: custom
           type: object
-        eventType:
-          description: A description of the log event type.
-          example: BUSINESS.NEW_ACCOUNT
-          type: string
-        createdAt:
-          description: Creation UTC ISO 8601 timestamp of the business.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-        updatedAt:
-          description: Last updated UTC ISO 8601 timestamp of the business.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - businessId
-      - createdAt
-      - eventType
-      - id
-      - payload
-      - platformBusinessId
-      - updatedAt
+        metadata:
+          description: Metadata from your system that you want to associate the business with.
+          type: object
+        isSoleProprietorship:
+          description: Whether the business is a sole proprietorship.
+          example: false
+          type: boolean
       type: object
   securitySchemes:
     Authorization:

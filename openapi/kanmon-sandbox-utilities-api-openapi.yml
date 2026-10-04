@@ -176,6 +176,78 @@ paths:
       - application/json
 components:
   schemas:
+    InternalServerErrorException:
+      example:
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - InternalServerErrorException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    BadRequestException:
+      example:
+        errorCode: BadRequestException
+        message: Bad Request
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BadRequestException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Bad Request
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    ForbiddenException:
+      example:
+        errorCode: ForbiddenException
+        message: Forbidden
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - ForbiddenException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Forbidden
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
     Business:
       example:
         createdAt: 2022-06-01 03:57:26.115000+00:00
@@ -269,44 +341,20 @@ components:
       - updatedAt
       - website
       type: object
-    ForbiddenException:
+    TooManyRequestsException:
       example:
-        errorCode: ForbiddenException
-        message: Forbidden
+        errorCode: TooManyRequestsException
+        message: Too Many Requests
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - ForbiddenException
+          - TooManyRequestsException
           type: string
         message:
           description: The human readable description of the error.
-          example: Forbidden
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    InternalServerErrorException:
-      example:
-        errorCode: InternalServerErrorException
-        message: Internal Server Error
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - InternalServerErrorException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Internal Server Error
+          example: Too Many Requests
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -404,54 +452,6 @@ components:
       - country
       - state
       - zipcode
-      type: object
-    TooManyRequestsException:
-      example:
-        errorCode: TooManyRequestsException
-        message: Too Many Requests
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - TooManyRequestsException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Too Many Requests
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    BadRequestException:
-      example:
-        errorCode: BadRequestException
-        message: Bad Request
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - BadRequestException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Bad Request
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
       type: object
   securitySchemes:
     Authorization:

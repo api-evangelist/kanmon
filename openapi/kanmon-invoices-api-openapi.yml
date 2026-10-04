@@ -329,151 +329,11 @@ paths:
       - application/json
 components:
   schemas:
-    InvoicePaymentPlanNotFoundException:
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - InvalidInvoicePaymentPlanException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Invoice payment plan id must be valid.
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    GetInvoicesResponse:
-      example:
-        pagination: ''
-        invoices:
-        - advanceRatePercentage: 100
-          payeeFirstName: John
-          payeeType: BUSINESS
-          payorEmail: user@gmail.com
-          payorType: BUSINESS
-          payorMiddleName: payorMiddleName
-          payorLastName: Smith
-          payorFirstName: John
-          createdAt: 2022-06-01 03:57:26.115000+00:00
-          amountRequestedForFinancingCents: 100000
-          invoiceIssuedDate: 2022-05-01
-          id: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          payeeEmail: user@gmail.com
-          transactionFeePercentage: 2
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
-          invoiceAdvanceAmountCents: 98000
-          payeeLastName: Smith
-          issuedProductId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          payorBusinessName: My Business
-          platformInvoiceId: 1234abc
-          invoiceDueDate: 2022-06-01
-          repaymentAmountCents: 100000
-          invoiceAmountCents: 100000
-          payorAddress:
-            city: San Mateo
-            state: CA
-            country: USA
-            zipcode: '94401'
-            addressLineOne: 123 Main Street
-          payeeAddress:
-            city: San Mateo
-            state: CA
-            country: USA
-            zipcode: '94401'
-            addressLineOne: 123 Main Street
-          principalAmountCents: 100000
-          platformInvoiceNumber: '123'
-          payeeMiddleName: payeeMiddleName
-          feeAmountCents: 2000
-          repaymentSchedule:
-            schedule:
-            - repaymentAmountCents: 100000
-              repaymentFeeAmountCents: 2000
-              repaymentPrincipalAmountCents: 98000
-              repaymentDate: 2020-11-11
-          payeeBusinessName: My Business
-          status: INVOICE_CREATED
-        - advanceRatePercentage: 100
-          payeeFirstName: John
-          payeeType: BUSINESS
-          payorEmail: user@gmail.com
-          payorType: BUSINESS
-          payorMiddleName: payorMiddleName
-          payorLastName: Smith
-          payorFirstName: John
-          createdAt: 2022-06-01 03:57:26.115000+00:00
-          amountRequestedForFinancingCents: 100000
-          invoiceIssuedDate: 2022-05-01
-          id: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          payeeEmail: user@gmail.com
-          transactionFeePercentage: 2
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
-          invoiceAdvanceAmountCents: 98000
-          payeeLastName: Smith
-          issuedProductId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          payorBusinessName: My Business
-          platformInvoiceId: 1234abc
-          invoiceDueDate: 2022-06-01
-          repaymentAmountCents: 100000
-          invoiceAmountCents: 100000
-          payorAddress:
-            city: San Mateo
-            state: CA
-            country: USA
-            zipcode: '94401'
-            addressLineOne: 123 Main Street
-          payeeAddress:
-            city: San Mateo
-            state: CA
-            country: USA
-            zipcode: '94401'
-            addressLineOne: 123 Main Street
-          principalAmountCents: 100000
-          platformInvoiceNumber: '123'
-          payeeMiddleName: payeeMiddleName
-          feeAmountCents: 2000
-          repaymentSchedule:
-            schedule:
-            - repaymentAmountCents: 100000
-              repaymentFeeAmountCents: 2000
-              repaymentPrincipalAmountCents: 98000
-              repaymentDate: 2020-11-11
-          payeeBusinessName: My Business
-          status: INVOICE_CREATED
-      properties:
-        invoices:
-          description: Array of invoices.
-          items:
-            $ref: '#/components/schemas/Invoice'
-          type: array
-        pagination:
-          allOf:
-          - $ref: '#/components/schemas/PaginationResult'
-          description: Pagination metadata.
-      required:
-      - invoices
-      - pagination
-      type: object
-    InvoiceStatus:
-      description: "The status of the invoice.\n  <table>\n    <tr>\n      <td>INVOICE_CREATED</td>\n      <td>The business has submitted an invoice and it is under review.<td/>\n    </tr>\n    <tr>\n      <td>INVOICE_FUNDED</td>\n      <td>\n        The funds for the invoice have been disbursed. The business is now\n        expected to pay back the funds. Note that an invoice transitions to\n        this state when the disbursement is initiated, not when the disbursement\n        has cleared.\n      </td>\n    </tr>\n    <tr>\n      <td>INVOICE_PAID_IN_FULL</td>\n      <td> A payment was made that fully paid off an outstanding invoice.</td>\n    </tr>\n    <tr>\n      <td>INVOICE_RETURNED</td>\n      <td>The invoice was returned (e.g. disbursement cancelled or funds recollected from the platform).</td>\n    </tr>\n    <tr>\n      <td>INVOICE_PENDING_RETURN</td>\n      <td>The disbursement return has been initiated and we are waiting for funds to be recollected from the platform.</td>\n    </tr>\n    <tr>\n      <td>LATE</td>\n      <td>A payment was not made towards an outstanding invoice.</td>\n    </tr>\n    <tr>\n      <td>REJECTED</td>\n      <td> An invoice was rejected during the funding step.</td>\n    </tr>\n    <tr>\n      <td>DEFAULTED</td>\n      <td>A payment was not made towards an outstanding invoice and we were unable to encourage the borrower to make a payment.</td>\n    </tr>\n  </table>\n  "
-      enum:
-      - INVOICE_CREATED
-      - INVOICE_FUNDED
-      - INVOICE_PAID_IN_FULL
-      - INVOICE_RETURNED
-      - INVOICE_PENDING_RETURN
-      - REJECTED
-      - IN_REVIEW
-      - DEFAULTED
-      - LATE
-      type: string
+    financeInvoice_409_response:
+      oneOf:
+      - $ref: '#/components/schemas/IssuedProductStatusNotCurrentException'
+      - $ref: '#/components/schemas/IncorrectProductTypeException'
+      - $ref: '#/components/schemas/InsufficientCreditLimitException'
     InsufficientCreditLimitException:
       properties:
         errorCode:
@@ -494,20 +354,40 @@ components:
       - message
       - timestamp
       type: object
-    IssuedProductNotFoundException:
+    InvoicePaymentPlanNotFoundException:
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - InvalidInvoicePaymentPlanException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Invoice payment plan id must be valid.
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    TooManyRequestsException:
       example:
-        errorCode: IssuedProductNotFoundException
-        message: Internal Server Error
+        errorCode: TooManyRequestsException
+        message: Too Many Requests
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - IssuedProductNotFoundException
+          - TooManyRequestsException
           type: string
         message:
           description: The human readable description of the error.
-          example: Internal Server Error
+          example: Too Many Requests
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -538,170 +418,29 @@ components:
       - message
       - timestamp
       type: object
-    FinanceInvoiceRequestBody:
+    InvoiceStatus:
+      description: "The status of the invoice.\n  <table>\n    <tr>\n      <td>INVOICE_CREATED</td>\n      <td>The business has submitted an invoice and it is under review.<td/>\n    </tr>\n    <tr>\n      <td>INVOICE_FUNDED</td>\n      <td>\n        The funds for the invoice have been disbursed. The business is now\n        expected to pay back the funds. Note that an invoice transitions to\n        this state when the disbursement is initiated, not when the disbursement\n        has cleared.\n      </td>\n    </tr>\n    <tr>\n      <td>INVOICE_PAID_IN_FULL</td>\n      <td> A payment was made that fully paid off an outstanding invoice.</td>\n    </tr>\n    <tr>\n      <td>INVOICE_RETURNED</td>\n      <td>The invoice was returned (e.g. disbursement cancelled or funds recollected from the platform).</td>\n    </tr>\n    <tr>\n      <td>INVOICE_PENDING_RETURN</td>\n      <td>The disbursement return has been initiated and we are waiting for funds to be recollected from the platform.</td>\n    </tr>\n    <tr>\n      <td>LATE</td>\n      <td>A payment was not made towards an outstanding invoice.</td>\n    </tr>\n    <tr>\n      <td>REJECTED</td>\n      <td> An invoice was rejected during the funding step.</td>\n    </tr>\n    <tr>\n      <td>DEFAULTED</td>\n      <td>A payment was not made towards an outstanding invoice and we were unable to encourage the borrower to make a payment.</td>\n    </tr>\n  </table>\n  "
+      enum:
+      - INVOICE_CREATED
+      - INVOICE_FUNDED
+      - INVOICE_PAID_IN_FULL
+      - INVOICE_RETURNED
+      - INVOICE_PENDING_RETURN
+      - REJECTED
+      - IN_REVIEW
+      - DEFAULTED
+      - LATE
+      type: string
+    IssuedProductNotFoundException:
       example:
-        payeeFirstName: John
-        payeeLastName: Smith
-        payeeType: BUSINESS
-        issuedProductId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-        payorEmail: user@gmail.com
-        description: Invoice for equipment purchased.
-        payorType: BUSINESS
-        payorMiddleName: payorMiddleName
-        payorBusinessName: My Business
-        payorLastName: Smith
-        platformInvoiceId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-        invoiceDueDate: 2022-06-01
-        payorFirstName: John
-        invoiceAmountCents: 1000000
-        payorAddress:
-          city: San Mateo
-          state: CA
-          country: USA
-          zipcode: '94401'
-          addressLineOne: 123 Main Street
-        payeeAddress:
-          city: San Mateo
-          state: CA
-          country: USA
-          zipcode: '94401'
-          addressLineOne: 123 Main Street
-        amountRequestedForFinancingCents: 1000000
-        platformInvoiceNumber: '123'
-        invoiceIssuedDate: 2022-04-01
-        payeeMiddleName: payeeMiddleName
-        invoicePaymentPlanId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-        payeeEmail: user@gmail.com
-        payeeBusinessName: My Business
-      properties:
-        issuedProductId:
-          description: The unique identifier for the issued product within Kanmon.
-          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          type: string
-        invoicePaymentPlanId:
-          description: The unique identifier for the invoice payment plan within Kanmon.
-          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          type: string
-        platformInvoiceId:
-          description: Your platform’s unique ID for the invoice.
-          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          type: string
-        platformInvoiceNumber:
-          description: Your user-facing identifier for the invoice. This is unique per issued product. This may or may not be the same as your `platformInvoiceId`.
-          example: '123'
-          type: string
-        invoiceAmountCents:
-          description: The invoice amount - in cents. This needs to be greater than or equal to 100.
-          example: 1000000
-          type: number
-        amountRequestedForFinancingCents:
-          description: The amount requested for financing - in cents. The portion of the invoice amount that the business requests to be financed. Must be less than or equal to the `invoiceAmountCents`. This needs to be greater than or equal to 100.
-          example: 1000000
-          type: number
-        invoiceDueDate:
-          description: The date when the invoice will be paid. ISO 8601 date format. If `invoiceIssuedDate` is provided, then it must be after `invoiceIssuedDate`. If product type is `ACCOUNTS_PAYABLE_FINANCING`, this date must be no more than 5 days in the past. If product type is `INVOICE_FINANCING`, this date must be at least 7 days in the future.
-          example: 2022-06-01
-          type: string
-        invoiceIssuedDate:
-          description: The date when the payee issued the invoice. This is required if product type is `INVOICE_FINANCING`. ISO 8601 date format.
-          example: 2022-04-01
-          type: string
-        description:
-          description: The description of the goods or services in the invoice.
-          example: Invoice for equipment purchased.
-          type: string
-        payorType:
-          description: '`INDIVIDUAL` if the payor is a person and `BUSINESS` if the payor is a company. This is required if product type is `INVOICE_FINANCING`.'
-          enum:
-          - BUSINESS
-          - INDIVIDUAL
-          example: BUSINESS
-          type: string
-        payorEmail:
-          description: The email of the payor.
-          example: user@gmail.com
-          type: string
-        payorAddress:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: The address of the payor. The address is optional. If you provide the address, you need to provide all the required fields in the address. The address must be a street address, not a PO Box.
-          example:
-            city: San Mateo
-            state: CA
-            country: USA
-            zipcode: '94401'
-            addressLineOne: 123 Main Street
-        payorBusinessName:
-          description: The registered name of the payor business when the payor is a business and not an individual. Required and should only be defined if `payorType` is `BUSINESS`.
-          example: My Business
-          type: string
-        payorFirstName:
-          description: The first name of the payor when the payor is an individual and not a business. Required and should only be defined if `payorType` is `INDIVIDUAL`.
-          example: John
-          type: string
-        payorMiddleName:
-          description: The middle name of the payor when the payor is an individual and not a business. Optional and should only be defined if `payorType` is `INDIVIDUAL`.
-          type: string
-        payorLastName:
-          description: The last name of the payor when the payor is an individual and not a business. Required and should only be defined if `payorType` is `INDIVIDUAL`.
-          example: Smith
-          type: string
-        payeeType:
-          description: '`INDIVIDUAL` if the payee is a person and `BUSINESS` if the payee is a company. This is required if product type is `ACCOUNTS_PAYABLE_FINANCING`.'
-          enum:
-          - BUSINESS
-          - INDIVIDUAL
-          example: BUSINESS
-          type: string
-        payeeEmail:
-          description: The email of the payee.
-          example: user@gmail.com
-          type: string
-        payeeAddress:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          description: The address of the payee. The address is optional. If you provide the address, you need to provide all the required fields in the address. The address must be a street address, not a PO Box.
-          example:
-            city: San Mateo
-            state: CA
-            country: USA
-            zipcode: '94401'
-            addressLineOne: 123 Main Street
-        payeeBusinessName:
-          description: The registered name of the payee business when the payee is a business and not an individual. Required and should only be defined if `payeeType` is `BUSINESS`.
-          example: My Business
-          type: string
-        payeeFirstName:
-          description: The first name of the payee when the payee is an individual and not a business. Required and should only be defined if `payeeType` is `INDIVIDUAL`.
-          example: John
-          type: string
-        payeeMiddleName:
-          description: The middle name of the payee when the payee is an individual and not a business. Optional and should only be defined if `payeeType` is `INDIVIDUAL`.
-          type: string
-        payeeLastName:
-          description: The last name of the payee when the payee is an individual and not a business. Required and should only be defined if `payeeType` is `INDIVIDUAL`.
-          example: Smith
-          type: string
-      required:
-      - amountRequestedForFinancingCents
-      - description
-      - invoiceAmountCents
-      - invoiceDueDate
-      - invoicePaymentPlanId
-      - issuedProductId
-      - platformInvoiceId
-      - platformInvoiceNumber
-      type: object
-    InvoiceNotFoundException:
-      example:
-        errorCode: InvoiceNotFoundException
+        errorCode: IssuedProductNotFoundException
         message: Internal Server Error
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - InvoiceNotFoundException
+          - IssuedProductNotFoundException
           type: string
         message:
           description: The human readable description of the error.
@@ -716,20 +455,20 @@ components:
       - message
       - timestamp
       type: object
-    financeInvoice_404_response:
-      oneOf:
-      - $ref: '#/components/schemas/IssuedProductNotFoundException'
-      - $ref: '#/components/schemas/InvoicePaymentPlanNotFoundException'
-    InvalidInvoiceDueDateException:
+    IssuedProductStatusNotCurrentException:
+      example:
+        errorCode: IssuedProductStatusNotCurrentException
+        message: Issued product status must be CURRENT.
+        timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - InvalidInvoiceDueDateException
+          - IssuedProductStatusNotCurrentException
           type: string
         message:
           description: The human readable description of the error.
-          example: An error occurred.
+          example: Issued product status must be CURRENT.
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -740,25 +479,10 @@ components:
       - message
       - timestamp
       type: object
-    PaginationResult:
-      properties:
-        limit:
-          description: The number of records to limit when performing pagination.
-          example: 100
-          type: number
-        offset:
-          description: The number of records to skip when performing pagination.
-          example: 0
-          type: number
-        totalCount:
-          description: The total number of records that matched the query.
-          example: 100
-          type: number
-      required:
-      - limit
-      - offset
-      - totalCount
-      type: object
+    financeInvoice_404_response:
+      oneOf:
+      - $ref: '#/components/schemas/IssuedProductNotFoundException'
+      - $ref: '#/components/schemas/InvoicePaymentPlanNotFoundException'
     Address:
       properties:
         addressLineOne:
@@ -847,30 +571,6 @@ components:
       - state
       - zipcode
       type: object
-    TooManyRequestsException:
-      example:
-        errorCode: TooManyRequestsException
-        message: Too Many Requests
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - TooManyRequestsException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Too Many Requests
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
     BadRequestException:
       example:
         errorCode: BadRequestException
@@ -885,6 +585,34 @@ components:
         message:
           description: The human readable description of the error.
           example: Bad Request
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    getInvoice_404_response:
+      oneOf:
+      - $ref: '#/components/schemas/InvoiceNotFoundException'
+      - $ref: '#/components/schemas/BusinessNotFoundException'
+    InvoiceNotFoundException:
+      example:
+        errorCode: InvoiceNotFoundException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - InvoiceNotFoundException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -1155,20 +883,20 @@ components:
       - transactionFeePercentage
       - updatedAt
       type: object
-    ForbiddenException:
+    PlatformInvoiceIdAlreadyExistsException:
       example:
-        errorCode: ForbiddenException
-        message: Forbidden
+        errorCode: PlatformInvoiceIdAlreadyExistsException
+        message: An error occurred.
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - ForbiddenException
+          - PlatformInvoiceIdAlreadyExistsException
           type: string
         message:
           description: The human readable description of the error.
-          example: Forbidden
+          example: An error occurred.
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -1179,20 +907,303 @@ components:
       - message
       - timestamp
       type: object
-    IncorrectProductTypeException:
+    GetInvoicesResponse:
       example:
-        errorCode: IncorrectProductTypeException
-        message: Internal Server Error
-        timestamp: 2022-06-01 03:57:26.115000+00:00
+        pagination: ''
+        invoices:
+        - advanceRatePercentage: 100
+          payeeFirstName: John
+          payeeType: BUSINESS
+          payorEmail: user@gmail.com
+          payorType: BUSINESS
+          payorMiddleName: payorMiddleName
+          payorLastName: Smith
+          payorFirstName: John
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          amountRequestedForFinancingCents: 100000
+          invoiceIssuedDate: 2022-05-01
+          id: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          payeeEmail: user@gmail.com
+          transactionFeePercentage: 2
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+          invoiceAdvanceAmountCents: 98000
+          payeeLastName: Smith
+          issuedProductId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          payorBusinessName: My Business
+          platformInvoiceId: 1234abc
+          invoiceDueDate: 2022-06-01
+          repaymentAmountCents: 100000
+          invoiceAmountCents: 100000
+          payorAddress:
+            city: San Mateo
+            state: CA
+            country: USA
+            zipcode: '94401'
+            addressLineOne: 123 Main Street
+          payeeAddress:
+            city: San Mateo
+            state: CA
+            country: USA
+            zipcode: '94401'
+            addressLineOne: 123 Main Street
+          principalAmountCents: 100000
+          platformInvoiceNumber: '123'
+          payeeMiddleName: payeeMiddleName
+          feeAmountCents: 2000
+          repaymentSchedule:
+            schedule:
+            - repaymentAmountCents: 100000
+              repaymentFeeAmountCents: 2000
+              repaymentPrincipalAmountCents: 98000
+              repaymentDate: 2020-11-11
+          payeeBusinessName: My Business
+          status: INVOICE_CREATED
+        - advanceRatePercentage: 100
+          payeeFirstName: John
+          payeeType: BUSINESS
+          payorEmail: user@gmail.com
+          payorType: BUSINESS
+          payorMiddleName: payorMiddleName
+          payorLastName: Smith
+          payorFirstName: John
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          amountRequestedForFinancingCents: 100000
+          invoiceIssuedDate: 2022-05-01
+          id: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          payeeEmail: user@gmail.com
+          transactionFeePercentage: 2
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+          invoiceAdvanceAmountCents: 98000
+          payeeLastName: Smith
+          issuedProductId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          payorBusinessName: My Business
+          platformInvoiceId: 1234abc
+          invoiceDueDate: 2022-06-01
+          repaymentAmountCents: 100000
+          invoiceAmountCents: 100000
+          payorAddress:
+            city: San Mateo
+            state: CA
+            country: USA
+            zipcode: '94401'
+            addressLineOne: 123 Main Street
+          payeeAddress:
+            city: San Mateo
+            state: CA
+            country: USA
+            zipcode: '94401'
+            addressLineOne: 123 Main Street
+          principalAmountCents: 100000
+          platformInvoiceNumber: '123'
+          payeeMiddleName: payeeMiddleName
+          feeAmountCents: 2000
+          repaymentSchedule:
+            schedule:
+            - repaymentAmountCents: 100000
+              repaymentFeeAmountCents: 2000
+              repaymentPrincipalAmountCents: 98000
+              repaymentDate: 2020-11-11
+          payeeBusinessName: My Business
+          status: INVOICE_CREATED
+      properties:
+        invoices:
+          description: Array of invoices.
+          items:
+            $ref: '#/components/schemas/Invoice'
+          type: array
+        pagination:
+          allOf:
+          - $ref: '#/components/schemas/PaginationResult'
+          description: Pagination metadata.
+      required:
+      - invoices
+      - pagination
+      type: object
+    InvoiceRepaymentSchedule:
+      properties:
+        schedule:
+          description: The invoice repayment schedule items.
+          example:
+          - repaymentAmountCents: 100000
+            repaymentDate: 2020-11-11
+            repaymentFeeAmountCents: 2000
+            repaymentPrincipalAmountCents: 98000
+          items:
+            $ref: '#/components/schemas/InvoiceRepaymentScheduleItem'
+          type: array
+      required:
+      - schedule
+      type: object
+    financeInvoice_400_response:
+      oneOf:
+      - $ref: '#/components/schemas/PlatformInvoiceIdAlreadyExistsException'
+      - $ref: '#/components/schemas/InvoicePaymentPlanNotFoundException'
+      - $ref: '#/components/schemas/InvalidInvoiceDueDateException'
+      - $ref: '#/components/schemas/IncorrectFinancingAmountException'
+    FinanceInvoiceRequestBody:
+      example:
+        payeeFirstName: John
+        payeeLastName: Smith
+        payeeType: BUSINESS
+        issuedProductId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+        payorEmail: user@gmail.com
+        description: Invoice for equipment purchased.
+        payorType: BUSINESS
+        payorMiddleName: payorMiddleName
+        payorBusinessName: My Business
+        payorLastName: Smith
+        platformInvoiceId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+        invoiceDueDate: 2022-06-01
+        payorFirstName: John
+        invoiceAmountCents: 1000000
+        payorAddress:
+          city: San Mateo
+          state: CA
+          country: USA
+          zipcode: '94401'
+          addressLineOne: 123 Main Street
+        payeeAddress:
+          city: San Mateo
+          state: CA
+          country: USA
+          zipcode: '94401'
+          addressLineOne: 123 Main Street
+        amountRequestedForFinancingCents: 1000000
+        platformInvoiceNumber: '123'
+        invoiceIssuedDate: 2022-04-01
+        payeeMiddleName: payeeMiddleName
+        invoicePaymentPlanId: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+        payeeEmail: user@gmail.com
+        payeeBusinessName: My Business
+      properties:
+        issuedProductId:
+          description: The unique identifier for the issued product within Kanmon.
+          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          type: string
+        invoicePaymentPlanId:
+          description: The unique identifier for the invoice payment plan within Kanmon.
+          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          type: string
+        platformInvoiceId:
+          description: Your platform’s unique ID for the invoice.
+          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          type: string
+        platformInvoiceNumber:
+          description: Your user-facing identifier for the invoice. This is unique per issued product. This may or may not be the same as your `platformInvoiceId`.
+          example: '123'
+          type: string
+        invoiceAmountCents:
+          description: The invoice amount - in cents. This needs to be greater than or equal to 100.
+          example: 1000000
+          type: number
+        amountRequestedForFinancingCents:
+          description: The amount requested for financing - in cents. The portion of the invoice amount that the business requests to be financed. Must be less than or equal to the `invoiceAmountCents`. This needs to be greater than or equal to 100.
+          example: 1000000
+          type: number
+        invoiceDueDate:
+          description: The date when the invoice will be paid. ISO 8601 date format. If `invoiceIssuedDate` is provided, then it must be after `invoiceIssuedDate`. If product type is `ACCOUNTS_PAYABLE_FINANCING`, this date must be no more than 5 days in the past. If product type is `INVOICE_FINANCING`, this date must be at least 7 days in the future.
+          example: 2022-06-01
+          type: string
+        invoiceIssuedDate:
+          description: The date when the payee issued the invoice. This is required if product type is `INVOICE_FINANCING`. ISO 8601 date format.
+          example: 2022-04-01
+          type: string
+        description:
+          description: The description of the goods or services in the invoice.
+          example: Invoice for equipment purchased.
+          type: string
+        payorType:
+          description: '`INDIVIDUAL` if the payor is a person and `BUSINESS` if the payor is a company. This is required if product type is `INVOICE_FINANCING`.'
+          enum:
+          - BUSINESS
+          - INDIVIDUAL
+          example: BUSINESS
+          type: string
+        payorEmail:
+          description: The email of the payor.
+          example: user@gmail.com
+          type: string
+        payorAddress:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: The address of the payor. The address is optional. If you provide the address, you need to provide all the required fields in the address. The address must be a street address, not a PO Box.
+          example:
+            city: San Mateo
+            state: CA
+            country: USA
+            zipcode: '94401'
+            addressLineOne: 123 Main Street
+        payorBusinessName:
+          description: The registered name of the payor business when the payor is a business and not an individual. Required and should only be defined if `payorType` is `BUSINESS`.
+          example: My Business
+          type: string
+        payorFirstName:
+          description: The first name of the payor when the payor is an individual and not a business. Required and should only be defined if `payorType` is `INDIVIDUAL`.
+          example: John
+          type: string
+        payorMiddleName:
+          description: The middle name of the payor when the payor is an individual and not a business. Optional and should only be defined if `payorType` is `INDIVIDUAL`.
+          type: string
+        payorLastName:
+          description: The last name of the payor when the payor is an individual and not a business. Required and should only be defined if `payorType` is `INDIVIDUAL`.
+          example: Smith
+          type: string
+        payeeType:
+          description: '`INDIVIDUAL` if the payee is a person and `BUSINESS` if the payee is a company. This is required if product type is `ACCOUNTS_PAYABLE_FINANCING`.'
+          enum:
+          - BUSINESS
+          - INDIVIDUAL
+          example: BUSINESS
+          type: string
+        payeeEmail:
+          description: The email of the payee.
+          example: user@gmail.com
+          type: string
+        payeeAddress:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: The address of the payee. The address is optional. If you provide the address, you need to provide all the required fields in the address. The address must be a street address, not a PO Box.
+          example:
+            city: San Mateo
+            state: CA
+            country: USA
+            zipcode: '94401'
+            addressLineOne: 123 Main Street
+        payeeBusinessName:
+          description: The registered name of the payee business when the payee is a business and not an individual. Required and should only be defined if `payeeType` is `BUSINESS`.
+          example: My Business
+          type: string
+        payeeFirstName:
+          description: The first name of the payee when the payee is an individual and not a business. Required and should only be defined if `payeeType` is `INDIVIDUAL`.
+          example: John
+          type: string
+        payeeMiddleName:
+          description: The middle name of the payee when the payee is an individual and not a business. Optional and should only be defined if `payeeType` is `INDIVIDUAL`.
+          type: string
+        payeeLastName:
+          description: The last name of the payee when the payee is an individual and not a business. Required and should only be defined if `payeeType` is `INDIVIDUAL`.
+          example: Smith
+          type: string
+      required:
+      - amountRequestedForFinancingCents
+      - description
+      - invoiceAmountCents
+      - invoiceDueDate
+      - invoicePaymentPlanId
+      - issuedProductId
+      - platformInvoiceId
+      - platformInvoiceNumber
+      type: object
+    InvalidInvoiceDueDateException:
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - IncorrectProductTypeException
+          - InvalidInvoiceDueDateException
           type: string
         message:
           description: The human readable description of the error.
-          example: Internal Server Error
+          example: An error occurred.
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -1202,6 +1213,25 @@ components:
       - errorCode
       - message
       - timestamp
+      type: object
+    PaginationResult:
+      properties:
+        limit:
+          description: The number of records to limit when performing pagination.
+          example: 100
+          type: number
+        offset:
+          description: The number of records to skip when performing pagination.
+          example: 0
+          type: number
+        totalCount:
+          description: The total number of records that matched the query.
+          example: 100
+          type: number
+      required:
+      - limit
+      - offset
+      - totalCount
       type: object
     InvoiceRepaymentScheduleItem:
       properties:
@@ -1227,20 +1257,20 @@ components:
       - repaymentFeeAmountCents
       - repaymentPrincipalAmountCents
       type: object
-    IssuedProductStatusNotCurrentException:
+    ForbiddenException:
       example:
-        errorCode: IssuedProductStatusNotCurrentException
-        message: Issued product status must be CURRENT.
+        errorCode: ForbiddenException
+        message: Forbidden
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - IssuedProductStatusNotCurrentException
+          - ForbiddenException
           type: string
         message:
           description: The human readable description of the error.
-          example: Issued product status must be CURRENT.
+          example: Forbidden
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -1251,56 +1281,6 @@ components:
       - message
       - timestamp
       type: object
-    InvoiceRepaymentSchedule:
-      properties:
-        schedule:
-          description: The invoice repayment schedule items.
-          example:
-          - repaymentAmountCents: 100000
-            repaymentDate: 2020-11-11
-            repaymentFeeAmountCents: 2000
-            repaymentPrincipalAmountCents: 98000
-          items:
-            $ref: '#/components/schemas/InvoiceRepaymentScheduleItem'
-          type: array
-      required:
-      - schedule
-      type: object
-    financeInvoice_409_response:
-      oneOf:
-      - $ref: '#/components/schemas/IssuedProductStatusNotCurrentException'
-      - $ref: '#/components/schemas/IncorrectProductTypeException'
-      - $ref: '#/components/schemas/InsufficientCreditLimitException'
-    PlatformInvoiceIdAlreadyExistsException:
-      example:
-        errorCode: PlatformInvoiceIdAlreadyExistsException
-        message: An error occurred.
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - PlatformInvoiceIdAlreadyExistsException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: An error occurred.
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    financeInvoice_400_response:
-      oneOf:
-      - $ref: '#/components/schemas/PlatformInvoiceIdAlreadyExistsException'
-      - $ref: '#/components/schemas/InvoicePaymentPlanNotFoundException'
-      - $ref: '#/components/schemas/InvalidInvoiceDueDateException'
-      - $ref: '#/components/schemas/IncorrectFinancingAmountException'
     BusinessNotFoundException:
       example:
         errorCode: BusinessNotFoundException
@@ -1325,10 +1305,6 @@ components:
       - message
       - timestamp
       type: object
-    getInvoice_404_response:
-      oneOf:
-      - $ref: '#/components/schemas/InvoiceNotFoundException'
-      - $ref: '#/components/schemas/BusinessNotFoundException'
     InternalServerErrorException:
       example:
         errorCode: InternalServerErrorException
@@ -1339,6 +1315,30 @@ components:
           description: Safe for programmatic use.
           enum:
           - InternalServerErrorException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    IncorrectProductTypeException:
+      example:
+        errorCode: IncorrectProductTypeException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - IncorrectProductTypeException
           type: string
         message:
           description: The human readable description of the error.

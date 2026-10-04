@@ -86,31 +86,125 @@ paths:
       - application/json
 components:
   schemas:
-    CreateBusinessDocumentsResponse:
+    InternalServerErrorException:
       example:
-        documents:
-        - originalFileName: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          createdAt: 2022-06-01 03:57:26.115000+00:00
-          platformBusinessId: '12345'
-          documentType: INVOICE
-          businessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          id: 1193fdaf-630c-4771-a629-8da7a87947d2
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
-        - originalFileName: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          createdAt: 2022-06-01 03:57:26.115000+00:00
-          platformBusinessId: '12345'
-          documentType: INVOICE
-          businessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
-          id: 1193fdaf-630c-4771-a629-8da7a87947d2
-          updatedAt: 2022-06-01 03:57:26.115000+00:00
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
-        documents:
-          description: The documents that were uploaded.
-          items:
-            $ref: '#/components/schemas/BusinessDocument'
-          type: array
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - InternalServerErrorException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
       required:
-      - documents
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    BadRequestException:
+      example:
+        errorCode: BadRequestException
+        message: Bad Request
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - BadRequestException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Bad Request
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    UploadBankDocumentsRequest:
+      properties:
+        invoices:
+          description: Invoices to be uploaded. The file format must be PDF. The limit is 10 files, 10 MB per file.
+          items:
+            format: binary
+            type: string
+          type: array
+        businessId:
+          description: The unique identifier for business within Kanmon. Either of `businessId` or `platformBusinessId` is required.
+          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          type: string
+        platformBusinessId:
+          description: The unique identifier for business in your platform. Either of `businessId` or `platformBusinessId` is required.
+          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
+          type: string
+      required:
+      - invoices
+      type: object
+    TooManyRequestsException:
+      example:
+        errorCode: TooManyRequestsException
+        message: Too Many Requests
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - TooManyRequestsException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Too Many Requests
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    BusinessDocumentType:
+      description: The type of document that is uploaded.
+      enum:
+      - INVOICE
+      type: string
+    ForbiddenException:
+      example:
+        errorCode: ForbiddenException
+        message: Forbidden
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - ForbiddenException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Forbidden
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
       type: object
     BusinessDocument:
       example:
@@ -159,125 +253,31 @@ components:
       - platformBusinessId
       - updatedAt
       type: object
-    BusinessDocumentType:
-      description: The type of document that is uploaded.
-      enum:
-      - INVOICE
-      type: string
-    InternalServerErrorException:
+    CreateBusinessDocumentsResponse:
       example:
-        errorCode: InternalServerErrorException
-        message: Internal Server Error
-        timestamp: 2022-06-01 03:57:26.115000+00:00
+        documents:
+        - originalFileName: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          platformBusinessId: '12345'
+          documentType: INVOICE
+          businessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          id: 1193fdaf-630c-4771-a629-8da7a87947d2
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
+        - originalFileName: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          createdAt: 2022-06-01 03:57:26.115000+00:00
+          platformBusinessId: '12345'
+          documentType: INVOICE
+          businessId: 2b5d0f14-9b73-4f44-a82a-2182a9ff77bb
+          id: 1193fdaf-630c-4771-a629-8da7a87947d2
+          updatedAt: 2022-06-01 03:57:26.115000+00:00
       properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - InternalServerErrorException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Internal Server Error
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    UploadBankDocumentsRequest:
-      properties:
-        invoices:
-          description: Invoices to be uploaded. The file format must be PDF. The limit is 10 files, 10 MB per file.
+        documents:
+          description: The documents that were uploaded.
           items:
-            format: binary
-            type: string
+            $ref: '#/components/schemas/BusinessDocument'
           type: array
-        businessId:
-          description: The unique identifier for business within Kanmon. Either of `businessId` or `platformBusinessId` is required.
-          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          type: string
-        platformBusinessId:
-          description: The unique identifier for business in your platform. Either of `businessId` or `platformBusinessId` is required.
-          example: adbcccf9-3a7f-4040-add3-55c9d6da2d37
-          type: string
       required:
-      - invoices
-      type: object
-    ForbiddenException:
-      example:
-        errorCode: ForbiddenException
-        message: Forbidden
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - ForbiddenException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Forbidden
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    TooManyRequestsException:
-      example:
-        errorCode: TooManyRequestsException
-        message: Too Many Requests
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - TooManyRequestsException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Too Many Requests
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    BadRequestException:
-      example:
-        errorCode: BadRequestException
-        message: Bad Request
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - BadRequestException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Bad Request
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
+      - documents
       type: object
   securitySchemes:
     Authorization:

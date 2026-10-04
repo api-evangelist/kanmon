@@ -124,6 +124,30 @@ paths:
       - application/json
 components:
   schemas:
+    InternalServerErrorException:
+      example:
+        errorCode: InternalServerErrorException
+        message: Internal Server Error
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - InternalServerErrorException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Internal Server Error
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
     BusinessPrequalification:
       example:
         createdAt: 2022-06-01 03:57:26.115000+00:00
@@ -178,72 +202,20 @@ components:
       - product
       - updatedAt
       type: object
-    ProductType:
-      enum:
-      - INVOICE_FINANCING
-      - TERM_LOAN
-      - MCA
-      - LINE_OF_CREDIT
-      - INTEGRATED_MCA
-      - ACCOUNTS_PAYABLE_FINANCING
-      type: string
-    PaginationResult:
-      properties:
-        limit:
-          description: The number of records to limit when performing pagination.
-          example: 100
-          type: number
-        offset:
-          description: The number of records to skip when performing pagination.
-          example: 0
-          type: number
-        totalCount:
-          description: The total number of records that matched the query.
-          example: 100
-          type: number
-      required:
-      - limit
-      - offset
-      - totalCount
-      type: object
-    ForbiddenException:
+    BadRequestException:
       example:
-        errorCode: ForbiddenException
-        message: Forbidden
+        errorCode: BadRequestException
+        message: Bad Request
         timestamp: 2022-06-01 03:57:26.115000+00:00
       properties:
         errorCode:
           description: Safe for programmatic use.
           enum:
-          - ForbiddenException
+          - BadRequestException
           type: string
         message:
           description: The human readable description of the error.
-          example: Forbidden
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    InternalServerErrorException:
-      example:
-        errorCode: InternalServerErrorException
-        message: Internal Server Error
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - InternalServerErrorException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Internal Server Error
+          example: Bad Request
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.
@@ -288,6 +260,58 @@ components:
       - pagination
       - prequalifications
       type: object
+    ForbiddenException:
+      example:
+        errorCode: ForbiddenException
+        message: Forbidden
+        timestamp: 2022-06-01 03:57:26.115000+00:00
+      properties:
+        errorCode:
+          description: Safe for programmatic use.
+          enum:
+          - ForbiddenException
+          type: string
+        message:
+          description: The human readable description of the error.
+          example: Forbidden
+          type: string
+        timestamp:
+          description: When the error occurred - ISO 8601 format.
+          example: 2022-06-01 03:57:26.115000+00:00
+          type: string
+      required:
+      - errorCode
+      - message
+      - timestamp
+      type: object
+    ProductType:
+      enum:
+      - INVOICE_FINANCING
+      - TERM_LOAN
+      - MCA
+      - LINE_OF_CREDIT
+      - INTEGRATED_MCA
+      - ACCOUNTS_PAYABLE_FINANCING
+      type: string
+    PaginationResult:
+      properties:
+        limit:
+          description: The number of records to limit when performing pagination.
+          example: 100
+          type: number
+        offset:
+          description: The number of records to skip when performing pagination.
+          example: 0
+          type: number
+        totalCount:
+          description: The total number of records that matched the query.
+          example: 100
+          type: number
+      required:
+      - limit
+      - offset
+      - totalCount
+      type: object
     TooManyRequestsException:
       example:
         errorCode: TooManyRequestsException
@@ -302,30 +326,6 @@ components:
         message:
           description: The human readable description of the error.
           example: Too Many Requests
-          type: string
-        timestamp:
-          description: When the error occurred - ISO 8601 format.
-          example: 2022-06-01 03:57:26.115000+00:00
-          type: string
-      required:
-      - errorCode
-      - message
-      - timestamp
-      type: object
-    BadRequestException:
-      example:
-        errorCode: BadRequestException
-        message: Bad Request
-        timestamp: 2022-06-01 03:57:26.115000+00:00
-      properties:
-        errorCode:
-          description: Safe for programmatic use.
-          enum:
-          - BadRequestException
-          type: string
-        message:
-          description: The human readable description of the error.
-          example: Bad Request
           type: string
         timestamp:
           description: When the error occurred - ISO 8601 format.

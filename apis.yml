@@ -45,6 +45,9 @@ specificationVersion: '0.23'
 created: '2026-07-17'
 modified: '2026-07-19'
 image: https://files.readme.io/c09d869-small-kanmon_logoicon_bw_black.png
+x-docs-platform: readme
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-10-03
 tags:
 - Company
 - Fintech

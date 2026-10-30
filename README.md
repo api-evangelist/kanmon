@@ -64,6 +64,149 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Kanmon is a company surfaced as a portfolio company of homebrew and added to the API Evangelist network as a stub for enrichment. Sector: fintech. This profile is a lead awaiting the enrichment pipeline.
+Kanmon is an embedded-lending platform that lets vertical SaaS and business-management software offer working capital to their customers without becoming a lender themselves. Through the Kanmon Public V2 REST API and the embeddable Kanmon Connect UI, platforms can originate term loans, lines of credit, invoice financing, Accounts Payable financing, and integrated merchant cash advances. Kanmon is the licensed lender and owns underwriting, compliance, and credit risk, while partners integrate financing directly into their existing product with API keys, official SDKs, prebuilt borrower UI components, and outbound webhooks.
 
-Backed by: homebrew — https://www.kanmonhq.com
+**Areas:** Company · Fintech · Embedded Finance · Embedded Lending · Lending · Working Capital · Invoice Financing
+
+## Kanmon on APIs.io
+
+Everything profiled for Kanmon is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/kanmon/](https://apis.io/providers/kanmon/)** — or go straight to one of the APIs or properties below.
+
+### APIs (14)
+
+- [Kanmon Bank Accounts API](https://apis.io/apis/kanmon/kanmon-bank-accounts-api/) — The Bank Accounts API from Kanmon — 2 operation(s) for bank accounts.
+- [Kanmon Businesses API](https://apis.io/apis/kanmon/kanmon-businesses-api/) — The Businesses API from Kanmon — 3 operation(s) for businesses.
+- [Kanmon Connect Tokens API](https://apis.io/apis/kanmon/kanmon-connect-tokens-api/) — The Connect Tokens API from Kanmon — 1 operation(s) for connect tokens.
+- [Kanmon Documents API](https://apis.io/apis/kanmon/kanmon-documents-api/) — The Documents API from Kanmon — 1 operation(s) for documents.
+- [Kanmon Draw Requests API](https://apis.io/apis/kanmon/kanmon-draw-requests-api/) — The Draw Requests API from Kanmon — 2 operation(s) for draw requests.
+- [Kanmon Embedded Sessions API](https://apis.io/apis/kanmon/kanmon-embedded-sessions-api/) — The Embedded Sessions API from Kanmon — 1 operation(s) for embedded sessions.
+- [Kanmon Integrated MCA API](https://apis.io/apis/kanmon/kanmon-integrated-mca-api/) — The Integrated MCA API from Kanmon — 2 operation(s) for integrated mca.
+- [Kanmon Invoices API](https://apis.io/apis/kanmon/kanmon-invoices-api/) — The Invoices API from Kanmon — 3 operation(s) for invoices.
+- [Kanmon Issued Products API](https://apis.io/apis/kanmon/kanmon-issued-products-api/) — The Issued Products API from Kanmon — 2 operation(s) for issued products.
+- [Kanmon Offers API](https://apis.io/apis/kanmon/kanmon-offers-api/) — The Offers API from Kanmon — 2 operation(s) for offers.
+- [Kanmon Payments API](https://apis.io/apis/kanmon/kanmon-payments-api/) — The Payments API from Kanmon — 3 operation(s) for payments.
+- [Kanmon Prequalifications API](https://apis.io/apis/kanmon/kanmon-prequalifications-api/) — The Prequalifications API from Kanmon — 1 operation(s) for prequalifications.
+- [Kanmon Sandbox Utilities API](https://apis.io/apis/kanmon/kanmon-sandbox-utilities-api/) — The Sandbox Utilities API from Kanmon — 2 operation(s) for sandbox utilities.
+- [Kanmon Users API](https://apis.io/apis/kanmon/kanmon-users-api/) — The Users API from Kanmon — 3 operation(s) for users.
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### AsyncAPI (1)
+
+Event-driven and webhook contracts.
+
+- [Kanmon Webhooks](https://apis.io/asyncapis/kanmon/kanmon-webhooks/)
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [kanmon](https://apis.io/servers/kanmon/kanmon/)
+
+#### Agentic access (1)
+
+Which operations an agent can call, which act, and which need a human in the loop.
+
+- [Kanmon Agentic Access](https://apis.io/agentic-access/kanmon/kanmon-agentic-access/)
+
+#### Collections (14)
+
+Postman and Open Collection request collections.
+
+- [Kanmon Public V2 Bank Accounts API](https://apis.io/collections/kanmon/open-kanmon-bank-accounts-api/)
+- [Kanmon Public V2 Bank Accounts Businesses API](https://apis.io/collections/kanmon/open-kanmon-businesses-api/)
+- [Kanmon Public V2 Bank Accounts Connect Tokens API](https://apis.io/collections/kanmon/open-kanmon-connect-tokens-api/)
+- [Kanmon Public V2 Bank Accounts Documents API](https://apis.io/collections/kanmon/open-kanmon-documents-api/)
+- [Kanmon Public V2 Bank Accounts Draw Requests API](https://apis.io/collections/kanmon/open-kanmon-draw-requests-api/)
+- [Kanmon Public V2 Bank Accounts Embedded Sessions API](https://apis.io/collections/kanmon/open-kanmon-embedded-sessions-api/)
+- [Kanmon Public V2 Bank Accounts Integrated MCA API](https://apis.io/collections/kanmon/open-kanmon-integrated-mca-api/)
+- [Kanmon Public V2 Bank Accounts Invoices API](https://apis.io/collections/kanmon/open-kanmon-invoices-api/)
+- [Kanmon Public V2 Bank Accounts Issued Products API](https://apis.io/collections/kanmon/open-kanmon-issued-products-api/)
+- [Kanmon Public V2 Bank Accounts Offers API](https://apis.io/collections/kanmon/open-kanmon-offers-api/)
+- [Kanmon Public V2 Bank Accounts Payments API](https://apis.io/collections/kanmon/open-kanmon-payments-api/)
+- [Kanmon Public V2 Bank Accounts Prequalifications API](https://apis.io/collections/kanmon/open-kanmon-prequalifications-api/)
+- [Kanmon Public V2 Bank Accounts Sandbox Utilities API](https://apis.io/collections/kanmon/open-kanmon-sandbox-utilities-api/)
+- [Kanmon Public V2 Bank Accounts Users API](https://apis.io/collections/kanmon/open-kanmon-users-api/)
+
+#### Overlays (1)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Kanmon Openapi Overlay](https://apis.io/overlays/kanmon/kanmon-openapi-overlay/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Kanmon Authentication](https://apis.io/security/kanmon/kanmon-authentication/)
+- [Kanmon Domain Security](https://apis.io/security/kanmon/kanmon-domain-security/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.kanmon.com)
+- [Documentation](https://kanmon.dev)
+- [API reference](https://kanmon.dev)
+- [Support](https://www.kanmon.com/contact-us)
+- [Blog](https://www.kanmon.com/blog)
+- [Terms of service](https://www.kanmon.com/terms-of-service)
+- [Privacy policy](https://www.kanmon.com/privacy-policy)
+- [GitHub](https://github.com/Kanmon)
+
+## API Evangelist rating
+
+**Kin Score 39.4** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 54.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 10.5 |
+| Developer ergonomics | 48.2 |
+| Access clarity | 21.1 |
+
+**Agent readiness 39.6** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | verified |
+| Event Surface Described | yes |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/kanmon/](https://apis.io/providers/kanmon/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Kanmon: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/kanmon/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
